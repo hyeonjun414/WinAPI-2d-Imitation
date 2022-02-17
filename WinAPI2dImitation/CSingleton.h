@@ -3,6 +3,7 @@
 
 #define SINGLETON(CLASS)				\
 private:								\
+	static CLASS* _instance;			\
 public:									\
 	static CLASS* getInst()				\
 	{									\
