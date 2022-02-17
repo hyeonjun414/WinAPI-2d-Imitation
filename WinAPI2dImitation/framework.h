@@ -13,3 +13,20 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+// STL
+#include <vector>
+#include <list>
+#include <map>
+#include <chrono>
+
+// 1280x720
+
+
+
+// 디파인
+#define WINSTARTX 100     
+#define WINSTARTY 100         
+#define WINSIZEX 1280         
+#define WINSIZEY 720
+#define WINSTYLE WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
