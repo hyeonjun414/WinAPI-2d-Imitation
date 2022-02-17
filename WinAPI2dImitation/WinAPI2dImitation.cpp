@@ -46,7 +46,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 실행된 프로세스의 시
     // 단축키 정보를 불러온다.
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINAPI2DIMITATION));
 
-    MSG msg;
 
     // 기본 메시지 루프입니다:
     // 메세지 큐에서 메세지가 확인될 때까지 대기
@@ -57,7 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 실행된 프로세스의 시
 
     // 게임 루프
     // 이전 GetMessage의 대기 상태 유지에서
-    // 현재 PeekMessage의 메시지가 없는 상황에서 게임 상황 처리
+    // 현재 PeekMessage의 메시지가 없는 상황(대부분)에서 게임 상황 처리
     MSG msg;
     while (TRUE)
     {
@@ -77,11 +76,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 실행된 프로세스의 시
         // 메세지가 없을 때 게임에 대한 처리를 진행한다.
         else
         {
-            // 게임 처리
+            // 게임 로직
             // 게임 업데이트와 게임 렌더
+            CCore::getInst()->update();
+            CCore::getInst()->render();
         }
 
     }
+    CCore::getInst()->release();
 
     return (int)msg.wParam;
 }

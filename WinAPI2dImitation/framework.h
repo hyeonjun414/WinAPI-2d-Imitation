@@ -20,7 +20,9 @@
 #include <map>
 #include <chrono>
 
-// 1280x720
+// 사용자 정의 클래스
+#include "CSingleton.h"
+#include "CCore.h"
 
 
 
@@ -30,3 +32,4 @@
 #define WINSIZEX 1280         
 #define WINSIZEY 720
 #define WINSTYLE WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+
