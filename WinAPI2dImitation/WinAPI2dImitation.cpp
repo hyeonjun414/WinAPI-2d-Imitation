@@ -7,10 +7,12 @@
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
-HINSTANCE hInst;                                // 현재 인스턴스입니다.
-HWND hWnd;
+HINSTANCE   hInst;                                // 현재 인스턴스입니다.
+HWND        hWnd;
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+
+
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -42,6 +44,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 실행된 프로세스의 시
     {
         return FALSE;
     }
+
+    CCore::getInst()->Init();
 
     // 단축키 정보를 불러온다.
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINAPI2DIMITATION));
@@ -83,7 +87,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 실행된 프로세스의 시
         }
 
     }
-    CCore::getInst()->release();
 
     return (int)msg.wParam;
 }
@@ -206,82 +209,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
     }
     break;
-    case WM_LBUTTONDOWN:
-        //// 클릭한 위치에 원을 출력하는 기능 -> 클릭된 좌표를 가져옴
-        //g_mousePos.x = LOWORD(lParam);
-        //g_mousePos.y = HIWORD(lParam);
-        //InvalidateRect(hWnd, NULL, false); // 화면을 다시 그리는 함수
-        isClick = true;
-        g_mouseStartPos.x = LOWORD(lParam);
-        g_mouseStartPos.y = HIWORD(lParam);
-        break;
-    case WM_LBUTTONUP:
-        isClick = false;
-        break;
-    case WM_MOUSEMOVE:
-        // 클릭한 위치에 원을 출력하는 기능 -> 클릭된 좌표를 가져옴
-        g_mouseEndPos.x = LOWORD(lParam);
-        g_mouseEndPos.y = HIWORD(lParam);
-        g_mousePos.x = LOWORD(lParam);
-        g_mousePos.y = HIWORD(lParam);
-        InvalidateRect(hWnd, NULL, false); // 화면을 다시 그리는 함수
         break;
     case WM_KEYDOWN:
-        switch (wParam)
-        {
-            // 기타 다른 키들은 VK로 등록되어 있다 ex. VK_UP ...
-        case VK_LEFT:
-        case 'A':
-            g_keyPos.x -= 10;
-            break;
-        case VK_RIGHT:
-        case 'D':
-            g_keyPos.x += 10;
-            break;
-        case VK_UP:
-        case 'W':
-            g_keyPos.y -= 10;
-            break;
-        case VK_DOWN:
-        case 'S':
-            g_keyPos.y += 10;
-            break;
-        default:
-            break;
-        }
-        InvalidateRect(hWnd, NULL, false); // 화면을 다시 그리는 함수
         break;
     case WM_PAINT:
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-
-        HPEN hNewPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
-        HBRUSH hNewBrush = CreateSolidBrush(RGB(0, 255, 0));
-
-        // 앞으로 사용할 펜을 지정함. - 외곽선
-        // 원래 있던 펜 정보를 저장
-        HPEN hOldPen = (HPEN)SelectObject(hdc, hNewPen);
-        HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hNewBrush);
-
-
-        if (isClick)
-            Rectangle(hdc, g_mouseStartPos.x, g_mouseStartPos.y, g_mouseEndPos.x, g_mouseEndPos.y);
-
-        //if(g_mousePos.x != 0 && g_mousePos.y != 0)
-        //    Ellipse(hdc, g_mousePos.x - 50, g_mousePos.y - 50, g_mousePos.x + 50, g_mousePos.y + 50);
-        if (g_keyPos.x != 0 && g_keyPos.y != 0)
-            Rectangle(hdc, g_keyPos.x - 100, g_keyPos.y - 100, g_keyPos.x + 100, g_keyPos.y + 100);
-
-
-        // 의도한대로 색을 표현하기위해 그리기가 끝나면 다시 원상복구를 해야한다.
-        SelectObject(hdc, hOldPen);
-        SelectObject(hdc, hOldBrush);
-
-        DeleteObject(hNewPen);
-        DeleteObject(hNewBrush);
-
         EndPaint(hWnd, &ps);
     }
     break;
