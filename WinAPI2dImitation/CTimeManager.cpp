@@ -8,6 +8,7 @@ CTimeManager::CTimeManager()
 	m_llFrequency = {};
 	m_uiFPS = 0;
 	m_dDT = 0;
+	m_uiPlayTime = 0;
 }
 CTimeManager::~CTimeManager()
 {
@@ -31,9 +32,15 @@ void CTimeManager::update()
 	if (updateOneSecond >= 1.0)
 	{
 		m_uiFPS = updateCount;
+		m_uiPlayTime++;
+		m_bIsSecond = true;
 
 		updateOneSecond = 0;
 		updateCount = 0;
+	}
+	else
+	{
+		m_bIsSecond = false;
 	}
 }
 
@@ -41,4 +48,9 @@ void CTimeManager::init()
 {
 	QueryPerformanceCounter(&m_llPrevCount);		// 현재 시간의 카운트 수
 	QueryPerformanceFrequency(&m_llFrequency);	// 1초당 진행하는 카운트 수
+}
+
+void CTimeManager::SetPlayTime(unsigned int playtime)
+{
+	m_uiPlayTime = playtime;
 }

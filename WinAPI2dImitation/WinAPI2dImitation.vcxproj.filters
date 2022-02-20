@@ -13,14 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Engine">
+    <Filter Include="01.Engine">
       <UniqueIdentifier>{9ef21898-24c4-42e2-b392-4de4efc17294}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Core">
+    <Filter Include="01.Engine\01.Core">
       <UniqueIdentifier>{61638e5b-e3f9-4c47-86d3-7b95c965f417}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Util">
+    <Filter Include="02.Util">
       <UniqueIdentifier>{7cdb8ba6-44e9-40c0-93bb-672ff8f9aae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.GameObject">
+      <UniqueIdentifier>{84f538e2-5366-4bff-a662-ec3b5a5775d2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,19 +40,25 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CCore.h">
-      <Filter>Engine\Core</Filter>
+      <Filter>01.Engine\01.Core</Filter>
     </ClInclude>
     <ClInclude Include="CSingleton.h">
-      <Filter>Util</Filter>
+      <Filter>02.Util</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
-      <Filter>Util</Filter>
+      <Filter>02.Util</Filter>
     </ClInclude>
     <ClInclude Include="struct.h">
-      <Filter>Util</Filter>
+      <Filter>02.Util</Filter>
     </ClInclude>
     <ClInclude Include="CTimeManager.h">
-      <Filter>Util</Filter>
+      <Filter>02.Util</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
+      <Filter>03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet.h">
+      <Filter>03.GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -57,10 +66,16 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CCore.cpp">
-      <Filter>Engine\Core</Filter>
+      <Filter>01.Engine\01.Core</Filter>
     </ClCompile>
     <ClCompile Include="CTimeManager.cpp">
-      <Filter>Util</Filter>
+      <Filter>02.Util</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet.cpp">
+      <Filter>03.GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

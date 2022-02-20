@@ -147,7 +147,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="framework.h" />
@@ -158,7 +160,9 @@
     <ClInclude Include="WinAPI2dImitation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="WinAPI2dImitation.cpp" />
   </ItemGroup>

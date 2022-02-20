@@ -19,13 +19,17 @@
 #include <list>
 #include <map>
 #include <chrono>
+#include <random>
 
 // 사용자 정의 클래스
+
 #include "Logger.h"
 #include "CSingleton.h"
 #include "CCore.h"
 #include "struct.h"
 #include "CTimeManager.h"
+#include "CGameObject.h"
+#include "CBullet.h"
 
 
 
