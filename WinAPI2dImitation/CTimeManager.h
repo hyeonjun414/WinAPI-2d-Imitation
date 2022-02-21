@@ -15,8 +15,8 @@ private:
 	
 
 public:
-	void			update();		// 매번 FPS와 DeltaTime의 연산이 되어야한다.
-	void			init();			// 타임 매니저 초기화
+	void			Update();		// 매번 FPS와 DeltaTime의 연산이 되어야한다.
+	void			Init();			// 타임 매니저 초기화
 
 	bool			GetIsSec()		{ return m_bIsSecond; }
 	unsigned int	GetPlayTime()	{ return m_uiPlayTime; }	// 1프레임에 몇 초가 걸렸는지 확인

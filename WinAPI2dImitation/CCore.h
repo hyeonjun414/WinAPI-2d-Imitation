@@ -10,8 +10,8 @@ private:
 	HDC		m_hMemDC;
 
 public :
-	void update(); // 게임 업데이트
-	void render(); // 게임 그리기
+	void Update(); // 게임 업데이트
+	void Render(); // 게임 그리기
 
 	void Init();
 };
