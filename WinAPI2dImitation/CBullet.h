@@ -6,10 +6,10 @@ class CBullet :
 
 public:
     CBullet();
-    CBullet(fPoint pos, fPoint size, fPoint speed);
+    CBullet(OBJ_GROUP objGroup, Vec2 pos, Vec2 size, Vec2 speed);
     ~CBullet();
 
-    void update();
-    void render(HDC hdc);
+    void Update() override;
+    void Render(HDC hdc) override;
 };
 

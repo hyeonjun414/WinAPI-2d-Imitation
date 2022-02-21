@@ -5,33 +5,35 @@ CBullet::CBullet()
 {
 }
 
-CBullet::CBullet(fPoint pos, fPoint size, fPoint speed)
+CBullet::CBullet(OBJ_GROUP objGroup, Vec2 pos, Vec2 size, Vec2 speed)
 {
+	m_enumObjGroup = objGroup;
 	m_bIsActive = true;
-	m_fptPos = pos;
-	m_fptScale = size;
-	m_fSpeed = speed;
+
+	m_vec2Pos = pos;
+	m_vec2Scale = size;
+	m_vec2fSpeed = speed;
 }
 
 CBullet::~CBullet()
 {
 }
 
-void CBullet::update()
+void CBullet::Update()
 {
-	m_fptPos.x += m_fSpeed.x *300* DT;
-	m_fptPos.y += m_fSpeed.y *300* DT;
+	m_vec2Pos.x += m_vec2fSpeed.x * 300 * DT;
+	m_vec2Pos.y += m_vec2fSpeed.y * 300 * DT;
 
-	if (m_fptPos.x < -200 || m_fptPos.x > WINSIZEX + 200 ||
-		m_fptPos.y < -200 || m_fptPos.y > WINSIZEY + 200)
+	if (m_vec2Pos.x < -200 || m_vec2Pos.x > WINSIZEX + 200 ||
+		m_vec2Pos.y < -200 || m_vec2Pos.y > WINSIZEY + 200)
 		m_bIsActive = false;
 }
 
-void CBullet::render(HDC hdc)
+void CBullet::Render(HDC hdc)
 {
 	Rectangle(hdc,
-		m_fptPos.x - m_fptScale.x,
-		m_fptPos.y - m_fptScale.y,
-		m_fptPos.x + m_fptScale.x,
-		m_fptPos.y + m_fptScale.y);
+		m_vec2Pos.x - m_vec2Scale.x,
+		m_vec2Pos.y - m_vec2Scale.y,
+		m_vec2Pos.x + m_vec2Scale.x,
+		m_vec2Pos.y + m_vec2Scale.y);
 }

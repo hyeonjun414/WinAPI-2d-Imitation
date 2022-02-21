@@ -56,6 +56,8 @@ Vec2 CGameObject::GetScale()
 
 void CGameObject::Update()
 {
+	if (!m_bIsActive) return;
+
 	if (KEYCHECK(KEY::LEFT) == KEY_STATE::HOLD)
 	{
 		// ¿ÞÂÊ

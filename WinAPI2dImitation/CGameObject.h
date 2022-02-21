@@ -7,7 +7,7 @@ protected:
 
 	Vec2			m_vec2Pos;
 	Vec2			m_vec2Scale;
-
+	Vec2			m_vec2fSpeed;
 
 public:
 	CGameObject();
