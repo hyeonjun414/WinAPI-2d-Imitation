@@ -148,8 +148,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CKeyManager.h" />
+    <ClInclude Include="CScene.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="CTimeManager.h" />
+    <ClInclude Include="enumClass.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Resource.h" />
@@ -159,6 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CKeyManager.cpp" />
+    <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="WinAPI2dImitation.cpp" />
   </ItemGroup>

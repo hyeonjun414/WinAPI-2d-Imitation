@@ -45,7 +45,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 실행된 프로세스의 시
         return FALSE;
     }
 
-    CCore::getInst()->Init();
+    CCore::GetInst()->Init();
 
     // 단축키 정보를 불러온다.
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINAPI2DIMITATION));
@@ -82,8 +82,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 실행된 프로세스의 시
         {
             // 게임 로직
             // 게임 업데이트와 게임 렌더
-            CCore::getInst()->update();
-            CCore::getInst()->render();
+            CCore::GetInst()->Update();
+            CCore::GetInst()->Render();
         }
 
     }

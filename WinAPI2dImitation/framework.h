@@ -19,27 +19,32 @@
 #include <list>
 #include <map>
 #include <chrono>
+#include <random>
+using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도록 유의
 
 // 사용자 정의 클래스
 #include "Logger.h"
 #include "CSingleton.h"
 #include "CCore.h"
+#include "enumClass.h"
 #include "struct.h"
 #include "CTimeManager.h"
+#include "CKeyManager.h"
+#include "CGameObject.h"
+#include "CScene.h"
 
 
-
-// 디파인
+// 정의
 #define WINSTARTX 100     
 #define WINSTARTY 100         
 #define WINSIZEX 1280         
 #define WINSIZEY 720
 #define WINSTYLE WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
 
-
 // 매크로
-#define DT CTimeManager::getInst()->GetDT();
+#define DT CTimeManager::GetInst()->GetDT();
+#define KEYCHECK(vk_Key) CKeyManager::GetInst()->GetKeyState(vk_Key)
 
-// 전역 변수 -> 외부 클래스에 변수가 존재함을 알림.
+// 외부 변수 참조 -> 외부 클래스에 변수가 존재함을 알림.
 extern HINSTANCE	hInst;
 extern HWND			hWnd;
