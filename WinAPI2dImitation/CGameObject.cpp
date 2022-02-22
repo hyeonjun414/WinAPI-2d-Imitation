@@ -4,12 +4,13 @@
 CGameObject::CGameObject()
 {
 	m_bIsActive = true;
+	m_enumObjType = OBJ_TYPE::DEFAULT;
 }
 
-CGameObject::CGameObject(OBJ_GROUP objGroup)
+CGameObject::CGameObject(OBJ_TYPE objGroup)
 {
 	m_bIsActive = true;
-	m_enumObjGroup = objGroup;
+	m_enumObjType = objGroup;
 }
 
 CGameObject::~CGameObject()
@@ -33,9 +34,9 @@ void CGameObject::SetScale(Vec2 scale)
 	m_vec2Scale = scale;
 }
 
-OBJ_GROUP CGameObject::GetObjGroup()
+OBJ_TYPE CGameObject::GetObjGroup()
 {
-	return m_enumObjGroup;
+	return m_enumObjType;
 }
 
 bool CGameObject::GetActive()
@@ -53,39 +54,3 @@ Vec2 CGameObject::GetScale()
 	return m_vec2Scale;
 }
 #pragma endregion
-
-void CGameObject::Update()
-{
-	if (!m_bIsActive) return;
-
-	if (KEYCHECK(KEY::LEFT) == KEY_STATE::HOLD)
-	{
-		// 왼쪽
-		m_vec2Pos.x -= 300 * DT;
-	}
-	if (KEYCHECK(KEY::RIGHT) == KEY_STATE::HOLD)
-	{
-		// 오른쪽
-		m_vec2Pos.x += 300 * DT;
-	}
-	if (KEYCHECK(KEY::UP) == KEY_STATE::HOLD)
-	{
-		// 위쪽
-		m_vec2Pos.y -= 300 * DT;
-	}
-	if (KEYCHECK(KEY::DOWN) == KEY_STATE::HOLD)
-	{
-		// 아래쪽
-		m_vec2Pos.y += 300 * DT;
-	}
-}
-
-void CGameObject::Render(HDC hdc)
-{
-	// 움직이는 사각형 출력
-	Rectangle(hdc,
-		m_vec2Pos.x - m_vec2Scale.x,
-		m_vec2Pos.y - m_vec2Scale.y,
-		m_vec2Pos.x + m_vec2Scale.x,
-		m_vec2Pos.y + m_vec2Scale.y);
-}

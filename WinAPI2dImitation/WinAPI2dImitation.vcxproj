@@ -150,9 +150,14 @@
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CInGameScene.h" />
     <ClInclude Include="CKeyManager.h" />
+    <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CScene.h" />
+    <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSingleton.h" />
+    <ClInclude Include="CStartScene.h" />
+    <ClInclude Include="CTextObject.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="enumClass.h" />
     <ClInclude Include="framework.h" />
@@ -166,8 +171,13 @@
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CInGameScene.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
+    <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSceneManager.cpp" />
+    <ClCompile Include="CStartScene.cpp" />
+    <ClCompile Include="CTextObject.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="WinAPI2dImitation.cpp" />
   </ItemGroup>

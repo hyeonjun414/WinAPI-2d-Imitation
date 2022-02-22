@@ -2,14 +2,28 @@
 
 
 // 오브젝트 그룹
-enum class OBJ_GROUP
+enum class OBJ_TYPE
 {
 	DEFAULT,
 	PLAYER,
 	MONSTER,
 	BULLET,
 
-	SIZE
+	TEXT,
+
+	SIZE,
+};
+
+// 장면 그룹
+enum class SCENE_TYPE
+{
+	NONE,
+	TOOL,
+	START,
+	STAGE_01,
+	STAGE_02,
+
+	SIZE,
 };
 
 // 키 상태
