@@ -2,7 +2,7 @@
 class CGameObject
 {
 protected:
-	OBJ_GROUP		m_enumObjGroup;
+	OBJ_TYPE		m_enumObjType;
 	bool			m_bIsActive;
 
 	Vec2			m_vec2Pos;
@@ -11,19 +11,19 @@ protected:
 
 public:
 	CGameObject();
-	CGameObject(OBJ_GROUP objGroup);
+	CGameObject(OBJ_TYPE objGroup);
 	~CGameObject();
 
 	void			SetActive(bool active);
 	void			SetPos(Vec2 pos);
 	void			SetScale(Vec2 scale);
 
-	OBJ_GROUP		GetObjGroup();
+	OBJ_TYPE		GetObjGroup();
 	bool			GetActive();
 	Vec2			GetPos();
 	Vec2			GetScale();
 
-	virtual void	Update();
-	virtual void	Render(HDC hdc);
+	virtual void	Update() = 0;
+	virtual void	Render(HDC hDC) = 0;
 };
 

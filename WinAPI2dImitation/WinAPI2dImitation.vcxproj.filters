@@ -72,6 +72,21 @@
     <ClInclude Include="CKeyManager.h">
       <Filter>02.Util\01.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneManager.h">
+      <Filter>02.Util\01.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CStartScene.h">
+      <Filter>04.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextObject.h">
+      <Filter>03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CInGameScene.h">
+      <Filter>04.Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI2dImitation.cpp">
@@ -91,6 +106,21 @@
     </ClCompile>
     <ClCompile Include="CKeyManager.cpp">
       <Filter>02.Util\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneManager.cpp">
+      <Filter>02.Util\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CStartScene.cpp">
+      <Filter>04.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextObject.cpp">
+      <Filter>03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CInGameScene.cpp">
+      <Filter>04.Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
