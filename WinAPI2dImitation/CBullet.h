@@ -6,7 +6,7 @@ class CBullet :
 
 public:
     CBullet();
-    CBullet(OBJ_GROUP objGroup, Vec2 pos, Vec2 size, Vec2 speed);
+    CBullet(OBJ_TYPE objType, Vec2 pos, Vec2 size, Vec2 speed);
     ~CBullet();
 
     void Update() override;

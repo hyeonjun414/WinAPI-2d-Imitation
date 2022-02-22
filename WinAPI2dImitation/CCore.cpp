@@ -58,6 +58,7 @@ void CCore::Init()
 	CTimeManager::GetInst()->Init();
 	CKeyManager::GetInst()->Init();
 	CSceneManager::GetInst()->Init();
+	CGameManager::GetInst()->Init();
 
 	// 코어의 변수에 DC 할당
 	m_hDC = GetDC(hWnd);

@@ -16,25 +16,28 @@ CPlayer::~CPlayer()
 
 void CPlayer::Update()
 {
-	if (KEYCHECK(KEY::LEFT) == KEY_STATE::HOLD)
+	if (m_bIsActive)
 	{
-		// 왼쪽
-		m_vec2Pos.x -= 300 * DT;
-	}
-	if (KEYCHECK(KEY::RIGHT) == KEY_STATE::HOLD)
-	{
-		// 오른쪽
-		m_vec2Pos.x += 300 * DT;
-	}
-	if (KEYCHECK(KEY::UP) == KEY_STATE::HOLD)
-	{
-		// 위쪽
-		m_vec2Pos.y -= 300 * DT;
-	}
-	if (KEYCHECK(KEY::DOWN) == KEY_STATE::HOLD)
-	{
-		// 아래쪽
-		m_vec2Pos.y += 300 * DT;
+		if (KEYCHECK(KEY::LEFT) == KEY_STATE::HOLD)
+		{
+			// 왼쪽
+			m_vec2Pos.x -= 300 * DT;
+		}
+		if (KEYCHECK(KEY::RIGHT) == KEY_STATE::HOLD)
+		{
+			// 오른쪽
+			m_vec2Pos.x += 300 * DT;
+		}
+		if (KEYCHECK(KEY::UP) == KEY_STATE::HOLD)
+		{
+			// 위쪽
+			m_vec2Pos.y -= 300 * DT;
+		}
+		if (KEYCHECK(KEY::DOWN) == KEY_STATE::HOLD)
+		{
+			// 아래쪽
+			m_vec2Pos.y += 300 * DT;
+		}
 	}
 }
 
