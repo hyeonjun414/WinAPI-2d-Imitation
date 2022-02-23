@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CInGameScene.h"
 #include "CPlayer.h"
+#include "CMonster.h"
 
 CInGameScene::CInGameScene()
 {
@@ -21,7 +22,11 @@ void CInGameScene::Enter()
 	CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
 	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	obj->SetScale(Vec2(50, 50));
+	AddObject(obj);
 
+	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1100, WINSIZEY / 2));
+	obj->Init();
 	AddObject(obj);
 }
 

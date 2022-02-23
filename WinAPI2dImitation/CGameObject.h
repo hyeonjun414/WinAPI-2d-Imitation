@@ -23,7 +23,10 @@ public:
 	Vec2			GetPos();
 	Vec2			GetScale();
 
+	virtual void	Init() = 0;
 	virtual void	Update() = 0;
 	virtual void	Render(HDC hDC) = 0;
+
+	
 };
 

@@ -23,6 +23,29 @@ typedef struct Vector2
 		this->x = x;
 		this->y = y;
 	}
+
+	Vector2& operator=(POINT _pt)
+	{
+		x = (float)_pt.x;
+		y = (float)_pt.y;
+	}
+
+	float Length()
+	{
+		return sqrt(x * x + y * y);
+	}
+
+	Vector2& Normalize() // 벡터의 정규화
+	{
+		float fLen = Length();
+
+		assert(fLen != 0.f);
+
+		x /= fLen;
+		y /= fLen;
+		return *this;
+	}
+
 } Vec2;
 
 struct tKeyInfo

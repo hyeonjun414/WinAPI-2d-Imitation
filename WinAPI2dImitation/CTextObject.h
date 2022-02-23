@@ -10,6 +10,7 @@ public:
     CTextObject(wstring strText, OBJ_TYPE objGroup);
     ~CTextObject();
 
+    virtual void Init();
     virtual void Update();
     virtual void Render(HDC hDC);
 };

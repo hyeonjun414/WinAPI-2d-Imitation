@@ -1,5 +1,7 @@
 #include "framework.h"
 #include "CPlayer.h"
+#include "CMissile.h"
+#include "CScene.h"
 
 CPlayer::CPlayer()
 {
@@ -11,6 +13,10 @@ CPlayer::CPlayer(OBJ_TYPE objGroup) :
 }
 
 CPlayer::~CPlayer()
+{
+}
+
+void CPlayer::Init()
 {
 }
 
@@ -36,6 +42,9 @@ void CPlayer::Update()
 		// ¾Æ·¡ÂÊ
 		m_vec2Pos.y += 300 * DT;
 	}
+
+	if (KEYCHECK(KEY::SPACE) == KEY_STATE::TAP)
+		CreateMissile();
 }
 
 void CPlayer::Render(HDC hDC)
@@ -46,4 +55,21 @@ void CPlayer::Render(HDC hDC)
 		m_vec2Pos.y - m_vec2Scale.y,
 		m_vec2Pos.x + m_vec2Scale.x,
 		m_vec2Pos.y + m_vec2Scale.y);
+}
+
+void CPlayer::CreateMissile()
+{
+	CScene* pCurScene = CSceneManager::GetInst()->GetCurScene();
+
+	CMissile* pMissile = new CMissile(OBJ_TYPE::MISSILE, 0);
+	pMissile->SetPos(Vec2(m_vec2Pos.x + m_vec2Scale.x+ pMissile->GetScale().x, m_vec2Pos.y));
+	pCurScene->AddObject(pMissile);
+
+	pMissile = new CMissile(OBJ_TYPE::MISSILE, DEG(45));
+	pMissile->SetPos(Vec2(m_vec2Pos.x + m_vec2Scale.x + pMissile->GetScale().x, m_vec2Pos.y));
+	pCurScene->AddObject(pMissile);
+
+	pMissile = new CMissile(OBJ_TYPE::MISSILE, DEG(-45));
+	pMissile->SetPos(Vec2(m_vec2Pos.x + m_vec2Scale.x + pMissile->GetScale().x, m_vec2Pos.y));
+	pCurScene->AddObject(pMissile);
 }

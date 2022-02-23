@@ -52,3 +52,8 @@ void CSceneManager::ChangeScene(SCENE_TYPE sceneType)
 	m_pCurScene = m_arrScene[(int)sceneType];	// 씬 전환
 	m_pCurScene->Enter();						// 새로운 씬의 시작
 }
+
+CScene* CSceneManager::GetCurScene()
+{
+	return m_pCurScene;
+}
