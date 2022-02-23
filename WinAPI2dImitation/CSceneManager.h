@@ -19,6 +19,8 @@ public:
 
 	void ChangeScene(SCENE_TYPE sceneType);
 
+	CScene* GetCurScene();
+
 
 };
 

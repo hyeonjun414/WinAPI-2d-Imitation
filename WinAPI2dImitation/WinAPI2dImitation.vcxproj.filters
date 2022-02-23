@@ -93,6 +93,12 @@
     <ClInclude Include="CGameManager.h">
       <Filter>02.Util\01.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissile.h">
+      <Filter>03.GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI2dImitation.cpp">
@@ -127,6 +133,12 @@
     </ClCompile>
     <ClCompile Include="CInGameScene.cpp">
       <Filter>04.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissile.cpp">
+      <Filter>03.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CBullet.cpp">
       <Filter>03.GameObject</Filter>

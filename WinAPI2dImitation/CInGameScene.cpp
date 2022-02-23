@@ -129,6 +129,9 @@ void CInGameScene::Enter()
 	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	obj->SetScale(Vec2(20, 20));
 
+	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1100, WINSIZEY / 2));
+	obj->Init();
 	AddObject(obj);
 }
 

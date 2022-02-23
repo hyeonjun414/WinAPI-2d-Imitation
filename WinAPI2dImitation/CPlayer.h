@@ -6,9 +6,12 @@ class CPlayer :
 public :
     CPlayer();
     CPlayer(OBJ_TYPE objGroup);
-    ~CPlayer();
+    virtual ~CPlayer();
 
+    virtual void Init();
     virtual void Update();
     virtual void Render(HDC hDC);
+
+    void CreateMissile();
 };
 

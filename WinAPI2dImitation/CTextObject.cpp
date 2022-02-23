@@ -15,6 +15,10 @@ CTextObject::~CTextObject()
 {
 }
 
+void CTextObject::Init()
+{
+}
+
 void CTextObject::Update()
 {
 }
