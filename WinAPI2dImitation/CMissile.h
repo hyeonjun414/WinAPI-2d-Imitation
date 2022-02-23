@@ -13,7 +13,8 @@ private:
 public:
     CMissile();
     CMissile(OBJ_TYPE objType, float fTheta);
-    ~CMissile();
+    CMissile(OBJ_TYPE objType, Vec2 pos, Vec2 size, Vec2 speed);
+    virtual ~CMissile();
 
     virtual void Init();
     virtual void Update();
@@ -21,6 +22,7 @@ public:
     
 
     void    SetDir(float fTheta);
+    void    SetDir(Vec2 vec);
     float   GetDir();
 };
 

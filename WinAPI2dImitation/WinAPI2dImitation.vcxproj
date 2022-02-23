@@ -147,7 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CGameObject.h" />
@@ -171,7 +170,6 @@
     <ClInclude Include="WinAPI2dImitation.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CGameObject.cpp" />

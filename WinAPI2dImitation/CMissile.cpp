@@ -15,6 +15,17 @@ CMissile::CMissile(OBJ_TYPE objType, float fTheta):
     m_fVelocity = 500;
 }
 
+CMissile::CMissile(OBJ_TYPE objType, Vec2 pos, Vec2 size, Vec2 dirVec):
+    CGameObject(objType)
+{
+    m_fTheta = 0;
+    m_fVelocity = 300;
+
+    m_vec2Pos = pos;
+    m_vec2Scale = size;
+    m_vDir = dirVec;
+}
+
 CMissile::~CMissile()
 {
 }
@@ -25,10 +36,15 @@ void CMissile::Init()
 
 void CMissile::Update()
 {
+    if (CGameManager::GetInst()->GetPlayer()->GetActive())
+    {
+        m_vec2Pos.x += m_vDir.x * m_fVelocity * DT;
+        m_vec2Pos.y += m_vDir.y * m_fVelocity * DT;
 
-    m_vec2Pos.x += m_vDir.x * m_fVelocity * DT;
-    m_vec2Pos.y += m_vDir.y * m_fVelocity * DT; // y좌표는 윈도우 좌표계로 반대로 간다.
-
+        if (m_vec2Pos.x < -200 || m_vec2Pos.x > WINSIZEX + 200 ||
+            m_vec2Pos.y < -200 || m_vec2Pos.y > WINSIZEY + 200)
+            m_bIsActive = false;
+    }
 }
 
 void CMissile::Render(HDC hDC)
@@ -44,6 +60,10 @@ void CMissile::Render(HDC hDC)
 void CMissile::SetDir(float fTheta)
 {
     m_fTheta = fTheta;
+}
+
+void CMissile::SetDir(Vec2 vec)
+{
 }
 
 float CMissile::GetDir()

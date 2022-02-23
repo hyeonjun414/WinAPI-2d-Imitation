@@ -3,7 +3,7 @@
 class CInGameScene :
     public CScene
 {
-    int stageNum = 5;
+    int m_iStageTime;
 public:
     CInGameScene();
     CInGameScene(wstring sceneName, SCENE_TYPE sceneType);

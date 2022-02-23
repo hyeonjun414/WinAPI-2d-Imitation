@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "CInGameScene.h"
 #include "CPlayer.h"
-#include "CBullet.h"
+#include "CMissile.h"
 #include "CGameManager.h"
 
 CInGameScene::CInGameScene()
@@ -29,7 +29,7 @@ void CInGameScene::Update()
 		player->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 		player->SetScale(Vec2(20, 20));
 		CTimeManager::GetInst()->SetPlayTime(0);
-		stageNum = 5;
+		m_iStageTime = 5;
 		m_vecObjectList[(int)OBJ_TYPE::BULLET].clear();
 		return;
 	}
@@ -40,10 +40,10 @@ void CInGameScene::Update()
 		// 1초마다 돌아오면 플레이어를 겨냥하는 총알을 생성
 		if (CTimeManager::GetInst()->GetIsSec())
 		{
-			stageNum++;
+			m_iStageTime++;
 			srand((unsigned int)time(NULL));
 
-			for (int i = 0; i < stageNum / 5; i++)
+			for (int i = 0; i < m_iStageTime / 5; i++)
 			{
 				float x, y;
 				while (true)
@@ -60,14 +60,11 @@ void CInGameScene::Update()
 						((0 < x && x < WINSIZEX) && !(0 < y && y < WINSIZEY)))
 						break;
 				}
-				float speedX = player->GetPos().x - x;
-				float speedY = player->GetPos().y - y;
-				float normalize = sqrt(pow(speedX, 2) + pow(speedY, 2));
+				float dirX = player->GetPos().x - x;
+				float dirY = player->GetPos().y - y;
+				Vec2 dirVec = Vec2(dirX, dirY).Normalize();
 
-				speedX /= normalize;
-				speedY /= normalize;
-
-				CGameObject* bullet = new CBullet(OBJ_TYPE::BULLET, Vec2(x, y), Vec2(10, 10), Vec2(speedX, speedY));
+				CGameObject* bullet = new CMissile(OBJ_TYPE::BULLET, Vec2(x, y), Vec2(10, 10), dirVec);
 				m_vecObjectList[(int)OBJ_TYPE::BULLET].push_back(bullet);
 			}
 		}
@@ -113,7 +110,7 @@ void CInGameScene::Render(HDC hDC)
 
 		// 스테이지 출력
 		WCHAR strStage[8];
-		swprintf_s(strStage, L"STAGE %d", stageNum / 5);
+		swprintf_s(strStage, L"STAGE %d", m_iStageTime / 5);
 		TextOutW(hDC, WINSIZEX / 2, 30, strStage, 7);
 	}
 	else
@@ -125,13 +122,13 @@ void CInGameScene::Render(HDC hDC)
 
 void CInGameScene::Enter()
 {
+	m_iStageTime = 5;
+
 	CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
 	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	obj->SetScale(Vec2(20, 20));
+	
 
-	obj = new CMonster(OBJ_TYPE::MONSTER);
-	obj->SetPos(Vec2(1100, WINSIZEY / 2));
-	obj->Init();
 	AddObject(obj);
 }
 

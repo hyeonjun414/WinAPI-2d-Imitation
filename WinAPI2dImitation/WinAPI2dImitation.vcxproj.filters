@@ -87,9 +87,6 @@
     <ClInclude Include="CInGameScene.h">
       <Filter>04.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CBullet.h">
-      <Filter>03.GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="CGameManager.h">
       <Filter>02.Util\01.Manager</Filter>
     </ClInclude>
@@ -138,9 +135,6 @@
       <Filter>03.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CMissile.cpp">
-      <Filter>03.GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="CBullet.cpp">
       <Filter>03.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CGameManager.cpp">
