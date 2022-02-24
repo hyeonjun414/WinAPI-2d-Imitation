@@ -3,20 +3,21 @@
 
 class CTexture;
 
-class CPlayer :
+class CImageObject :
     public CGameObject
 {
-private:
+private :
     CTexture* m_pTex;
-public :
-    CPlayer();
-    CPlayer(OBJ_TYPE objGroup);
-    virtual ~CPlayer();
+
+public:
+    CImageObject();
+    CImageObject(OBJ_TYPE objGroup);
+    ~CImageObject();
+
 
     virtual void Init();
     virtual void Update();
     virtual void Render(HDC hDC);
-
-    void CreateMissile();
+    
 };
 

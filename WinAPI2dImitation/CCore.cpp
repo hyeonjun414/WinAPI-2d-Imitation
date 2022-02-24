@@ -24,10 +24,9 @@ void CCore::Update()
 	// 게임의 정보를 갱신
 	
 	// 매니저 클래스 업데이트 ( 타임, 키, 장면 )
-	CTimeManager::GetInst()->Update();
-	CKeyManager::GetInst()->Update();
-	CSceneManager::GetInst()->Update();
-
+	SINGLE(CTimeManager)->Update();
+	SINGLE(CKeyManager)->Update();
+	SINGLE(CSceneManager)->Update();
 
 
 	// 게임의 정보를 토대로 그려주는 작업
@@ -44,7 +43,7 @@ void CCore::Render()
 	Rectangle(m_hMemDC, -1, -1, WINSIZEX + 1, WINSIZEY + 1);
 
 	// 매니저 클래스 렌더 ( 장면 )
-	CSceneManager::GetInst()->Render(m_hMemDC);
+	SINGLE(CSceneManager)->Render(m_hMemDC);
 
 	// m_hMemDC에 모아 그린 정보를 m_hDC로 한번에 다시 그림.
 	BitBlt(m_hDC, 0, 0, WINSIZEX, WINSIZEY, m_hMemDC, 0, 0, SRCCOPY);
@@ -54,10 +53,11 @@ void CCore::Init()
 {
 	// Core의 초기화 과정
 
-	// 매니저 클래스 초기화 ( 타임, 키, 장면 )
-	CTimeManager::GetInst()->Init();
-	CKeyManager::GetInst()->Init();
-	CSceneManager::GetInst()->Init();
+	// 매니저 클래스 초기화 ( 타임, 키, 장면, 경로 )
+	SINGLE(CTimeManager)->Init();
+	SINGLE(CKeyManager)->Init();
+	SINGLE(CPathManager)->Init();
+	SINGLE(CSceneManager)->Init();
 
 	// 코어의 변수에 DC 할당
 	m_hDC = GetDC(hWnd);

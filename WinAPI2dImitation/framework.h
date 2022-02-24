@@ -14,6 +14,9 @@
 #include <memory.h>
 #include <tchar.h>
 
+
+#pragma comment(lib, "Msimg32.lib")
+
 // STL
 #include <vector>
 #include <list>
@@ -34,6 +37,7 @@ using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도�
 #include "CTimeManager.h"
 #include "CKeyManager.h"
 #include "CSceneManager.h"
+#include "CPathManager.h"
 
 
 // 정의
@@ -44,8 +48,10 @@ using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도�
 #define WINSTYLE WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
 #define PI	3.141592f
 #define DEG(value) value * PI / 180
+#define GRAVITY 9.8f;
 
 // 매크로
+#define SINGLE(manager) manager::GetInst()
 #define DT CTimeManager::GetInst()->GetDT()
 #define KEYCHECK(vk_Key) CKeyManager::GetInst()->GetKeyState(vk_Key)
 

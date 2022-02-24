@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CStartScene.h"
 #include "CTextObject.h"
+#include "CImageObject.h"
 
 CStartScene::CStartScene()
 {
@@ -28,10 +29,15 @@ void CStartScene::Update()
 
 void CStartScene::Enter()
 {
+
 	CGameObject* obj = new CTextObject(L"스페이스바를 누르면 게임이 시작됩니다.", OBJ_TYPE::TEXT);
 	obj->SetPos(Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 150));
-
 	AddObject(obj);
+	obj = new CImageObject(OBJ_TYPE::IMAGE);
+	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2 - 200));
+	obj->Init();
+	AddObject(obj);
+
 }
 
 void CStartScene::Exit()

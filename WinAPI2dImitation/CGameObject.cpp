@@ -24,6 +24,11 @@ void CGameObject::SetActive(bool active)
 	m_bIsActive = active;
 }
 
+void CGameObject::SetGravity(bool active)
+{
+	m_bIsGravity = active;
+}
+
 void CGameObject::SetPos(Vec2 pos)
 {
 	m_vec2Pos = pos;
@@ -42,6 +47,11 @@ OBJ_TYPE CGameObject::GetObjGroup()
 bool CGameObject::GetActive()
 {
 	return m_bIsActive;
+}
+
+bool CGameObject::GetGravity()
+{
+	return m_bIsGravity;
 }
 
 Vec2 CGameObject::GetPos()

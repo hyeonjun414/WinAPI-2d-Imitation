@@ -11,6 +11,7 @@ enum class OBJ_TYPE
 	MISSILE,
 
 	TEXT,
+	IMAGE,
 
 	SIZE,
 };

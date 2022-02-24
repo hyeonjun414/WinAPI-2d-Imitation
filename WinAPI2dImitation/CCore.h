@@ -14,5 +14,7 @@ public :
 	void Render(); // 게임 그리기
 
 	void Init();
+
+	HDC GetMainDC() { return m_hDC; }
 };
 
