@@ -5,10 +5,10 @@ CTextObject::CTextObject()
 {
 }
 
-CTextObject::CTextObject(wstring strText, OBJ_TYPE objGroup) :
-	CGameObject(objGroup)
+CTextObject::CTextObject(wstring _strText, OBJ_TYPE _objGroup) :
+	CGameObject(_objGroup)
 {
-	m_strText = strText;
+	m_strText = _strText;
 }
 
 CTextObject::~CTextObject()
@@ -23,10 +23,9 @@ void CTextObject::Update()
 {
 }
 
-void CTextObject::Render(HDC hDC)
+void CTextObject::Render(HDC _hDC)
 {
-	const int size = m_strText.size();
 	WCHAR str[50];
 	swprintf_s(str, L"%s", m_strText.c_str());
-	TextOutW(hDC, m_vec2Pos.x, m_vec2Pos.y, str, m_strText.size());
+	TextOutW(_hDC, (int)m_vec2Pos.x, (int)m_vec2Pos.y, str, (int)m_strText.size());
 }

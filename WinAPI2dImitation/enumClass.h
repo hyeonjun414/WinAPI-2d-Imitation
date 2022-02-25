@@ -51,3 +51,19 @@ enum class KEY
 
 	SIZE
 };
+
+// 그리기에 사용할 브러쉬와 펜 그룹
+enum class BRUSH_TYPE
+{
+	HOLLOW,
+
+	SIZE
+};
+enum class PEN_TYPE
+{
+	RED,
+	GREEN,
+	BLUE,
+
+	SIZE
+};

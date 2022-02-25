@@ -11,13 +11,13 @@ private :
 
 public:
     CImageObject();
-    CImageObject(OBJ_TYPE objGroup);
-    ~CImageObject();
+    CImageObject(OBJ_TYPE _objGroup);
+    virtual ~CImageObject();
 
 
-    virtual void Init();
-    virtual void Update();
-    virtual void Render(HDC hDC);
+    virtual void    Init();
+    virtual void    Update();
+    virtual void    Render(HDC _hDC);
     
 };
 

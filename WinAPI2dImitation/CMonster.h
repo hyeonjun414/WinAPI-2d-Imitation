@@ -10,14 +10,14 @@ class CMonster :
 
 public:
     CMonster();
-    CMonster(OBJ_TYPE objType);
+    CMonster(OBJ_TYPE _objType);
     virtual ~CMonster();
 
-    virtual void Update();
-    virtual void Render(HDC hDC);
-    virtual void Init();
+    virtual void    Update();
+    virtual void    Render(HDC _hDC);
+    virtual void    Init();
 
-    void SetCenterPos(Vec2 vec);
-    Vec2 GetCenterPos();
+    void            SetCenterPos(Vec2 _vec) { m_vec2CenterPos = _vec; }
+    Vec2            GetCenterPos()          { return m_vec2CenterPos; }
 };
 

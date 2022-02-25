@@ -5,17 +5,24 @@ CMonster::CMonster()
 {
 }
 
-CMonster::CMonster(OBJ_TYPE objType) :
-    CGameObject(objType)
+CMonster::CMonster(OBJ_TYPE _objType) :
+    CGameObject(_objType)
 {
     SetScale(Vec2(100, 100));
     m_fVelocity = 100;
     m_fDistance = 100;
     m_bIsUpDir = true;
+
+    CreateCollider();
 }
 
 CMonster::~CMonster()
 {
+}
+
+void CMonster::Init()
+{
+    SetCenterPos(m_vec2Pos);
 }
 
 void CMonster::Update()
@@ -31,28 +38,14 @@ void CMonster::Update()
         if (m_vec2Pos.y > m_vec2CenterPos.y + m_fDistance) m_bIsUpDir = !m_bIsUpDir;
     }
 }
-void CMonster::Render(HDC hDC)
+void CMonster::Render(HDC _hDC)
 {
-    Rectangle(hDC,
-        m_vec2Pos.x - m_vec2Scale.x,
-        m_vec2Pos.y - m_vec2Scale.y,
-        m_vec2Pos.x + m_vec2Scale.x,
-        m_vec2Pos.y + m_vec2Scale.y);
+    Rectangle(_hDC,
+        (int)(m_vec2Pos.x - m_vec2Scale.x),
+        (int)(m_vec2Pos.y - m_vec2Scale.y),
+        (int)(m_vec2Pos.x + m_vec2Scale.x),
+        (int)(m_vec2Pos.y + m_vec2Scale.y));
 }
 
-void CMonster::SetCenterPos(Vec2 vec)
-{
-    m_vec2CenterPos = vec;
-}
-
-void CMonster::Init()
-{
-    SetCenterPos(m_vec2Pos);
-}
-
-Vec2 CMonster::GetCenterPos()
-{
-    return m_vec2CenterPos;
-}
 
 

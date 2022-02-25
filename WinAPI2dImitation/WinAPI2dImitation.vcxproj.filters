@@ -37,6 +37,12 @@
     <Filter Include="05.Resource\01.Texture">
       <UniqueIdentifier>{ad401253-6924-4644-a1cb-97a39ec50285}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Util\02.Other">
+      <UniqueIdentifier>{bb1e2a2f-9207-4044-8c2c-e26b4c79744f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Component">
+      <UniqueIdentifier>{69f5a52a-4f69-439a-a613-0af8bc40a818}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -54,23 +60,11 @@
     <ClInclude Include="CCore.h">
       <Filter>01.Engine\01.Core</Filter>
     </ClInclude>
-    <ClInclude Include="CSingleton.h">
-      <Filter>02.Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>02.Util</Filter>
-    </ClInclude>
-    <ClInclude Include="struct.h">
-      <Filter>02.Util</Filter>
-    </ClInclude>
     <ClInclude Include="CGameObject.h">
       <Filter>03.GameObject</Filter>
     </ClInclude>
     <ClInclude Include="CScene.h">
       <Filter>04.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="enumClass.h">
-      <Filter>02.Util</Filter>
     </ClInclude>
     <ClInclude Include="CTimeManager.h">
       <Filter>02.Util\01.Manager</Filter>
@@ -110,6 +104,27 @@
     </ClInclude>
     <ClInclude Include="CImageObject.h">
       <Filter>03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CResourceManager.h">
+      <Filter>02.Util\01.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CSingleton.h">
+      <Filter>02.Util\02.Other</Filter>
+    </ClInclude>
+    <ClInclude Include="enumClass.h">
+      <Filter>02.Util\02.Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>02.Util\02.Other</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>02.Util\02.Other</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider.h">
+      <Filter>06.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectGDI.h">
+      <Filter>02.Util\02.Other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +178,15 @@
     </ClCompile>
     <ClCompile Include="CImageObject.cpp">
       <Filter>03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CResourceManager.cpp">
+      <Filter>02.Util\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider.cpp">
+      <Filter>06.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGDI.cpp">
+      <Filter>02.Util\02.Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

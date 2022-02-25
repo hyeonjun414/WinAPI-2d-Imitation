@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CGameObject.h"
+#include "CCollider.h"
 
 CGameObject::CGameObject()
 {
@@ -7,60 +8,38 @@ CGameObject::CGameObject()
 	m_enumObjType = OBJ_TYPE::DEFAULT;
 }
 
-CGameObject::CGameObject(OBJ_TYPE objGroup)
+CGameObject::CGameObject(OBJ_TYPE _objGroup)
 {
 	m_bIsActive = true;
-	m_enumObjType = objGroup;
+	m_enumObjType = _objGroup;
+	m_pCollider = nullptr;
 }
 
 CGameObject::~CGameObject()
 {
+	if (nullptr != m_pCollider)
+		delete m_pCollider;
 }
 
-#pragma region GET & SET
-
-void CGameObject::SetActive(bool active)
+void CGameObject::FinalUpdate()
 {
-	m_bIsActive = active;
+	if (nullptr != m_pCollider)
+		m_pCollider->FinalUpdate();
 }
 
-void CGameObject::SetGravity(bool active)
+void CGameObject::ComponentRender(HDC _hDC)
 {
-	m_bIsGravity = active;
+	if (nullptr != m_pCollider)
+		m_pCollider->Render(_hDC);
 }
 
-void CGameObject::SetPos(Vec2 pos)
-{
-	m_vec2Pos = pos;
-}
 
-void CGameObject::SetScale(Vec2 scale)
-{
-	m_vec2Scale = scale;
-}
 
-OBJ_TYPE CGameObject::GetObjGroup()
+void CGameObject::CreateCollider()
 {
-	return m_enumObjType;
-}
+	m_pCollider = new CCollider;
+	m_pCollider->m_pOwner = this;
 
-bool CGameObject::GetActive()
-{
-	return m_bIsActive;
-}
 
-bool CGameObject::GetGravity()
-{
-	return m_bIsGravity;
-}
-
-Vec2 CGameObject::GetPos()
-{
-	return m_vec2Pos;
-}
-
-Vec2 CGameObject::GetScale()
-{
-	return m_vec2Scale;
 }
 #pragma endregion

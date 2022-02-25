@@ -3,21 +3,23 @@
 #include "CMissile.h"
 #include "CScene.h"
 #include "CTexture.h"
+#include "CCollider.h"
 
 CPlayer::CPlayer()
 {
 }
 
-CPlayer::CPlayer(OBJ_TYPE objGroup) :
-	CGameObject(objGroup),
+CPlayer::CPlayer(OBJ_TYPE _objGroup) :
+	CGameObject(_objGroup),
 	m_pTex(nullptr)
 {
-	m_pTex = new CTexture;
+	// 텍스쳐 불러오기
+	m_pTex = SINGLE(CResourceManager)->LoadTexture(L"PlayerTex", L"texture\\monster01.bmp");
 
-	wstring strFilePath = SINGLE(CPathManager)->GetContentPath();
-	strFilePath += L"texture\\monster01.bmp";
+	// Collider 만들기
+	CreateCollider();
 
-	m_pTex->Load(strFilePath);
+	m_pCollider->SetScale(Vec2(100, 100));
 }
 
 CPlayer::~CPlayer()
@@ -51,27 +53,20 @@ void CPlayer::Update()
 		m_vec2Pos.y += 300 * DT;
 	}
 
-	if (KEYCHECK(KEY::SPACE) == KEY_STATE::TAP)
+	if (KEYCHECK(KEY::SPACE) == KEY_STATE::HOLD)
 		CreateMissile();
 }
 
-void CPlayer::Render(HDC hDC)
+void CPlayer::Render(HDC _hDC)
 {
 	if (nullptr != m_pTex)
 	{
 		int iWidth = (int)m_pTex->Width();
 		int iHeight = (int)m_pTex->Height();
 
-		//BitBlt(hDC,
-		//	m_vec2Pos.x - (float)(iWidth / 2),
-		//	m_vec2Pos.y - (float)(iHeight / 2),
-		//	iWidth, iHeight,
-		//	m_pTex->GetDC(),
-		//	0, 0, SRCCOPY);
-
-		TransparentBlt(hDC,
-			m_vec2Pos.x - (float)(iWidth / 2),
-			m_vec2Pos.y - (float)(iHeight / 2),
+		TransparentBlt(_hDC,
+			(int)(m_vec2Pos.x - (iWidth / 2)),
+			(int)(m_vec2Pos.y - (iHeight / 2)),
 			iWidth, iHeight,
 			m_pTex->GetDC(),
 			0, 0, iWidth, iHeight,
@@ -80,13 +75,14 @@ void CPlayer::Render(HDC hDC)
 	else
 	{
 		// 움직이는 사각형 출력
-		Rectangle(hDC,
-			m_vec2Pos.x - m_vec2Scale.x/2,
-			m_vec2Pos.y - m_vec2Scale.y/2,
-			m_vec2Pos.x + m_vec2Scale.x/2,
-			m_vec2Pos.y + m_vec2Scale.y/2);
+		Rectangle(_hDC,
+			(int)(m_vec2Pos.x - m_vec2Scale.x/2),
+			(int)(m_vec2Pos.y - m_vec2Scale.y/2),
+			(int)(m_vec2Pos.x + m_vec2Scale.x/2),
+			(int)(m_vec2Pos.y + m_vec2Scale.y/2));
 	}
 
+	ComponentRender(_hDC);
 }
 
 void CPlayer::CreateMissile()

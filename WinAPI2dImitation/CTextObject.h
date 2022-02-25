@@ -7,11 +7,11 @@ class CTextObject :
 
 public:
     CTextObject();
-    CTextObject(wstring strText, OBJ_TYPE objGroup);
+    CTextObject(wstring _strText, OBJ_TYPE _objGroup);
     ~CTextObject();
 
-    virtual void Init();
-    virtual void Update();
-    virtual void Render(HDC hDC);
+    virtual void    Init();
+    virtual void    Update();
+    virtual void    Render(HDC _hDC);
 };
 

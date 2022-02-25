@@ -30,6 +30,51 @@ typedef struct Vector2
 		y = (float)_pt.y;
 	}
 
+	Vector2 operator+(const Vector2& _other)
+	{
+		return Vector2(this->x + _other.x, this->y + _other.y);
+	}
+	Vector2 operator-(const Vector2& _other)
+	{
+		return Vector2(this->x - _other.x, this->y - _other.y);
+	}
+	Vector2 operator*(const Vector2& _other)
+	{
+		return Vector2(this->x * _other.x, this->y * _other.y);
+	}
+	Vector2 operator/(const Vector2& _other)
+	{
+		assert(!(0.f == _other.x || 0.f == _other.y));
+		return Vector2(this->x / _other.x, this->y / _other.y);
+	}
+
+	Vector2& operator+=(const Vector2& _other)
+	{
+		x += _other.x;
+		y += _other.y;
+		return *this;
+	}
+	Vector2& operator-=(const Vector2& _other)
+	{
+		x -= _other.x;
+		y -= _other.y;
+		return *this;
+	}
+	Vector2& operator*=(const Vector2& _other)
+	{
+		x *= _other.x;
+		y *= _other.y;
+		return *this;
+	}
+	Vector2& operator/=(const Vector2& _other)
+	{
+		assert(!(0.f == _other.x || 0.f == _other.y));
+		x /= _other.x;
+		y /= _other.y;
+		return *this;
+	}
+
+
 	float Length()
 	{
 		return sqrt(x * x + y * y);

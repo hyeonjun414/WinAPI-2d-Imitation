@@ -10,13 +10,13 @@ private:
     CTexture* m_pTex;
 public :
     CPlayer();
-    CPlayer(OBJ_TYPE objGroup);
+    CPlayer(OBJ_TYPE _objGroup);
     virtual ~CPlayer();
 
-    virtual void Init();
-    virtual void Update();
-    virtual void Render(HDC hDC);
+    virtual void    Init();
+    virtual void    Update();
+    virtual void    Render(HDC _hDC);
 
-    void CreateMissile();
+    void            CreateMissile();
 };
 

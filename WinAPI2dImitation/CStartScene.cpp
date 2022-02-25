@@ -9,8 +9,8 @@ CStartScene::CStartScene()
 	m_enumSceneType = SCENE_TYPE::NONE;
 }
 
-CStartScene::CStartScene(wstring sceneName, SCENE_TYPE sceneType):
-	CScene(sceneName, sceneType)
+CStartScene::CStartScene(wstring _sceneName, SCENE_TYPE _sceneType):
+	CScene(_sceneName, _sceneType)
 {
 }
 

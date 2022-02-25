@@ -7,8 +7,8 @@ CInGameScene::CInGameScene()
 {
 }
 
-CInGameScene::CInGameScene(wstring sceneName, SCENE_TYPE sceneType) :
-	CScene(sceneName, sceneType)
+CInGameScene::CInGameScene(wstring _sceneName, SCENE_TYPE _sceneType) :
+	CScene(_sceneName, _sceneType)
 {
 }
 

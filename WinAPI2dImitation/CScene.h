@@ -14,21 +14,24 @@ protected:
 
 public:
 	CScene();
-	CScene(wstring sceneName, SCENE_TYPE sceneType);
+	CScene(wstring _sceneName, SCENE_TYPE _sceneType);
 	virtual ~CScene();
 
-	virtual void Update();
-	virtual void Render(HDC hDC);
+	virtual void	Update();
+	virtual void	FinalUpdate();
+	virtual void	Render(HDC _hDC);
 
-	virtual void Enter() = 0;
-	virtual void Exit() = 0;
+	virtual void	Enter() = 0;
+	virtual void	Exit() = 0;
 
-	void	SetName(const wstring& strName);
-	wstring GetName();
+	void			SetName(const wstring& _strName){ m_strName = _strName; }
+	wstring			GetName()						{ return m_strName; }
 
-	void AddObject(CGameObject* pObj);
+
+	void			AddObject(CGameObject* _pObj);
+	void			EraseObject(CGameObject* _pObj);
 
 protected:
-	void ClearObject();
+	void			ClearObject();
 };
 

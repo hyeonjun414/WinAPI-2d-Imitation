@@ -1,5 +1,8 @@
 #pragma once
 #include "CGameObject.h"
+
+class CTexture;
+
 class CMissile :
     public CGameObject
 {
@@ -10,19 +13,21 @@ private:
     Vec2    m_vDir;             // 방향성 정보
     Vec2    m_vSpeed;           // 총알 속도
     Vec2    m_vVelocity;       // 총알 가속도
+
+    CTexture* m_pTex;
     
 
 public:
     CMissile();
-    CMissile(OBJ_TYPE objType, float fTheta);
+    CMissile(OBJ_TYPE _objType, float _fTheta);
     ~CMissile();
 
-    virtual void Init();
-    virtual void Update();
-    virtual void Render(HDC hDC);
+    virtual void    Init();
+    virtual void    Update();
+    virtual void    Render(HDC _hDC);
     
 
-    void    SetDir(float fTheta);
-    float   GetDir();
+    void            SetDir(float _fTheta)   { m_fTheta = _fTheta; }
+    float           GetDir()                { return m_fTheta; }
 };
 
