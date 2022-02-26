@@ -6,8 +6,6 @@ class CTexture;
 class CPlayer :
     public CGameObject
 {
-private:
-    CTexture* m_pTex;
 public :
     CPlayer();
     CPlayer(OBJ_TYPE _objGroup);

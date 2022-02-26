@@ -10,8 +10,7 @@ CPlayer::CPlayer()
 }
 
 CPlayer::CPlayer(OBJ_TYPE _objGroup) :
-	CGameObject(_objGroup),
-	m_pTex(nullptr)
+	CGameObject(_objGroup)
 {
 	// 텍스쳐 불러오기
 	m_pTex = SINGLE(CResourceManager)->LoadTexture(L"PlayerTex", L"texture\\monster01.bmp");
@@ -19,7 +18,8 @@ CPlayer::CPlayer(OBJ_TYPE _objGroup) :
 	// Collider 만들기
 	CreateCollider();
 
-	m_pCollider->SetScale(Vec2(100, 100));
+	//m_pCollider->SetOffsetPos(Vec2(0, 20));
+	m_pCollider->SetScale(Vec2(50, 50));
 }
 
 CPlayer::~CPlayer()
@@ -53,7 +53,7 @@ void CPlayer::Update()
 		m_vec2Pos.y += 300 * DT;
 	}
 
-	if (KEYCHECK(KEY::SPACE) == KEY_STATE::HOLD)
+	if (KEYCHECK(KEY::SPACE) == KEY_STATE::TAP)
 		CreateMissile();
 }
 
@@ -61,16 +61,7 @@ void CPlayer::Render(HDC _hDC)
 {
 	if (nullptr != m_pTex)
 	{
-		int iWidth = (int)m_pTex->Width();
-		int iHeight = (int)m_pTex->Height();
-
-		TransparentBlt(_hDC,
-			(int)(m_vec2Pos.x - (iWidth / 2)),
-			(int)(m_vec2Pos.y - (iHeight / 2)),
-			iWidth, iHeight,
-			m_pTex->GetDC(),
-			0, 0, iWidth, iHeight,
-			RGB(255, 0, 255));
+		TextureRender(_hDC);
 	}
 	else
 	{

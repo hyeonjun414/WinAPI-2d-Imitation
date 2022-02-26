@@ -126,6 +126,9 @@
     <ClInclude Include="SelectGDI.h">
       <Filter>02.Util\02.Other</Filter>
     </ClInclude>
+    <ClInclude Include="CCollisionManager.h">
+      <Filter>02.Util\01.Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI2dImitation.cpp">
@@ -187,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="SelectGDI.cpp">
       <Filter>02.Util\02.Other</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionManager.cpp">
+      <Filter>02.Util\01.Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

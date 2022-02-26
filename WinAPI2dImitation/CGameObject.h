@@ -1,6 +1,7 @@
 #pragma once
 
 class CCollider;
+class CTexture;
 
 class CGameObject
 {
@@ -12,6 +13,7 @@ protected:
 	Vec2			m_vec2Pos;		// 위치
 	Vec2			m_vec2Scale;	// 크기
 
+	CTexture*		m_pTex;
 	CCollider*		m_pCollider;
 
 public:
@@ -36,8 +38,10 @@ public:
 	bool			GetGravity()	{ return m_bIsGravity; }
 	Vec2			GetPos()		{ return m_vec2Pos; }
 	Vec2			GetScale()		{ return m_vec2Scale; }
+	CCollider*		GetCollider()	{ return m_pCollider; }
 	
 	// Component
+	void			TextureRender(HDC _hDC);
 	void			CreateCollider();
 
 

@@ -14,7 +14,6 @@ private:
     Vec2    m_vSpeed;           // ÃÑ¾Ë ¼Óµµ
     Vec2    m_vVelocity;       // ÃÑ¾Ë °¡¼Óµµ
 
-    CTexture* m_pTex;
     
 
 public:

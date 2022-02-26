@@ -31,6 +31,11 @@ public:
 	void			AddObject(CGameObject* _pObj);
 	void			EraseObject(CGameObject* _pObj);
 
+	const vector<CGameObject*>& GetGroupObject(OBJ_TYPE _eType)
+	{
+		return m_vecObjectList[(UINT)_eType];
+	};
+
 protected:
 	void			ClearObject();
 };

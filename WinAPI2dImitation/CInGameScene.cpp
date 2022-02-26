@@ -28,8 +28,15 @@ void CInGameScene::Enter()
 	obj->SetPos(Vec2(1100, WINSIZEY / 2));
 	obj->Init();
 	AddObject(obj);
+
+	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::MONSTER);
 }
 
 void CInGameScene::Exit()
 {
+	ClearObject();
+
+	// 기존의 충돌 그릅을 해제시켜야한다.
+	SINGLE(CCollisionManager)->Reset();
 }

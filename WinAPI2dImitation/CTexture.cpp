@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CTexture.h"
+#include "CGameObject.h"
 
 CTexture::CTexture()
 {

@@ -2,8 +2,11 @@
 #include "CCollider.h"
 #include "CGameObject.h"
 
+UINT CCollider::g_iNextID = 0;
+
 CCollider::CCollider():
-	m_pOwner(nullptr)
+	m_pOwner(nullptr),
+	m_uiID(g_iNextID++)
 {
 }
 

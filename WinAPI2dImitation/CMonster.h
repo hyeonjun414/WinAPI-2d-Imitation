@@ -1,12 +1,15 @@
 #pragma once
 #include "CGameObject.h"
+
+class CTexture;
+
 class CMonster :
     public CGameObject
 {
-    Vec2    m_vec2CenterPos;
-    float   m_fVelocity;
-    float   m_fDistance;
-    bool    m_bIsUpDir;
+    Vec2        m_vec2CenterPos;
+    float       m_fVelocity;
+    float       m_fDistance;
+    bool        m_bIsUpDir;
 
 public:
     CMonster();

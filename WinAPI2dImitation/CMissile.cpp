@@ -3,13 +3,13 @@
 #include "CTexture.h"
 #include "CCollider.h"
 #include "CScene.h"
+
 CMissile::CMissile()
 {
 }
 
 CMissile::CMissile(OBJ_TYPE _objType, float _fTheta):
-    CGameObject(_objType),
-    m_pTex(nullptr)
+    CGameObject(_objType)
 {
     m_fTheta = _fTheta;
     m_vDir = Vec2(cosf(_fTheta), -sinf(_fTheta));
@@ -53,16 +53,7 @@ void CMissile::Render(HDC _hDC)
 {
     if (nullptr != m_pTex)
     {
-        int iWidth = (int)m_pTex->Width();
-        int iHeight = (int)m_pTex->Height();
-
-        TransparentBlt(_hDC,
-            (int)(m_vec2Pos.x - (iWidth / 2)),
-            (int)(m_vec2Pos.y - (iHeight / 2)),
-            iWidth, iHeight,
-            m_pTex->GetDC(),
-            0, 0, iWidth, iHeight,
-            RGB(255, 0, 255));
+        TextureRender(_hDC);
     }
     else
     {

@@ -42,6 +42,7 @@ using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도�
 
 #include "CTimeManager.h"
 #include "CKeyManager.h"
+#include "CCollisionManager.h"
 #include "CResourceManager.h"
 #include "CSceneManager.h"
 #include "CPathManager.h"
