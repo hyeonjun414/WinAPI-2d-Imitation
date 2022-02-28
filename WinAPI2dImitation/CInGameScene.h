@@ -6,7 +6,7 @@ class CInGameScene :
     int m_iStageTime;
 public:
     CInGameScene();
-    CInGameScene(wstring sceneName, SCENE_TYPE sceneType);
+    CInGameScene(wstring _sceneName, SCENE_TYPE _sceneType);
     ~CInGameScene();
 
     virtual void Update();

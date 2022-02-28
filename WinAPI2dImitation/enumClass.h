@@ -7,10 +7,12 @@ enum class OBJ_TYPE
 	DEFAULT,
 	PLAYER,
 	MONSTER,
-	BULLET,
+	BULLET_PLAYER,
+	BULLET_ENEMY,
 	MISSILE,
 
 	TEXT,
+	IMAGE,
 
 	SIZE,
 };
@@ -47,6 +49,32 @@ enum class KEY
 	A,S,D,F,G,Z,X,C,V,B,
 	ALT,LSHIFT,CTRL,
 	SPACE,ENTER,ESC,
+
+	SIZE
+};
+
+// 그리기에 사용할 브러쉬와 펜 그룹
+enum class BRUSH_TYPE
+{
+	HOLLOW,
+
+	SIZE
+};
+enum class PEN_TYPE
+{
+	RED,
+	GREEN,
+	BLUE,
+
+	SIZE
+};
+
+// 이벤트 타입
+enum class EVENT_TYPE
+{
+	CREATE_OBJECT,
+	DELETE_OBJECT,
+	SCENE_CHANGE,
 
 	SIZE
 };

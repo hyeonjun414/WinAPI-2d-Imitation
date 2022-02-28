@@ -5,12 +5,12 @@ class CStartScene :
 {
 public:
     CStartScene();
-    CStartScene(wstring sceneName, SCENE_TYPE sceneType);
+    CStartScene(wstring _sceneName, SCENE_TYPE _sceneType);
     ~CStartScene();
 
-    virtual void Update();
+    virtual void    Update();
 
-    virtual void Enter();
-    virtual void Exit();
+    virtual void    Enter();
+    virtual void    Exit();
 };
 

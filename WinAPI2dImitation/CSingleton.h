@@ -11,7 +11,7 @@ public:												\
 	}												\
 private:											\
 	type();											\
-	~type()		
+	~type();		
 
 
 

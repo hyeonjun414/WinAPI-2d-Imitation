@@ -8,8 +8,8 @@ CInGameScene::CInGameScene()
 {
 }
 
-CInGameScene::CInGameScene(wstring sceneName, SCENE_TYPE sceneType) :
-	CScene(sceneName, sceneType)
+CInGameScene::CInGameScene(wstring _sceneName, SCENE_TYPE _sceneType) :
+	CScene(_sceneName, _sceneType)
 {
 }
 CInGameScene::~CInGameScene()
@@ -130,9 +130,15 @@ void CInGameScene::Enter()
 	
 
 	AddObject(obj);
+
+	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);
 }
 
 void CInGameScene::Exit()
 {
 	ClearObject();
+
+	// 기존의 충돌 그릅을 해제시켜야한다.
+	SINGLE(CCollisionManager)->Reset();
 }

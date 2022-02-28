@@ -1,29 +1,37 @@
 #include "framework.h"
 #include "CMissile.h"
+#include "CTexture.h"
+#include "CCollider.h"
+#include "CScene.h"
 
 CMissile::CMissile()
 {
 }
 
-CMissile::CMissile(OBJ_TYPE objType, float fTheta):
-    CGameObject(objType)
+CMissile::CMissile(OBJ_TYPE _objType, float _fTheta):
+    CGameObject(_objType)
 {
-    m_fTheta = fTheta;
-    m_vDir = Vec2(cosf(fTheta), -sinf(fTheta));
-    m_vDir.Normalize();
-    m_vec2Scale = Vec2(10, 10);
-    m_fVelocity = 500;
+    m_fTheta = _fTheta;
+    SetDir(_fTheta);
+    m_vec2Scale = Vec2(12.5f, 12.5f);
+    m_vSpeed = Vec2(500, 500);
+    m_vVelocity = Vec2(0, 0);
+
+    // 텍스쳐 불러오기
+    m_pTex = SINGLE(CResourceManager)->LoadTexture(L"BulletTex", L"texture\\Bullet.bmp");
+
+    CreateCollider();
+    m_pCollider->SetScale(Vec2(12.5, 12.5));
 }
 
-CMissile::CMissile(OBJ_TYPE objType, Vec2 pos, Vec2 size, Vec2 dirVec):
-    CGameObject(objType)
-{
-    m_fTheta = 0;
-    m_fVelocity = 300;
+CMissile::CMissile(const CMissile& _origin) :
+    CGameObject(_origin),
+    m_fTheta(_origin.m_fTheta),
+    m_vDir(_origin.m_vDir),
+    m_vSpeed(_origin.m_vSpeed),
+    m_vVelocity(_origin.m_vVelocity)
 
-    m_vec2Pos = pos;
-    m_vec2Scale = size;
-    m_vDir = dirVec;
+{
 }
 
 CMissile::~CMissile()
@@ -36,38 +44,49 @@ void CMissile::Init()
 
 void CMissile::Update()
 {
-    if (CGameManager::GetInst()->GetPlayer()->GetActive())
+    if(m_bIsGravity) m_vVelocity.y -= 1;
+
+    m_vec2Pos.x += m_vDir.x * m_vSpeed.x * DT;
+    m_vec2Pos.y += m_vDir.y * m_vSpeed.y * DT - m_vVelocity.y * DT; 
+    // y좌표는 윈도우 좌표계로 반대로 간다.
+
+    if (m_vec2Pos.x < -100 || m_vec2Pos.y < -100 ||
+        m_vec2Pos.x > WINSIZEX + 100 || m_vec2Pos.y > WINSIZEY + 100)
+        DeleteObject(this);
+}
+
+void CMissile::Render(HDC _hDC)
+{
+    if (nullptr != m_pTex)
     {
-        m_vec2Pos.x += m_vDir.x * m_fVelocity * DT;
-        m_vec2Pos.y += m_vDir.y * m_fVelocity * DT;
-
-        if (m_vec2Pos.x < -200 || m_vec2Pos.x > WINSIZEX + 200 ||
-            m_vec2Pos.y < -200 || m_vec2Pos.y > WINSIZEY + 200)
-            m_bIsActive = false;
+        TextureRender(_hDC);
     }
+    else
+    {
+        Ellipse(_hDC,
+            (int)(m_vec2Pos.x - m_vec2Scale.x),
+            (int)(m_vec2Pos.y - m_vec2Scale.y),
+            (int)(m_vec2Pos.x + m_vec2Scale.x),
+            (int)(m_vec2Pos.y + m_vec2Scale.y));
+    }
+
+    ComponentRender(_hDC);
 }
 
-void CMissile::Render(HDC hDC)
+void CMissile::SetDir(float _fTheta)
 {
-    // 움직이는 사각형 출력
-    Ellipse(hDC,
-        m_vec2Pos.x - m_vec2Scale.x,
-        m_vec2Pos.y - m_vec2Scale.y,
-        m_vec2Pos.x + m_vec2Scale.x,
-        m_vec2Pos.y + m_vec2Scale.y);
+    m_fTheta = _fTheta;
+    m_vDir = Vec2(cosf(_fTheta), -sinf(_fTheta));
+    m_vDir.Normalize();
 }
 
-void CMissile::SetDir(float fTheta)
+void CMissile::OnCollisionEnter(CCollider* _pOther)
 {
-    m_fTheta = fTheta;
-}
-
-void CMissile::SetDir(Vec2 vec)
-{
-}
-
-float CMissile::GetDir()
-{
-    return m_fTheta;
+    CGameObject* pOtherObj = _pOther->GetObj();
+    if (pOtherObj->GetName() == L"Monster")
+    {
+        LOG(L"미사일 충돌");
+        DeleteObject(this);
+    }
 }
 

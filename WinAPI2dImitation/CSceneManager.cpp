@@ -25,6 +25,8 @@ CSceneManager::~CSceneManager()
 void CSceneManager::Update()
 {
 	m_pCurScene->Update();
+
+	m_pCurScene->FinalUpdate();
 }
 
 void CSceneManager::Render(HDC hdc)
@@ -44,12 +46,12 @@ void CSceneManager::Init()
 
 }
 
-void CSceneManager::ChangeScene(SCENE_TYPE sceneType)
+void CSceneManager::ChangeScene(SCENE_TYPE _sceneType)
 {
 	// 만약 기존 씬이랑 같은 씬으로 바꾸려고 한다면
 	//if(m_pCur)
 	m_pCurScene->Exit();						// 기존 씬의 마무리
-	m_pCurScene = m_arrScene[(int)sceneType];	// 씬 전환
+	m_pCurScene = m_arrScene[(int)_sceneType];	// 씬 전환
 	m_pCurScene->Enter();						// 새로운 씬의 시작
 }
 

@@ -12,14 +12,14 @@ private:
 
 public:
 	
-	void Update();
-	void Render(HDC hdc);
+	void		Update();
+	void		Render(HDC _hDC);
 
-	void Init();
+	void		Init();
 
-	void ChangeScene(SCENE_TYPE sceneType);
+	void		ChangeScene(SCENE_TYPE _sceneType);
 
-	CScene* GetCurScene();
+	CScene*		GetCurScene();
 
 
 };
