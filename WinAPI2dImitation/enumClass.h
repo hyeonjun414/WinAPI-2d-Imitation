@@ -7,7 +7,8 @@ enum class OBJ_TYPE
 	DEFAULT,
 	PLAYER,
 	MONSTER,
-	BULLET,
+	BULLET_PLAYER,
+	BULLET_ENEMY,
 	MISSILE,
 
 	TEXT,
@@ -64,6 +65,16 @@ enum class PEN_TYPE
 	RED,
 	GREEN,
 	BLUE,
+
+	SIZE
+};
+
+// 이벤트 타입
+enum class EVENT_TYPE
+{
+	CREATE_OBJECT,
+	DELETE_OBJECT,
+	SCENE_CHANGE,
 
 	SIZE
 };

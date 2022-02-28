@@ -14,7 +14,7 @@ CMonster::CMonster(OBJ_TYPE _objType) :
     m_fVelocity = 100;
     m_fDistance = 100;
     m_bIsUpDir = true;
-
+    m_strName = L"Monster";
     m_pTex = SINGLE(CResourceManager)->LoadTexture(L"Monster2", L"\\texture\\monster02.bmp");
 
     CreateCollider();

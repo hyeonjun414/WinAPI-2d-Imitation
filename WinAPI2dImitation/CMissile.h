@@ -19,14 +19,20 @@ private:
 public:
     CMissile();
     CMissile(OBJ_TYPE _objType, float _fTheta);
+    CMissile(const CMissile& _origin); // 복사 생성자
     ~CMissile();
+    CLONE(CMissile)
 
     virtual void    Init();
     virtual void    Update();
     virtual void    Render(HDC _hDC);
     
-
-    void            SetDir(float _fTheta)   { m_fTheta = _fTheta; }
+    void            SetDir(float _fTheta);
     float           GetDir()                { return m_fTheta; }
+
+    virtual void	OnCollision(CCollider* _pOther) {}
+    virtual void	OnCollisionEnter(CCollider* _pOther);
+    virtual void	OnCollisionExit(CCollider* _pOther) {};
+
 };
 

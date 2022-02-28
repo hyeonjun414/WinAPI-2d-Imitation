@@ -21,7 +21,7 @@ public :
 
 	void		Init();
 	
-	HDC			GetMainDC()						{ return m_hMemDC; }
+	HDC			GetMainDC()						{ return m_hDC; }
 	HBRUSH		GetBrush(BRUSH_TYPE _brushType) { return m_arrBrush[(UINT)_brushType]; }
 	HPEN		GetPEN(PEN_TYPE _penType)		{ return m_arrPen[(UINT)_penType]; }
 };

@@ -99,3 +99,12 @@ struct tKeyInfo
 	bool		bPrevPush;	// 이전 프레임에 해당 키가 눌렸는지
 };
 
+struct tEvent
+{
+	EVENT_TYPE	eEvent;
+
+	// 오브젝트에 대한 데이터
+	DWORD_PTR	lParam;
+	DWORD_PTR	wParam;
+};
+

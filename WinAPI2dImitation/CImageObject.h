@@ -13,7 +13,7 @@ public:
     CImageObject();
     CImageObject(OBJ_TYPE _objGroup);
     virtual ~CImageObject();
-
+    CLONE(CImageObject)
 
     virtual void    Init();
     virtual void    Update();

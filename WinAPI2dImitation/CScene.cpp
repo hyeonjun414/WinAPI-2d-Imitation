@@ -33,7 +33,8 @@ void CScene::Update()
 	{
 		for (unsigned int j = 0; j < m_vecObjectList[i].size(); j++)
 		{
-			m_vecObjectList[i][j]->Update();
+			if(m_vecObjectList[i][j]->GetActive())
+				m_vecObjectList[i][j]->Update();
 		}
 	}
 }
@@ -53,9 +54,20 @@ void CScene::Render(HDC _hDC)
 {
 	for (int i = 0; i < (int)OBJ_TYPE::SIZE; i++)
 	{
-		for (unsigned int j = 0; j < (int)m_vecObjectList[i].size(); j++)
+		// 렌더부분에서 활성화 여부를 체크해서 벡터의 크기를 조절한다.
+		// 메모리해제는 이벤트매니저에서 진행하기 때문에 별도를 메모리해제는 해주지 않아도 된다.
+		vector<CGameObject*>::iterator iter = m_vecObjectList[i].begin();
+		for (; iter != m_vecObjectList[i].end();)
 		{
-			m_vecObjectList[i][j]->Render(_hDC);
+			if ((*iter)->GetActive())
+			{
+				(*iter)->Render(_hDC);
+				++iter;
+			}
+			else
+			{
+				iter = m_vecObjectList[i].erase(iter);
+			}
 		}
 	}
 }
@@ -89,12 +101,6 @@ void CScene::ClearObject()
 {
 	for (int i = 0; i < (int)OBJ_TYPE::SIZE; i++)
 	{
-		vector<CGameObject*>::iterator iter = m_vecObjectList[i].begin();
-		for (; iter != m_vecObjectList[i].end(); iter++)
-		{
-			delete* iter;
-			*iter = nullptr;
-		}
-		m_vecObjectList[i].clear();
+		Safe_Delete_Vec(m_vecObjectList[i]);
 	}
 }

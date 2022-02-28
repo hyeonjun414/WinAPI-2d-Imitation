@@ -15,6 +15,7 @@ public:
     CMonster();
     CMonster(OBJ_TYPE _objType);
     virtual ~CMonster();
+    CLONE(CMonster)
 
     virtual void    Update();
     virtual void    Render(HDC _hDC);
@@ -22,5 +23,6 @@ public:
 
     void            SetCenterPos(Vec2 _vec) { m_vec2CenterPos = _vec; }
     Vec2            GetCenterPos()          { return m_vec2CenterPos; }
+
 };
 

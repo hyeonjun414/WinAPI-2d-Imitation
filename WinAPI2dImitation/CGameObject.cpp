@@ -17,6 +17,19 @@ CGameObject::CGameObject(OBJ_TYPE _objGroup):
 	m_enumObjType = _objGroup;
 }
 
+CGameObject::CGameObject(const CGameObject& _origin):
+	m_strName(_origin.m_strName),
+	m_enumObjType(_origin.m_enumObjType),
+	m_bIsActive(true),
+	m_bIsGravity(_origin.m_bIsGravity),
+	m_vec2Pos(_origin.m_vec2Pos),
+	m_vec2Scale(_origin.m_vec2Scale),
+	m_pTex(_origin.m_pTex)
+{
+	m_pCollider = new CCollider(*_origin.m_pCollider);
+	m_pCollider->m_pOwner = this;
+}
+
 CGameObject::~CGameObject()
 {
 	if (nullptr != m_pCollider)

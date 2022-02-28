@@ -30,7 +30,7 @@ void CInGameScene::Enter()
 	AddObject(obj);
 
 	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
-	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::MONSTER);
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);
 }
 
 void CInGameScene::Exit()

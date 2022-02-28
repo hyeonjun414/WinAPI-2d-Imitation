@@ -129,6 +129,12 @@
     <ClInclude Include="CCollisionManager.h">
       <Filter>02.Util\01.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CEventManager.h">
+      <Filter>02.Util\01.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="function.h">
+      <Filter>02.Util\02.Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI2dImitation.cpp">
@@ -193,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="CCollisionManager.cpp">
       <Filter>02.Util\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventManager.cpp">
+      <Filter>02.Util\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="function.cpp">
+      <Filter>02.Util\02.Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
