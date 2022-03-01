@@ -87,9 +87,6 @@
     <ClInclude Include="CInGameScene.h">
       <Filter>04.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CGameManager.h">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClInclude>
     <ClInclude Include="CMonster.h">
       <Filter>03.GameObject</Filter>
     </ClInclude>
@@ -137,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="function.h">
       <Filter>02.Util\02.Other</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameManager.h">
+      <Filter>02.Util\01.Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

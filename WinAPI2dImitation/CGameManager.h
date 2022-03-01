@@ -1,16 +1,21 @@
 #pragma once
 
-#include "CGameObject.h"
+#include "CPlayer.h"
 
 class CGameManager
 {
 	SINGLETON(CGameManager);
 private:
-	CGameObject* m_pPlayer;
+	CPlayer*	m_pPlayer;
+	bool		m_DebugMode;
 
 public:
-	void			SetPlayer(CGameObject* player);
-	CGameObject*	GetPlayer();
+	void			SetPlayer(CPlayer* player) {m_pPlayer = player;}
+	void			SetDebugMode() { m_DebugMode = !m_DebugMode; }
+
+	CPlayer*		GetPlayer()		{ return m_pPlayer; }
+	bool			GetDebugMode()	{ return m_DebugMode; }
+	
 
 	void			Init();
 };

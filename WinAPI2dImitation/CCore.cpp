@@ -47,11 +47,10 @@ void CCore::Update()
 	SINGLE(CSceneManager)->Update();
 	SINGLE(CCollisionManager)->Update();
 
-	// 게임의 정보를 토대로 그려주는 작업
-	// FPS 출력
-	WCHAR strFPS[6];
-	swprintf_s(strFPS, L"%5d", CTimeManager::GetInst()->GetFPS());
-	TextOutW(m_hDC, WINSIZEX - 60, 10, strFPS, 5);
+	if (KEYCHECK(KEY::CTRL) == KEY_STATE::TAP)
+	{
+		SINGLE(CGameManager)->SetDebugMode();
+	}
 }
 
 
@@ -90,6 +89,8 @@ void CCore::Init()
 	SINGLE(CPathManager)->Init();
 	SINGLE(CSceneManager)->Init();
 	SINGLE(CCollisionManager)->Init();
+
+	SINGLE(CGameManager)->Init();
 
 	// 코어의 변수에 DC 할당
 	m_hDC = GetDC(hWnd);

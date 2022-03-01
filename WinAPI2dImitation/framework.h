@@ -31,6 +31,14 @@
 #include <assert.h>
 using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도록 유의
 
+
+// 매크로
+#define SINGLE(manager) manager::GetInst()
+#define DT (float)CTimeManager::GetInst()->GetDT()
+#define KEYCHECK(vk_Key) CKeyManager::GetInst()->GetKeyState(vk_Key)
+#define LOG(str) Logger::debug(str);
+#define CLONE(type) type* Clone() {return new type(*this);}
+
 // 사용자 정의 클래스
 
 #include "Logger.h"
@@ -49,6 +57,7 @@ using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도�
 #include "CSceneManager.h"
 #include "CPathManager.h"
 #include "CEventManager.h"
+#include "CGameManager.h"
 
 
 // 정의
@@ -61,12 +70,7 @@ using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도�
 #define DEG(value) value * PI / 180
 #define GRAVITY 9.8f;
 
-// 매크로
-#define SINGLE(manager) manager::GetInst()
-#define DT (float)CTimeManager::GetInst()->GetDT()
-#define KEYCHECK(vk_Key) CKeyManager::GetInst()->GetKeyState(vk_Key)
-#define LOG(str) Logger::debug(str);
-#define CLONE(type) type* Clone() {return new type(*this);}
+
 
 // 외부 변수 참조 -> 외부 클래스에 변수가 존재함을 알림.
 extern HINSTANCE	hInst;

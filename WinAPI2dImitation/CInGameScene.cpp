@@ -3,6 +3,7 @@
 #include "CPlayer.h"
 #include "CMissile.h"
 #include "CGameManager.h"
+#include "CImageObject.h"
 
 CInGameScene::CInGameScene()
 {
@@ -20,21 +21,16 @@ void CInGameScene::Update()
 {
 	CScene::Update();
 
-	CGameManager::GetInst()->SetPlayer(m_vecObjectList[(int)OBJ_TYPE::PLAYER][0]);
-	CGameObject* player = CGameManager::GetInst()->GetPlayer();
+	CGameManager::GetInst()->SetPlayer((CPlayer*)m_vecObjectList[(int)OBJ_TYPE::PLAYER][0]);
+	CPlayer* player = CGameManager::GetInst()->GetPlayer();
 
-	if (player->GetActive() == false && KEYCHECK(KEY::R) == KEY_STATE::TAP)
+	if (player->GetAlive() == false && KEYCHECK(KEY::R) == KEY_STATE::TAP)
 	{
-		player->SetActive(true);
-		player->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
-		player->SetScale(Vec2(20, 20));
-		CTimeManager::GetInst()->SetPlayTime(0);
-		m_iStageTime = 5;
-		m_vecObjectList[(int)OBJ_TYPE::BULLET].clear();
+		GameReset();
 		return;
 	}
 
-	if (player->GetActive())
+	if (player->GetAlive())
 	{
 
 		// 1초마다 돌아오면 플레이어를 겨냥하는 총알을 생성
@@ -64,33 +60,11 @@ void CInGameScene::Update()
 				float dirY = player->GetPos().y - y;
 				Vec2 dirVec = Vec2(dirX, dirY).Normalize();
 
-				CGameObject* bullet = new CMissile(OBJ_TYPE::BULLET, Vec2(x, y), Vec2(10, 10), dirVec);
-				m_vecObjectList[(int)OBJ_TYPE::BULLET].push_back(bullet);
-			}
-		}
-		vector<CGameObject*>::iterator iter;
-		for (iter = m_vecObjectList[(int)OBJ_TYPE::BULLET].begin(); iter != m_vecObjectList[(int)OBJ_TYPE::BULLET].end();)
-		{
-			(*iter)->GetActive();
-			if ((*iter)->GetActive())
-			{
-				(*iter)->Update();
-
-				// 플레이어의 영역과 총알의 영역이 겹치면
-				Vec2 bulletPos = (*iter)->GetPos();
-				Vec2 bulletScale = (*iter)->GetScale();
-				if (bulletPos.x + bulletScale.x > player->GetPos().x - player->GetScale().x &&
-					bulletPos.x - bulletScale.x < player->GetPos().x + player->GetScale().x &&
-					bulletPos.y + bulletScale.x > player->GetPos().y - player->GetScale().y &&
-					bulletPos.y - bulletScale.y < player->GetPos().y + player->GetScale().y)
-				{
-					player->SetActive(false);
-				}
-				iter++;
-			}
-			else
-			{
-				iter = m_vecObjectList[(int)OBJ_TYPE::BULLET].erase(iter);
+				CMissile* bullet = new CMissile(OBJ_TYPE::MISSILE, dirVec);
+				bullet->SetPos(Vec2(x, y));
+				bullet->SetGravity(false);
+				bullet->SetName(L"Missile");
+				CreateObject(bullet);
 			}
 		}
 	}
@@ -100,8 +74,8 @@ void CInGameScene::Render(HDC hDC)
 {
 	CScene::Render(hDC);
 
-	CGameObject* player = m_vecObjectList[(int)OBJ_TYPE::PLAYER][0];
-	if (player->GetActive())
+	CPlayer* player = (CPlayer*)m_vecObjectList[(int)OBJ_TYPE::PLAYER][0];
+	if (player->GetAlive())
 	{
 		// 시간 출력
 		WCHAR strSEC[7];
@@ -109,9 +83,9 @@ void CInGameScene::Render(HDC hDC)
 		TextOutW(hDC, WINSIZEX / 2, 10, strSEC, 6);
 
 		// 스테이지 출력
-		WCHAR strStage[8];
-		swprintf_s(strStage, L"STAGE %d", m_iStageTime / 5);
-		TextOutW(hDC, WINSIZEX / 2, 30, strStage, 7);
+		WCHAR strStage[9];
+		swprintf_s(strStage, L"STAGE %2d", m_iStageTime / 5);
+		TextOutW(hDC, WINSIZEX / 2, 30, strStage, 8);
 	}
 	else
 	{
@@ -124,15 +98,19 @@ void CInGameScene::Enter()
 {
 	m_iStageTime = 5;
 
-	CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
+	CPlayer* obj = new CPlayer(OBJ_TYPE::PLAYER);
 	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	obj->SetScale(Vec2(20, 20));
-	
-
+	SINGLE(CGameManager)->SetPlayer(obj);
 	AddObject(obj);
 
+
+	CGameObject* ImageObj = new CImageObject(OBJ_TYPE::IMAGE, L"texture\\scene01_bg.bmp");
+	ImageObj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
+	AddObject(ImageObj);
+
 	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
-	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::PLAYER);
 }
 
 void CInGameScene::Exit()

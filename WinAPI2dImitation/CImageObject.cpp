@@ -15,6 +15,13 @@ CImageObject::CImageObject(OBJ_TYPE _objGroup) :
 
 }
 
+CImageObject::CImageObject(OBJ_TYPE _objGroup, wstring _strPath) :
+	CGameObject(_objGroup),
+	m_pTex(nullptr)
+{
+	m_pTex = SINGLE(CResourceManager)->LoadTexture(L"Scene01_bg", _strPath);
+}
+
 CImageObject::~CImageObject()
 {
 }

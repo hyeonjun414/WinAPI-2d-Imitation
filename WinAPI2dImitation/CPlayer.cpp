@@ -10,16 +10,23 @@ CPlayer::CPlayer()
 }
 
 CPlayer::CPlayer(OBJ_TYPE _objGroup) :
-	CGameObject(_objGroup)
+	CGameObject(_objGroup),
+	m_bIsAlive(true)
 {
 	// 텍스쳐 불러오기
-	m_pTex = SINGLE(CResourceManager)->LoadTexture(L"PlayerTex", L"texture\\monster01.bmp");
+	m_pTex = SINGLE(CResourceManager)->LoadTexture(L"PlayerTex", L"texture\\player.bmp");
 
 	// Collider 만들기
 	CreateCollider();
 
 	//m_pCollider->SetOffsetPos(Vec2(0, 20));
 	m_pCollider->SetScale(Vec2(50, 50));
+}
+
+CPlayer::CPlayer(const CPlayer& _origin):
+	CGameObject(_origin),
+	m_bIsAlive(true)
+{
 }
 
 CPlayer::~CPlayer()
@@ -32,7 +39,7 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
-	if (m_bIsActive)
+	if (m_bIsAlive)
 	{
 		if (KEYCHECK(KEY::LEFT) == KEY_STATE::HOLD)
 		{
@@ -56,8 +63,8 @@ void CPlayer::Update()
 		}
 	}
 
-	if (KEYCHECK(KEY::SPACE) == KEY_STATE::TAP)
-		CreateMissile();
+	//if (KEYCHECK(KEY::SPACE) == KEY_STATE::TAP)
+	//	CreateMissile();
 }
 
 void CPlayer::Render(HDC _hDC)
@@ -108,3 +115,14 @@ void CPlayer::CreateMissile()
 	pMissile5->SetDir(DEG(60));
 	CreateObject(pMissile5);
 }
+
+void CPlayer::OnCollisionEnter(CCollider* _pOther)
+{
+	CGameObject* pObj = _pOther->GetObj();
+	if (pObj->GetName() == L"Missile")
+	{
+		LOG(L"플레이어 미사일 충돌");
+		PlayerDie(this);
+	}
+}
+

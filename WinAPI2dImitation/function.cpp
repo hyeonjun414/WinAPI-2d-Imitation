@@ -28,3 +28,20 @@ void ChangeScene(SCENE_TYPE _eSceneType)
 
 	SINGLE(CEventManager)->AddEvent(even);
 }
+
+void GameReset()
+{
+	tEvent even = {};
+	even.eEvent = EVENT_TYPE::RESET_GAME;
+
+	SINGLE(CEventManager)->AddEvent(even);
+}
+
+void PlayerDie(CPlayer* _pObj)
+{
+	tEvent even = {};
+	even.eEvent = EVENT_TYPE::PLAYER_DIE;
+	even.lParam = (DWORD_PTR)_pObj;
+
+	SINGLE(CEventManager)->AddEvent(even);
+}

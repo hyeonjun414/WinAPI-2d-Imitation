@@ -44,8 +44,12 @@ void CGameObject::FinalUpdate()
 
 void CGameObject::ComponentRender(HDC _hDC)
 {
+
 	if (nullptr != m_pCollider)
-		m_pCollider->Render(_hDC);
+	{
+		if(SINGLE(CGameManager)->GetDebugMode())
+			m_pCollider->Render(_hDC);
+	}
 }
 
 
