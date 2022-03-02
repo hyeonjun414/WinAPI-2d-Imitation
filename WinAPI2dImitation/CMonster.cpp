@@ -25,6 +25,7 @@ CMonster::~CMonster()
 {
 }
 
+
 void CMonster::Init()
 {
     SetCenterPos(m_vec2Pos);
@@ -52,15 +53,26 @@ void CMonster::Render(HDC _hDC)
     else
     {
         Rectangle(_hDC,
-            (int)(m_vec2Pos.x - m_vec2Scale.x / 2),
-            (int)(m_vec2Pos.y - m_vec2Scale.y / 2),
-            (int)(m_vec2Pos.x + m_vec2Scale.x / 2),
-            (int)(m_vec2Pos.y + m_vec2Scale.y / 2));
+            (int)(m_vRenderPos.x - m_vec2Scale.x / 2),
+            (int)(m_vRenderPos.y - m_vec2Scale.y / 2),
+            (int)(m_vRenderPos.x + m_vec2Scale.x / 2),
+            (int)(m_vRenderPos.y + m_vec2Scale.y / 2));
     }
 
 
     ComponentRender(_hDC);
 }
+
+void CMonster::OnCollisionEnter(CCollider* _pOther)
+{
+    CGameObject* pOtherObj = _pOther->GetObj();
+    if (pOtherObj->GetName() == L"Missile_Player")
+    {
+        LOG(L"몬스터가 미사일에 충돌");
+        DeleteObject(this);
+    }
+}
+
 
 
 

@@ -17,6 +17,18 @@ CInGameScene::~CInGameScene()
 {
 }
 
+void CInGameScene::Update()
+{
+	CScene::Update();
+
+	if (KEYCHECK(KEY::LBTN) == KEY_STATE::TAP)
+	{
+		Vec2 vLookAt = SINGLE(CKeyManager)->GetMousePos();
+		vLookAt = SINGLE(CCamera)->GetRealPos(vLookAt);
+		SINGLE(CCamera)->SetLookAt(vLookAt);
+	}
+}
+
 void CInGameScene::Enter()
 {
 	CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
@@ -24,10 +36,28 @@ void CInGameScene::Enter()
 	obj->SetScale(Vec2(50, 50));
 	AddObject(obj);
 
+	//SINGLE(CCamera)->SetTarget(obj);
+
+
 	obj = new CMonster(OBJ_TYPE::MONSTER);
 	obj->SetPos(Vec2(1100, WINSIZEY / 2));
 	obj->Init();
+	AddObject(obj);	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1100, WINSIZEY / 2));
+	obj->Init();
+	AddObject(obj);	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1100, WINSIZEY / 2));
+	obj->Init();
+	AddObject(obj);	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1100, WINSIZEY / 2));
+	obj->Init();
+	AddObject(obj);	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1100, WINSIZEY / 2));
+	obj->Init();
 	AddObject(obj);
+
+	
+	SINGLE(CCamera)->SetLookAt(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 
 	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);

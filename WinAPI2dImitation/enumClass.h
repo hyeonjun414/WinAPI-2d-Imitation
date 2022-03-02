@@ -50,6 +50,9 @@ enum class KEY
 	ALT,LSHIFT,CTRL,
 	SPACE,ENTER,ESC,
 
+	LBTN,
+	RBTN,
+
 	SIZE
 };
 

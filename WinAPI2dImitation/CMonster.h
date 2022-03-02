@@ -24,5 +24,8 @@ public:
     void            SetCenterPos(Vec2 _vec) { m_vec2CenterPos = _vec; }
     Vec2            GetCenterPos()          { return m_vec2CenterPos; }
 
+    virtual void	OnCollision(CCollider* _pOther) {}
+    virtual void	OnCollisionEnter(CCollider* _pOther);
+    virtual void	OnCollisionExit(CCollider* _pOther) {};
 };
 

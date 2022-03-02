@@ -17,6 +17,9 @@ int g_arrVK[(int)KEY::SIZE] =
 	VK_RETURN,	//	ENTER,
 	VK_ESCAPE,	//	ESC,
 
+	VK_LBUTTON, //	LBTN,
+	VK_RBUTTON, //  RBTN,
+
 	//	LAST
 };
 
@@ -104,6 +107,19 @@ void CKeyManager::Update()
 
 			m_vecKey[i].bPrevPush = false;
 
+		}
+
+		POINT ptPos = {};
+		GetCursorPos(&ptPos);
+		ScreenToClient(hWnd, &ptPos);
+		if (ptPos.x < 0 || ptPos.x > WINSIZEX ||
+			ptPos.y < 0 || ptPos.y > WINSIZEY)
+		{
+			m_vCurMousePos = Vec2(WINSIZEX / 2, WINSIZEY / 2);
+		}
+		else
+		{
+			m_vCurMousePos = Vec2(ptPos.x, ptPos.y);
 		}
 	}
 }

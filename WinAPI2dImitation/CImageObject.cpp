@@ -29,6 +29,7 @@ void CImageObject::Update()
 
 void CImageObject::Render(HDC _hDC)
 {
+	
 	int iWidth = (int)m_pTex->Width();
 	int iHeight = (int)m_pTex->Height();
 

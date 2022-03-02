@@ -2,6 +2,7 @@
 #include "CGameObject.h"
 #include "CCollider.h"
 #include "CTexture.h"
+#include "CAnimator.h"
 
 CGameObject::CGameObject()
 {
@@ -9,27 +10,38 @@ CGameObject::CGameObject()
 	m_enumObjType = OBJ_TYPE::DEFAULT;
 }
 
-CGameObject::CGameObject(OBJ_TYPE _objGroup):
+CGameObject::CGameObject(OBJ_TYPE _objGroup) :
 	m_pTex(nullptr),
-	m_pCollider(nullptr)
+	m_pCollider(nullptr),
+	m_pAnimator(nullptr)
 {
 	m_bIsActive = true;
 	m_enumObjType = _objGroup;
 }
 
-CGameObject::CGameObject(const CGameObject& _origin):
+CGameObject::CGameObject(const CGameObject& _origin) :
 	m_strName(_origin.m_strName),
 	m_enumObjType(_origin.m_enumObjType),
 	m_bIsActive(true),
 	m_bIsGravity(_origin.m_bIsGravity),
 	m_vec2Pos(_origin.m_vec2Pos),
 	m_vec2Scale(_origin.m_vec2Scale),
-	m_pTex(_origin.m_pTex)
+	m_pTex(_origin.m_pTex),
+	m_pCollider(nullptr),
+	m_pAnimator(nullptr)
 {
-	m_pCollider = new CCollider(*_origin.m_pCollider);
-	m_pCollider->m_pOwner = this;
-}
+	if (_origin.m_pCollider)
+	{
+		m_pCollider = new CCollider(*_origin.m_pCollider);
+		m_pCollider->m_pOwner = this;
+	}
 
+	if (_origin.m_pAnimator)
+	{
+		m_pAnimator = new CAnimator(*_origin.m_pAnimator);
+		m_pAnimator->m_pOwner = this;
+	}
+}
 CGameObject::~CGameObject()
 {
 	if (nullptr != m_pCollider)
@@ -38,6 +50,7 @@ CGameObject::~CGameObject()
 
 void CGameObject::FinalUpdate()
 {
+	m_vRenderPos = SINGLE(CCamera)->GetRenderPos(m_vec2Pos);
 	if (nullptr != m_pCollider)
 		m_pCollider->FinalUpdate();
 }
@@ -46,6 +59,9 @@ void CGameObject::ComponentRender(HDC _hDC)
 {
 	if (nullptr != m_pCollider)
 		m_pCollider->Render(_hDC);
+
+	if (nullptr != m_pAnimator)
+		m_pAnimator->Render(_hDC);
 }
 
 
@@ -56,8 +72,8 @@ void CGameObject::TextureRender(HDC _hDC)
 	int iHeight = (int)m_pTex->Height();
 
 	TransparentBlt(_hDC,
-		(int)(m_vec2Pos.x - (iWidth / 2)),
-		(int)(m_vec2Pos.y - (iHeight / 2)),
+		(int)(m_vRenderPos.x - (iWidth / 2)),
+		(int)(m_vRenderPos.y - (iHeight / 2)),
 		iWidth, iHeight,
 		m_pTex->GetDC(),
 		0, 0, iWidth, iHeight,
@@ -68,4 +84,10 @@ void CGameObject::CreateCollider()
 {
 	m_pCollider = new CCollider;
 	m_pCollider->m_pOwner = this;
+}
+
+void CGameObject::CreateAnimator()
+{
+	m_pAnimator = new CAnimator;
+	m_pAnimator->m_pOwner = this;
 }

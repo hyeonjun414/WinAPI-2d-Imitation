@@ -13,6 +13,7 @@ private:
 
 	Vec2			m_vOffsetPos;	// 오브젝트에서의 상대적인 위치 -> 기준점은 오브젝트의 중심이다.
 	Vec2			m_vFinalPos;	// 충돌체의 최종 위치
+	Vec2			m_vRenderPos;	// 그려낼 최종 위치
 	Vec2			m_vScale;		// 충돌체의 크기 정보
 
 	UINT			m_uiID;			// 충돌체의 고유한 ID

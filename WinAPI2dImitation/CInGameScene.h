@@ -8,6 +8,8 @@ public:
     CInGameScene(wstring _sceneName, SCENE_TYPE _sceneType);
     ~CInGameScene();
 
+    virtual void	Update();
+
     virtual void    Enter();
     virtual void    Exit();
 };

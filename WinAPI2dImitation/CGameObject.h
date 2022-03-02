@@ -2,6 +2,7 @@
 
 class CCollider;
 class CTexture;
+class CAnimator;
 
 class CGameObject
 {
@@ -13,10 +14,12 @@ protected:
 	bool			m_bIsGravity;	// 중력 적용 여부
 
 	Vec2			m_vec2Pos;		// 위치
+	Vec2			m_vRenderPos;	// 화면상 출력위치
 	Vec2			m_vec2Scale;	// 크기
 
 	CTexture*		m_pTex;
 	CCollider*		m_pCollider;
+	CAnimator*		m_pAnimator;
 
 public:
 	CGameObject();
@@ -43,12 +46,15 @@ public:
 	bool			GetActive()		{ return m_bIsActive; }
 	bool			GetGravity()	{ return m_bIsGravity; }
 	Vec2			GetPos()		{ return m_vec2Pos; }
+	Vec2			GetRenderPos()	{ return m_vRenderPos; }
 	Vec2			GetScale()		{ return m_vec2Scale; }
 	CCollider*		GetCollider()	{ return m_pCollider; }
+	CAnimator*		GetAnimator()	{ return m_pAnimator; }
 	
 	// Component
 	void			TextureRender(HDC _hDC);
 	void			CreateCollider();
+	void			CreateAnimator();
 
 
 	virtual void	OnCollision(CCollider* _pOther) {};

@@ -41,11 +41,12 @@ void CCore::Update()
 {
 	// 게임의 정보를 갱신
 	
-	// 매니저 클래스 업데이트 ( 타임, 키, 장면, 충돌 )
+	// 매니저 클래스 업데이트 ( 타임, 키, 장면, 충돌, 카메라 )
 	SINGLE(CTimeManager)->Update();
 	SINGLE(CKeyManager)->Update();
 	SINGLE(CSceneManager)->Update();
 	SINGLE(CCollisionManager)->Update();
+	SINGLE(CCamera)->Update();
 
 	// 게임의 정보를 토대로 그려주는 작업
 	// FPS 출력
@@ -89,6 +90,7 @@ void CCore::Init()
 	SINGLE(CPathManager)->Init();
 	SINGLE(CSceneManager)->Init();
 	SINGLE(CCollisionManager)->Init();
+	SINGLE(CCamera)->Init();
 
 	// 코어의 변수에 DC 할당
 	m_hDC = GetDC(hWnd);

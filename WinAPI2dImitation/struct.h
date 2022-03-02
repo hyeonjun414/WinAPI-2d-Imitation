@@ -42,10 +42,23 @@ typedef struct Vector2
 	{
 		return Vector2(this->x * _other.x, this->y * _other.y);
 	}
+	Vector2 operator*(int _i)
+	{
+		return Vector2(this->x * (float)_i, this->y * (float)_i);
+	}
+	Vector2 operator*(float _f)
+	{
+		return Vector2(this->x * _f, this->y * _f);
+	}
 	Vector2 operator/(const Vector2& _other)
 	{
 		assert(!(0.f == _other.x || 0.f == _other.y));
 		return Vector2(this->x / _other.x, this->y / _other.y);
+	}
+	Vector2 operator/(const int& _i)
+	{
+		assert(!(0.f == _i));
+		return Vector2(this->x / _i, this->y / _i);
 	}
 
 	Vector2& operator+=(const Vector2& _other)
@@ -66,6 +79,7 @@ typedef struct Vector2
 		y *= _other.y;
 		return *this;
 	}
+
 	Vector2& operator/=(const Vector2& _other)
 	{
 		assert(!(0.f == _other.x || 0.f == _other.y));
@@ -106,5 +120,13 @@ struct tEvent
 	// 오브젝트에 대한 데이터
 	DWORD_PTR	lParam;
 	DWORD_PTR	wParam;
+};
+
+struct tAnimFrame
+{
+	Vec2	vLT; // 프레임 좌상단 정보
+	Vec2	vSliceSize;
+	Vec2	vOffset;
+	float	fFrameTime;
 };
 

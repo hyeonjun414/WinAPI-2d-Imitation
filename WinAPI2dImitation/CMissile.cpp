@@ -64,10 +64,10 @@ void CMissile::Render(HDC _hDC)
     else
     {
         Ellipse(_hDC,
-            (int)(m_vec2Pos.x - m_vec2Scale.x),
-            (int)(m_vec2Pos.y - m_vec2Scale.y),
-            (int)(m_vec2Pos.x + m_vec2Scale.x),
-            (int)(m_vec2Pos.y + m_vec2Scale.y));
+            (int)(m_vRenderPos.x - m_vec2Scale.x),
+            (int)(m_vRenderPos.y - m_vec2Scale.y),
+            (int)(m_vRenderPos.x + m_vec2Scale.x),
+            (int)(m_vRenderPos.y + m_vec2Scale.y));
     }
 
     ComponentRender(_hDC);

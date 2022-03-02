@@ -25,6 +25,7 @@ void CEventManager::Excute(const tEvent& _event)
 		// 오브젝트를 Dead상태로 변경하고
 		// 삭제 예정 오브젝트들을 모아둔다.
 		CGameObject* pObj = (CGameObject*)_event.lParam;
+		if (!pObj->GetActive()) break;
 		pObj->SetActive(false);
 		m_vecDead.push_back(pObj);
 		break;
