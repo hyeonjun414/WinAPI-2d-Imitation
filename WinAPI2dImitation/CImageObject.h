@@ -6,12 +6,10 @@ class CTexture;
 class CImageObject :
     public CGameObject
 {
-private :
-    CTexture* m_pTex;
-
 public:
     CImageObject();
     CImageObject(OBJ_TYPE _objGroup);
+    CImageObject(OBJ_TYPE _objGroup, wstring _strTexName, wstring _strTexPath);
     virtual ~CImageObject();
     CLONE(CImageObject)
 

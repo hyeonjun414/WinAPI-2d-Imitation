@@ -4,8 +4,9 @@
 #include "CTexture.h"
 #include "CGameObject.h"
 
-CAnimation::CAnimation():
+CAnimation::CAnimation() :
 	m_pAnimator(nullptr),
+	m_pTex(nullptr),
 	m_iCurFrame(0),
 	m_fFlowTime(0.f),
 	m_bFinish(false)
@@ -65,7 +66,7 @@ void CAnimation::Create(CTexture* _pTex, Vec2 _vLeftTop, Vec2 _vSliceSize, Vec2 
 	m_pTex = _pTex;
 
 	tAnimFrame frame = {};
-	for (int i = 0; i < _iFrameCount; i++)
+	for (int i = 0; i < (int)_iFrameCount; i++)
 	{
 		frame.fFrameTime = _fFrameTime;
 		frame.vSliceSize = _vSliceSize;

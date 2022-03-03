@@ -13,7 +13,6 @@ CMissile::CMissile(OBJ_TYPE _objType, float _fTheta):
 {
     m_fTheta = _fTheta;
     SetDir(_fTheta);
-    m_vec2Scale = Vec2(12.5f, 12.5f);
     m_vSpeed = Vec2(500, 500);
     m_vVelocity = Vec2(0, 0);
 
@@ -50,9 +49,8 @@ void CMissile::Update()
     m_vec2Pos.y += m_vDir.y * m_vSpeed.y * DT - m_vVelocity.y * DT; 
     // y좌표는 윈도우 좌표계로 반대로 간다.
 
-    if (m_vec2Pos.x < -100 || m_vec2Pos.y < -100 ||
-        m_vec2Pos.x > WINSIZEX + 100 || m_vec2Pos.y > WINSIZEY + 100)
-        DeleteObject(this);
+    if (m_vec2Pos.x < -100 ||m_vec2Pos.x > WINSIZEX + 100)
+        DELETEOBJECT(this);
 }
 
 void CMissile::Render(HDC _hDC)
@@ -86,7 +84,7 @@ void CMissile::OnCollisionEnter(CCollider* _pOther)
     if (pOtherObj->GetName() == L"Monster")
     {
         LOG(L"미사일 충돌");
-        DeleteObject(this);
+        DELETEOBJECT(this);
     }
 }
 

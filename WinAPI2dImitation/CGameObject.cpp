@@ -57,7 +57,7 @@ void CGameObject::FinalUpdate()
 
 void CGameObject::ComponentRender(HDC _hDC)
 {
-	if (nullptr != m_pCollider)
+	if (nullptr != m_pCollider && SINGLE(CCore)->GetDebugMode())
 		m_pCollider->Render(_hDC);
 
 	if (nullptr != m_pAnimator)
@@ -73,7 +73,7 @@ void CGameObject::TextureRender(HDC _hDC)
 
 	TransparentBlt(_hDC,
 		(int)(m_vRenderPos.x - (iWidth / 2)),
-		(int)(m_vRenderPos.y - (iHeight / 2)),
+		(int)(m_vRenderPos.y - (iHeight / 2) - m_vec2Scale.y/2),
 		iWidth, iHeight,
 		m_pTex->GetDC(),
 		0, 0, iWidth, iHeight,

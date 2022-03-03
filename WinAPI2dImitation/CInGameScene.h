@@ -9,7 +9,6 @@ public:
     ~CInGameScene();
 
     virtual void	Update();
-
     virtual void    Enter();
     virtual void    Exit();
 };

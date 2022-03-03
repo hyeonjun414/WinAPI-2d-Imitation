@@ -11,8 +11,8 @@ int g_arrVK[(int)KEY::SIZE] =
 	'Q','W','E','R','T','Y','U','I','O','P',
 	'A','S','D','F','G','Z','X','C','V','B',
 	VK_MENU,	//	ALT,
-	VK_CONTROL,	//	LSHIFT,
-	VK_LSHIFT,	//	CTRL,
+	VK_LSHIFT,	//	LSHIFT,
+	VK_CONTROL,	//	CTRL,
 	VK_SPACE,	//	SPACE,
 	VK_RETURN,	//	ENTER,
 	VK_ESCAPE,	//	ESC,
@@ -119,7 +119,7 @@ void CKeyManager::Update()
 		}
 		else
 		{
-			m_vCurMousePos = Vec2(ptPos.x, ptPos.y);
+			m_vCurMousePos = Vec2((float)ptPos.x, (float)ptPos.y);
 		}
 	}
 }

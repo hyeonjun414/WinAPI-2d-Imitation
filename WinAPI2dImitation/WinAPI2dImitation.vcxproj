@@ -170,6 +170,7 @@
     <ClInclude Include="CResourceManager.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
+    <ClInclude Include="CToolScene.h" />
     <ClInclude Include="function.h" />
     <ClInclude Include="SelectGDI.h" />
     <ClInclude Include="CSingleton.h" />
@@ -209,7 +210,7 @@
     <ClCompile Include="CTextObject.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
-    <ClCompile Include="function.cpp" />
+    <ClCompile Include="CToolScene.cpp" />
     <ClCompile Include="SelectGDI.cpp" />
     <ClCompile Include="WinAPI2dImitation.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

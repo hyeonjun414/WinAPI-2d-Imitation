@@ -144,6 +144,9 @@
     <ClInclude Include="CCamera.h">
       <Filter>02.Util\02.Other</Filter>
     </ClInclude>
+    <ClInclude Include="CToolScene.h">
+      <Filter>04.Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI2dImitation.cpp">
@@ -212,9 +215,6 @@
     <ClCompile Include="CEventManager.cpp">
       <Filter>02.Util\01.Manager</Filter>
     </ClCompile>
-    <ClCompile Include="function.cpp">
-      <Filter>02.Util\02.Other</Filter>
-    </ClCompile>
     <ClCompile Include="CAnimator.cpp">
       <Filter>06.Component</Filter>
     </ClCompile>
@@ -223,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>02.Util\02.Other</Filter>
+    </ClCompile>
+    <ClCompile Include="CToolScene.cpp">
+      <Filter>04.Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

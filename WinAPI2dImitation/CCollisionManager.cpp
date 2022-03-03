@@ -111,10 +111,6 @@ void CCollisionManager::CollisionGroupUpdate(OBJ_TYPE _eLeft, OBJ_TYPE _eRight)
 				iter = m_mapColInfo.find(ID.ID);
 			}
 
-
-
-
-
 			// 두 오브젝트가 충돌했는지 확인,
 			// 키 상태와 마찬가지로 이전 프레임의 충돌정보가 필요하다.
 			if (IsCollision(pLeftCol,pRightCol))

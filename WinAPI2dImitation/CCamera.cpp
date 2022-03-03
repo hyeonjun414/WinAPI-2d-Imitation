@@ -4,7 +4,8 @@
 
 CCamera::CCamera() :
 	m_pTargetObj(nullptr),
-	m_fTime(0.2f)
+	m_fTime(0.2f),
+	m_vCamSize(WINSIZEX, WINSIZEY)
 {
 }
 
@@ -55,19 +56,32 @@ void CCamera::Update()
 		else
 		{
 			m_vLookAt = m_pTargetObj->GetPos();
+			m_vLookAt -= Vec2(0.f, +200.f);
 		}
+
 	}
-
-	if (KEYCHECK(KEY::UP) == KEY_STATE::HOLD)
-		m_vLookAt.y -= 500.f * DT;
-	if (KEYCHECK(KEY::DOWN) == KEY_STATE::HOLD)
-		m_vLookAt.y += 500.f * DT;
-	if (KEYCHECK(KEY::LEFT) == KEY_STATE::HOLD)
-		m_vLookAt.x -= 500.f * DT;
-	if (KEYCHECK(KEY::RIGHT) == KEY_STATE::HOLD)
-		m_vLookAt.x += 500.f * DT;
-
+	else
+	{
+		if (KEYCHECK(KEY::UP) == KEY_STATE::HOLD)
+			m_vLookAt.y -= 500.f * DT;
+		if (KEYCHECK(KEY::DOWN) == KEY_STATE::HOLD)
+			m_vLookAt.y += 500.f * DT;
+		if (KEYCHECK(KEY::LEFT) == KEY_STATE::HOLD)
+			m_vLookAt.x -= 500.f * DT;
+		if (KEYCHECK(KEY::RIGHT) == KEY_STATE::HOLD)
+			m_vLookAt.x += 500.f * DT;
+	}
 
 	// 화면 중앙좌표와  카메라 LookAt 좌표간의 차이값 계산
 	CalDiff();
+}
+
+bool CCamera::CheckBoundary()
+{
+	if (m_vLookAt.x - m_vCamSize.x / 2 <= 0 || m_vLookAt.x + m_vCamSize.x / 2 >= 1920 ||
+		m_vLookAt.y - m_vCamSize.y / 2 <= 0 || m_vLookAt.y + m_vCamSize.y / 2 >= 1080)
+	{
+		return true;
+	}
+	return false;
 }

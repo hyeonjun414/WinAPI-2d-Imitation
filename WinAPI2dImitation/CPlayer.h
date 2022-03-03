@@ -6,6 +6,8 @@ class CTexture;
 class CPlayer :
     public CGameObject
 {
+private:
+    Vec2    m_vVelocity;
 public :
     CPlayer();
     CPlayer(OBJ_TYPE _objGroup);

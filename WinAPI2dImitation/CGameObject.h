@@ -48,6 +48,7 @@ public:
 	Vec2			GetPos()		{ return m_vec2Pos; }
 	Vec2			GetRenderPos()	{ return m_vRenderPos; }
 	Vec2			GetScale()		{ return m_vec2Scale; }
+	CTexture*		GetTexture()	{ return m_pTex; }
 	CCollider*		GetCollider()	{ return m_pCollider; }
 	CAnimator*		GetAnimator()	{ return m_pAnimator; }
 	

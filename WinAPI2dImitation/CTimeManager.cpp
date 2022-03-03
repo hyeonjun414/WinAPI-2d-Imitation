@@ -50,8 +50,3 @@ void CTimeManager::Init()
 	QueryPerformanceCounter(&m_llPrevCount);		// 현재 시간의 카운트 수
 	QueryPerformanceFrequency(&m_llFrequency);	// 1초당 진행하는 카운트 수
 }
-
-void CTimeManager::SetPlayTime(unsigned int _playTime)
-{
-	m_uiPlayTime = _playTime;
-}

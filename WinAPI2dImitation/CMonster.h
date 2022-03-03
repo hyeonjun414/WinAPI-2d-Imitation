@@ -7,9 +7,9 @@ class CMonster :
     public CGameObject
 {
     Vec2        m_vec2CenterPos;
-    float       m_fVelocity;
+    Vec2        m_vVelocity;
     float       m_fDistance;
-    bool        m_bIsUpDir;
+    bool        m_bIsRight;
 
 public:
     CMonster();

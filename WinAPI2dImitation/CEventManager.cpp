@@ -43,7 +43,6 @@ void CEventManager::Update()
 {
 	for (size_t i = 0; i < m_vecDead.size(); i++)
 	{
-		Logger::debug(L"실행");
 		delete m_vecDead[i];
 	}
 
@@ -55,4 +54,31 @@ void CEventManager::Update()
 	}
 	// 이벤트를 모두 처리하고 초기화
 	m_vecEvent.clear();
+}
+
+void CEventManager::EventCreateObject(CGameObject* _pObj)
+{
+	tEvent even = {};
+	even.eEvent = EVENT_TYPE::CREATE_OBJECT;
+	even.lParam = (DWORD_PTR)_pObj;
+
+	AddEvent(even);
+}
+
+void CEventManager::EventDeleteObject(CGameObject* _pObj)
+{
+	tEvent even = {};
+	even.eEvent = EVENT_TYPE::DELETE_OBJECT;
+	even.lParam = (DWORD_PTR)_pObj;
+
+	AddEvent(even);
+}
+
+void CEventManager::EventChangeScene(SCENE_TYPE _eSceneType)
+{
+	tEvent even = {};
+	even.eEvent = EVENT_TYPE::SCENE_CHANGE;
+	even.lParam = (DWORD_PTR)_eSceneType;
+
+	AddEvent(even);
 }

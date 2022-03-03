@@ -4,12 +4,13 @@
 #include "CScene.h"
 #include "CGameObject.h"
 
-CCore::CCore():
+CCore::CCore() :
 	m_hDC(0),
 	m_hBMP(0),
 	m_hMemDC(0),
 	m_arrBrush{},
-	m_arrPen{}
+	m_arrPen{},
+	m_bDebugMode(false)
 {
 }
 CCore::~CCore()
@@ -48,11 +49,10 @@ void CCore::Update()
 	SINGLE(CCollisionManager)->Update();
 	SINGLE(CCamera)->Update();
 
-	// 게임의 정보를 토대로 그려주는 작업
-	// FPS 출력
-	WCHAR strFPS[6];
-	swprintf_s(strFPS, L"%5d", CTimeManager::GetInst()->GetFPS());
-	TextOutW(m_hDC, WINSIZEX - 60, 10, strFPS, 5);
+	if (KEYCHECK(KEY::CTRL) == KEY_STATE::TAP)
+	{
+		m_bDebugMode = !m_bDebugMode;
+	}
 }
 
 

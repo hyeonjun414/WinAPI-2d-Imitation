@@ -6,6 +6,9 @@ class CCamera
 {
 	SINGLETON(CCamera)
 private:
+	Vec2			m_vCamSize;		// 카메라의 해상도
+
+
 	Vec2			m_vLookAt;		// 카메라가 보고있는 화면의 중심의 위치
 	Vec2			m_vCurLookAt;	// 이전 프레임과 현재 프레임의 보정 위치
 	Vec2			m_vPrevLookAt;	// 카메라가 보는 이전 프레임 위치
@@ -34,5 +37,7 @@ public:
 	Vec2	GetLookAt()							{ return m_vCurLookAt; }
 	Vec2	GetRenderPos(Vec2 _vObjPos)			{ return _vObjPos - m_vDiff; }
 	Vec2	GetRealPos(Vec2 _vRenderPos)		{ return _vRenderPos + m_vDiff; }
+
+	bool CheckBoundary();
 };
 

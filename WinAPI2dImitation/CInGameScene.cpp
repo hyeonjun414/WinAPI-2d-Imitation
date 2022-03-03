@@ -2,6 +2,8 @@
 #include "CInGameScene.h"
 #include "CPlayer.h"
 #include "CMonster.h"
+#include "CImageObject.h"
+#include "CTexture.h"
 
 CInGameScene::CInGameScene()
 {
@@ -34,30 +36,27 @@ void CInGameScene::Enter()
 	CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
 	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	obj->SetScale(Vec2(50, 50));
-	AddObject(obj);
+	obj->SetGravity(true);
+	CREATEOBJECT(obj);
 
-	//SINGLE(CCamera)->SetTarget(obj);
-
+	SINGLE(CCamera)->SetTarget(obj);
 
 	obj = new CMonster(OBJ_TYPE::MONSTER);
 	obj->SetPos(Vec2(1100, WINSIZEY / 2));
 	obj->Init();
-	AddObject(obj);	obj = new CMonster(OBJ_TYPE::MONSTER);
-	obj->SetPos(Vec2(1100, WINSIZEY / 2));
-	obj->Init();
-	AddObject(obj);	obj = new CMonster(OBJ_TYPE::MONSTER);
-	obj->SetPos(Vec2(1100, WINSIZEY / 2));
-	obj->Init();
-	AddObject(obj);	obj = new CMonster(OBJ_TYPE::MONSTER);
-	obj->SetPos(Vec2(1100, WINSIZEY / 2));
-	obj->Init();
-	AddObject(obj);	obj = new CMonster(OBJ_TYPE::MONSTER);
-	obj->SetPos(Vec2(1100, WINSIZEY / 2));
-	obj->Init();
-	AddObject(obj);
+	obj->SetGravity(true);
+	CREATEOBJECT(obj);
 
+	CImageObject* BgObj = new CImageObject(OBJ_TYPE::IMAGE,
+		L"InGameSceneBG",
+		L"texture\\scene02_bg.bmp");
+	BgObj->GetTexture()->Width();
+	BgObj->SetPos(Vec2((float)(BgObj->GetTexture()->Width() / 2), (float)(BgObj->GetTexture()->Height() / 2)));
+	CREATEOBJECT(BgObj);
+
+
+	//SINGLE(CCamera)->SetLookAt(Vec2(WINSIZEX / 2, WINSIZEY / 2 + 300));
 	
-	SINGLE(CCamera)->SetLookAt(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 
 	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);

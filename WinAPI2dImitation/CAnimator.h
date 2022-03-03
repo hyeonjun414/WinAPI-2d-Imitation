@@ -31,6 +31,9 @@ public:
 	CAnimation* FindAnimation(const wstring& _strName);		// 특정 애니메이션을 찾는다.
 	void Play(const wstring& _strName, bool _bRepeat);				// 특정 애니메이션을 실행시킨다.
 
+	void SetAllAnimOffset();
+
+
 	CGameObject* GetObj() { return m_pOwner; }
 };
 

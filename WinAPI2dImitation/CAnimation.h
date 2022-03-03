@@ -37,6 +37,7 @@ public:
 	}
 
 	tAnimFrame& GetFrame(int _iIdx) { return m_vecFrame[_iIdx]; }
+	int			GetMaxFrame()		{ return (int)m_vecFrame.size(); }
 
 	const wstring&	GetName()	{ return m_strName; }
 	bool			IsFinish() { return m_bFinish; }

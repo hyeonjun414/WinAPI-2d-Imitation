@@ -10,11 +10,6 @@ CResourceManager::CResourceManager()
 CResourceManager::~CResourceManager()
 {
 	Safe_Delete_Map(m_mapTex);
-	//map<wstring, CTexture*>::iterator iter = m_mapTex.begin();
-	//for (; iter != m_mapTex.end(); iter++)
-	//{
-	//	delete iter->second;
-	//}
 }
 
 CTexture* CResourceManager::LoadTexture(const wstring& _strKey, const wstring& _strRelativePath)

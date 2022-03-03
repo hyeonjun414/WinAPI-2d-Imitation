@@ -13,6 +13,10 @@ private:
 	HBRUSH		m_arrBrush[(UINT)BRUSH_TYPE::SIZE];
 	HPEN		m_arrPen[(UINT)PEN_TYPE::SIZE];
 
+	// 디버그 모드 여부
+	bool		m_bDebugMode;
+
+
 	void		CreateBrushPen();
 
 public :
@@ -24,5 +28,6 @@ public :
 	HDC			GetMainDC()						{ return m_hDC; }
 	HBRUSH		GetBrush(BRUSH_TYPE _brushType) { return m_arrBrush[(UINT)_brushType]; }
 	HPEN		GetPEN(PEN_TYPE _penType)		{ return m_arrPen[(UINT)_penType]; }
+	bool		GetDebugMode()					{ return m_bDebugMode; }
 };
 

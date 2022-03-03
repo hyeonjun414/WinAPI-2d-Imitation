@@ -12,9 +12,9 @@ private:
     float   m_fTheta;           // 총알 이동 방향
     Vec2    m_vDir;             // 방향성 정보
     Vec2    m_vSpeed;           // 총알 속도
-    Vec2    m_vVelocity;       // 총알 가속도
-
-    
+    Vec2    m_vVelocity;        // 총알 가속도
+    Vec2    m_vMoveDist;        // 이동거리
+    Vec2    m_vMaxDist;         // 최대 이동거리
 
 public:
     CMissile();

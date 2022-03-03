@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CAnimator.h"
 #include "CAnimation.h"
+#include "CGameObject.h"
 
 CAnimator::CAnimator():
 	m_pOwner(nullptr),
@@ -63,4 +64,17 @@ void CAnimator::Play(const wstring& _strName, bool _bRepeat)
 {
 	m_pCurAnim = FindAnimation(_strName);
 	m_bRepeat = _bRepeat;
+}
+
+void CAnimator::SetAllAnimOffset()
+{
+	map<wstring, CAnimation*>::iterator iter = m_mapAnim.begin();
+	for (; iter != m_mapAnim.end(); iter++)
+	{
+		for (int i = 0; i < iter->second->GetMaxFrame(); i++)
+		{
+			iter->second->GetFrame(i).vOffset = Vec2(0.f, -m_pOwner->GetScale().y / 2);
+		}
+
+	}
 }

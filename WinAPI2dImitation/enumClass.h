@@ -5,14 +5,17 @@
 enum class OBJ_TYPE
 {
 	DEFAULT,
+
+	IMAGE,
+	TEXT,
+	
 	PLAYER,
 	MONSTER,
 	BULLET_PLAYER,
 	BULLET_ENEMY,
 	MISSILE,
 
-	TEXT,
-	IMAGE,
+
 
 	SIZE,
 };

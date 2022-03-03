@@ -2,17 +2,21 @@
 #include "CImageObject.h"
 #include "CTexture.h"
 
-CImageObject::CImageObject() :
-	m_pTex(nullptr)
+CImageObject::CImageObject()
 {
 }
 
 CImageObject::CImageObject(OBJ_TYPE _objGroup) :
-	CGameObject(_objGroup),
-	m_pTex(nullptr)
+	CGameObject(_objGroup)
 {
 	m_pTex = SINGLE(CResourceManager)->LoadTexture(L"TitleImage", L"texture\\a.bmp");
 
+}
+
+CImageObject::CImageObject(OBJ_TYPE _objGroup, wstring _strTexName, wstring _strTexPath):
+	CGameObject(_objGroup)
+{
+	m_pTex = SINGLE(CResourceManager)->LoadTexture(_strTexName, _strTexPath);
 }
 
 CImageObject::~CImageObject()
@@ -34,8 +38,8 @@ void CImageObject::Render(HDC _hDC)
 	int iHeight = (int)m_pTex->Height();
 
 	BitBlt(_hDC,
-		(int)(m_vec2Pos.x - (float)(iWidth / 2)),
-		(int)(m_vec2Pos.y - (float)(iHeight / 2)),
+		(int)(m_vRenderPos.x - (float)(iWidth / 2)),
+		(int)(m_vRenderPos.y - (float)(iHeight / 2)),
 		iWidth, iHeight,
 		m_pTex->GetDC(),
 		0, 0, SRCCOPY);
