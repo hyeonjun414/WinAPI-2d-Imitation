@@ -124,9 +124,9 @@ struct tEvent
 
 struct tAnimFrame
 {
-	Vec2	vLT; // 프레임 좌상단 정보
-	Vec2	vSliceSize;
-	Vec2	vOffset;
-	float	fFrameTime;
+	Vec2	vLT;			// 프레임 좌상단 정보
+	Vec2	vSliceSize;		// 프레임 크기
+	Vec2	vOffset;		// 프레임 상대 위치
+	float	fFrameTime;		// 프레임 재생 시간
 };
 

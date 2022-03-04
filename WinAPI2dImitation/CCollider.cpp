@@ -30,7 +30,7 @@ void CCollider::FinalUpdate()
 	// FinalPos는 실제 충돌이 일어나는 좌표이기 때문에 RenderPos를 적용하면 안된다.
 	// FinalPos를 기준으로 RenderPos를 구해주자
 	m_vFinalPos = m_pOwner->GetPos() + m_vOffsetPos;
-	m_vRenderPos = SINGLE(CCamera)->GetRenderPos(m_vFinalPos);
+	m_vRenderPos = SINGLE(CCameraManager)->GetRenderPos(m_vFinalPos);
 	assert(m_uiColCount >= 0);
 }
 

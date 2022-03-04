@@ -153,7 +153,7 @@
   <ItemGroup>
     <ClInclude Include="CAnimation.h" />
     <ClInclude Include="CAnimator.h" />
-    <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CCameraManager.h" />
     <ClInclude Include="CCollider.h" />
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CCore.h" />
@@ -189,7 +189,7 @@
   <ItemGroup>
     <ClCompile Include="CAnimation.cpp" />
     <ClCompile Include="CAnimator.cpp" />
-    <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CCameraManager.cpp" />
     <ClCompile Include="CCollider.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CCore.cpp" />

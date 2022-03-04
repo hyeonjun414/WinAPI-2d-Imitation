@@ -47,7 +47,7 @@ void CCore::Update()
 	SINGLE(CKeyManager)->Update();
 	SINGLE(CSceneManager)->Update();
 	SINGLE(CCollisionManager)->Update();
-	SINGLE(CCamera)->Update();
+	SINGLE(CCameraManager)->Update();
 
 	if (KEYCHECK(KEY::CTRL) == KEY_STATE::TAP)
 	{
@@ -90,7 +90,7 @@ void CCore::Init()
 	SINGLE(CPathManager)->Init();
 	SINGLE(CSceneManager)->Init();
 	SINGLE(CCollisionManager)->Init();
-	SINGLE(CCamera)->Init();
+	SINGLE(CCameraManager)->Init();
 
 	// 코어의 변수에 DC 할당
 	m_hDC = GetDC(hWnd);

@@ -141,11 +141,11 @@
     <ClInclude Include="CAnimation.h">
       <Filter>06.Component</Filter>
     </ClInclude>
-    <ClInclude Include="CCamera.h">
-      <Filter>02.Util\02.Other</Filter>
-    </ClInclude>
     <ClInclude Include="CToolScene.h">
       <Filter>04.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraManager.h">
+      <Filter>02.Util\01.Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,11 +221,11 @@
     <ClCompile Include="CAnimation.cpp">
       <Filter>06.Component</Filter>
     </ClCompile>
-    <ClCompile Include="CCamera.cpp">
-      <Filter>02.Util\02.Other</Filter>
-    </ClCompile>
     <ClCompile Include="CToolScene.cpp">
       <Filter>04.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraManager.cpp">
+      <Filter>02.Util\01.Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

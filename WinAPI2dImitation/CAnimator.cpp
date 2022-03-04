@@ -16,10 +16,13 @@ CAnimator::~CAnimator()
 
 void CAnimator::Update()
 {
+	// 현재 애니메이션이 지정되어있는 상태일떄
 	if (nullptr != m_pCurAnim)
 	{
 		m_pCurAnim->Update();
 
+		// 해당 애니메이션이 반복재생이고,
+		// 이미 한차례를 수행했다면 다시 0번 프레임을 초기화한다.
 		if (m_bRepeat && m_pCurAnim->IsFinish())
 		{
 			m_pCurAnim->SetFrame(0);
@@ -62,7 +65,9 @@ CAnimation* CAnimator::FindAnimation(const wstring& _strName)
 
 void CAnimator::Play(const wstring& _strName, bool _bRepeat)
 {
-	m_pCurAnim = FindAnimation(_strName);
+	if (m_pCurAnim == FindAnimation(_strName)) return;
+		m_pCurAnim = FindAnimation(_strName);
+	m_pCurAnim->m_iCurFrame = 0;
 	m_bRepeat = _bRepeat;
 }
 

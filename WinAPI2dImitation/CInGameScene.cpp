@@ -26,8 +26,8 @@ void CInGameScene::Update()
 	if (KEYCHECK(KEY::LBTN) == KEY_STATE::TAP)
 	{
 		Vec2 vLookAt = SINGLE(CKeyManager)->GetMousePos();
-		vLookAt = SINGLE(CCamera)->GetRealPos(vLookAt);
-		SINGLE(CCamera)->SetLookAt(vLookAt);
+		vLookAt = SINGLE(CCameraManager)->GetRealPos(vLookAt);
+		SINGLE(CCameraManager)->SetLookAt(vLookAt);
 	}
 }
 
@@ -39,7 +39,7 @@ void CInGameScene::Enter()
 	obj->SetGravity(true);
 	CREATEOBJECT(obj);
 
-	SINGLE(CCamera)->SetTarget(obj);
+	SINGLE(CCameraManager)->SetTarget(obj);
 
 	obj = new CMonster(OBJ_TYPE::MONSTER);
 	obj->SetPos(Vec2(1100, WINSIZEY / 2));
@@ -55,11 +55,13 @@ void CInGameScene::Enter()
 	CREATEOBJECT(BgObj);
 
 
-	//SINGLE(CCamera)->SetLookAt(Vec2(WINSIZEX / 2, WINSIZEY / 2 + 300));
+	//SINGLE(CCameraManager)->SetLookAt(Vec2(WINSIZEX / 2, WINSIZEY / 2 + 300));
+	//SINGLE(CCameraManager)->SetLookAt(Vec2(0, 0));
 	
 
 	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::MONSTER);
 }
 
 void CInGameScene::Exit()
