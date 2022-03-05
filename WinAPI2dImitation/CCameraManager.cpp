@@ -5,6 +5,8 @@
 CCameraManager::CCameraManager()
 {
 	m_vLookAt = Vec2(WINSIZEX / 2.f, WINSIZEY / 2.f);
+	m_vCamSize = Vec2(1280.f, 720.f);
+	m_vWorldSize = Vec2(1280.f, 720.f);
 	m_vCurLookAt = m_vLookAt;
 	m_vPrevLookAt = m_vLookAt;
 	m_pTargetObj = nullptr;
@@ -29,13 +31,16 @@ void CCameraManager::CalDiff()
 		m_vCurLookAt = m_vPrevLookAt + vLookDir.Normalize() * m_fSpeed * DT;
 	}
 
+	// 월드 크기를 고려해 카메라 이동 반경을 제어한다.
+	CheckBoundary();
+
 	// 화면의 중앙 좌표를 가져옴
 	Vec2 vCenter = Vec2(WINSIZEX / 2.f, WINSIZEY / 2.f);
 
 	m_vDiff = m_vCurLookAt - vCenter;
 	m_vPrevLookAt = m_vCurLookAt;
 
-	m_fSpeed += m_fAccel * DT;
+	m_fSpeed += m_fAccel * m_fAccelRate * DT;
 
 }
 
@@ -51,9 +56,7 @@ void CCameraManager::Update()
 		if (!m_pTargetObj->GetActive())
 			m_pTargetObj = nullptr;
 		else
-		{
-			SetLookAt(m_pTargetObj->GetPos()+ Vec2(0.f, -200.f));
-		}
+			SetLookAt(m_pTargetObj->GetPos());//+ Vec2(0.f, -200.f));
 	}
 	else
 	{
@@ -77,20 +80,30 @@ void CCameraManager::SetLookAt(Vec2 _vLook)
 	float fMoveDist = (m_vLookAt - m_vPrevLookAt).Length();
 
 	if(nullptr != m_pTargetObj)
-		m_fSpeed = fMoveDist / m_fTime;
+		m_fSpeed = fMoveDist / m_fTime * 2;
 	else
 		m_fSpeed = 0;
-	m_fAccel = fMoveDist / m_fTime * m_fAccelRate;
+	m_fAccel = fMoveDist / m_fTime;
 
 	m_fFlowTime = 0.f;
 }
 
-bool CCameraManager::CheckBoundary()
+void CCameraManager::CheckBoundary()
 {
-	if (m_vLookAt.x - m_vCamSize.x / 2 <= 0 || m_vLookAt.x + m_vCamSize.x / 2 >= 1920 ||
-		m_vLookAt.y - m_vCamSize.y / 2 <= 0 || m_vLookAt.y + m_vCamSize.y / 2 >= 1080)
+	if (m_vCurLookAt.x - m_vCamSize.x / 2 < 0)
 	{
-		return true;
+		m_vCurLookAt.x = m_vCamSize.x / 2;
 	}
-	return false;
+	if (m_vCurLookAt.x + m_vCamSize.x / 2 > m_vWorldSize.x)
+	{
+		m_vCurLookAt.x = m_vWorldSize.x - m_vCamSize.x / 2;
+	} 
+	if (m_vCurLookAt.y - m_vCamSize.y / 2 < 0)
+	{
+		m_vCurLookAt.y = m_vCamSize.y / 2;
+	} 
+	if (m_vCurLookAt.y + m_vCamSize.y / 2 > m_vWorldSize.y)
+	{
+		m_vCurLookAt.y = m_vWorldSize.y - m_vCamSize.y / 2;
+	}
 }

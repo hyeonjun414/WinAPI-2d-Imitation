@@ -39,6 +39,7 @@ void CInGameScene::Enter()
 	obj->SetGravity(true);
 	CREATEOBJECT(obj);
 
+	SINGLE(CCameraManager)->SetWorldSize(Vec2(1920.f, 1080.f));
 	SINGLE(CCameraManager)->SetTarget(obj);
 
 	obj = new CMonster(OBJ_TYPE::MONSTER);
