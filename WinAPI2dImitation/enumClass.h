@@ -14,7 +14,8 @@ enum class OBJ_TYPE
 	BULLET_PLAYER,
 	BULLET_ENEMY,
 	MISSILE,
-
+	Floor,
+	Wall,
 
 
 	SIZE,

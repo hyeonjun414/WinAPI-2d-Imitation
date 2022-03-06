@@ -26,9 +26,13 @@ void CCameraManager::CalDiff()
 	Vec2 vLookDir = m_vLookAt - m_vPrevLookAt;
 
 	// 아직 도착못했을때 이동
-	if (vLookDir.Length() > 1)
+	if (vLookDir.Length() > 2)
 	{
 		m_vCurLookAt = m_vPrevLookAt + vLookDir.Normalize() * m_fSpeed * DT;
+	}
+	else
+	{
+		m_fSpeed = 0;
 	}
 
 	// 월드 크기를 고려해 카메라 이동 반경을 제어한다.
@@ -56,7 +60,7 @@ void CCameraManager::Update()
 		if (!m_pTargetObj->GetActive())
 			m_pTargetObj = nullptr;
 		else
-			SetLookAt(m_pTargetObj->GetPos());//+ Vec2(0.f, -200.f));
+			SetLookAt(m_pTargetObj->GetPos()+ Vec2(0.f, -200.f));
 	}
 	else
 	{
@@ -83,7 +87,7 @@ void CCameraManager::SetLookAt(Vec2 _vLook)
 		m_fSpeed = fMoveDist / m_fTime * 2;
 	else
 		m_fSpeed = 0;
-	m_fAccel = fMoveDist / m_fTime;
+	m_fAccel = fMoveDist / m_fTime * DT;
 
 	m_fFlowTime = 0.f;
 }

@@ -4,6 +4,8 @@
 #include "CMonster.h"
 #include "CImageObject.h"
 #include "CTexture.h"
+#include "CCollObject.h"
+#include "CCollider.h"
 
 CInGameScene::CInGameScene()
 {
@@ -39,21 +41,83 @@ void CInGameScene::Enter()
 	obj->SetGravity(true);
 	CREATEOBJECT(obj);
 
-	SINGLE(CCameraManager)->SetWorldSize(Vec2(1920.f, 1080.f));
+	SINGLE(CCameraManager)->SetWorldSize(Vec2(3200.f, 1600.f));
 	SINGLE(CCameraManager)->SetTarget(obj);
-
+	
 	obj = new CMonster(OBJ_TYPE::MONSTER);
-	obj->SetPos(Vec2(1100, WINSIZEY / 2));
+	obj->SetPos(Vec2(900, WINSIZEY / 2));
 	obj->Init();
 	obj->SetGravity(true);
 	CREATEOBJECT(obj);
 
 	CImageObject* BgObj = new CImageObject(OBJ_TYPE::IMAGE,
 		L"InGameSceneBG",
-		L"texture\\scene02_bg.bmp");
-	BgObj->GetTexture()->Width();
+		L"texture\\background.bmp", false);
 	BgObj->SetPos(Vec2((float)(BgObj->GetTexture()->Width() / 2), (float)(BgObj->GetTexture()->Height() / 2)));
 	CREATEOBJECT(BgObj);
+
+	BgObj = new CImageObject(OBJ_TYPE::IMAGE,
+		L"InGameSceneTile",
+		L"texture\\map1.bmp", true);
+	BgObj->SetPos(Vec2((float)(BgObj->GetTexture()->Width() / 2), (float)(BgObj->GetTexture()->Height() / 2)));
+	CREATEOBJECT(BgObj);
+
+	obj = new CCollObject(OBJ_TYPE::Floor);
+	obj->SetName(L"Floor");
+	obj->CreateCollider();
+	obj->GetCollider()->SetOffsetPos(Vec2(560, 1030));
+	obj->GetCollider()->SetScale(Vec2(1115, 10));
+	CREATEOBJECT(obj);
+
+	obj = new CCollObject(OBJ_TYPE::Floor);
+	obj->SetName(L"Floor");
+	obj->CreateCollider();
+	obj->GetCollider()->SetOffsetPos(Vec2(2500, 1030));
+	obj->GetCollider()->SetScale(Vec2(1460, 10));
+	CREATEOBJECT(obj);
+
+	obj = new CCollObject(OBJ_TYPE::Floor);
+	obj->SetName(L"Floor");
+	obj->CreateCollider();
+	obj->GetCollider()->SetOffsetPos(Vec2(1440, 1220));
+	obj->GetCollider()->SetScale(Vec2(660, 10));
+	CREATEOBJECT(obj);
+
+	obj = new CCollObject(OBJ_TYPE::Floor);
+	obj->SetName(L"Floor");
+	obj->CreateCollider();
+	obj->GetCollider()->SetOffsetPos(Vec2(1440, 870));
+	obj->GetCollider()->SetScale(Vec2(370, 10));
+	CREATEOBJECT(obj);
+
+	obj = new CCollObject(OBJ_TYPE::Floor);
+	obj->SetName(L"Floor");
+	obj->CreateCollider();
+	obj->GetCollider()->SetOffsetPos(Vec2(1714, 1095));
+	obj->GetCollider()->SetScale(Vec2(100, 10));
+	CREATEOBJECT(obj);
+	obj = new CCollObject(OBJ_TYPE::Floor);
+	obj->SetName(L"Floor");
+	obj->CreateCollider();
+	obj->GetCollider()->SetOffsetPos(Vec2(1165, 1095));
+	obj->GetCollider()->SetScale(Vec2(100, 10));
+	CREATEOBJECT(obj);
+
+	obj = new CCollObject(OBJ_TYPE::Wall);
+	obj->SetName(L"Wall");
+	obj->CreateCollider();
+	obj->GetCollider()->SetOffsetPos(Vec2(1110, 1300));
+	obj->GetCollider()->SetScale(Vec2(10, 520));
+	CREATEOBJECT(obj);
+	obj = new CCollObject(OBJ_TYPE::Wall);
+	obj->SetName(L"Wall");
+	obj->CreateCollider();
+	obj->GetCollider()->SetOffsetPos(Vec2(1770, 1300));
+	obj->GetCollider()->SetScale(Vec2(10, 520));
+	CREATEOBJECT(obj);
+
+
+	
 
 
 	//SINGLE(CCameraManager)->SetLookAt(Vec2(WINSIZEX / 2, WINSIZEY / 2 + 300));
@@ -63,6 +127,9 @@ void CInGameScene::Enter()
 	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::MONSTER);
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::Floor);
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::Wall);
+	//SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MONSTER, OBJ_TYPE::Floor);
 }
 
 void CInGameScene::Exit()

@@ -14,10 +14,11 @@ CMonster::CMonster():
 CMonster::CMonster(OBJ_TYPE _objType) :
     CGameObject(_objType)
 {
-    SetScale(Vec2(83, 83));
+    SetScale(Vec2(100, 100));
     m_vVelocity = Vec2(100.f, 0.f);
     m_fDistance = 150;
     m_bIsRight = true;
+    m_bIsFloor = false;
     m_strName = L"Monster";
 
     CreateCollider();
@@ -62,13 +63,8 @@ void CMonster::Init()
 
 void CMonster::Update()
 {
-    if (m_bIsGravity) m_vVelocity.y -= 1;
+    if (m_bIsGravity && !m_bIsFloor) m_vVelocity.y -= 500 * DT;
     m_vec2Pos.y += -m_vVelocity.y * DT;
-    if (m_vec2Pos.y >= 910)
-    {
-        m_vec2Pos.y = 910;
-        m_vVelocity.y = 0;
-    }
 
     if (m_bIsRight)
     {
@@ -103,6 +99,12 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
     if (pOtherObj->GetName() == L"Missile_Player")
     {
         DELETEOBJECT(this);
+    }
+    if (pOtherObj->GetName() == L"Floor")
+    {
+        m_vVelocity.y = 0;
+        m_vec2Pos.y = _pOther->GetOffsetPos().y - _pOther->GetScale().y / 2 +1;
+        m_bIsFloor = true;
     }
 }
 

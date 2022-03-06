@@ -10,6 +10,7 @@ class CMonster :
     Vec2        m_vVelocity;
     float       m_fDistance;
     bool        m_bIsRight;
+    bool        m_bIsFloor;
 
 public:
     CMonster();

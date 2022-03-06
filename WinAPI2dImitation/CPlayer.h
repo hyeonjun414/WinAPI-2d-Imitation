@@ -8,6 +8,9 @@ class CPlayer :
 {
 private:
     Vec2    m_vVelocity;
+    bool    m_bIsFloor;
+    bool    m_bIsJumping;
+    bool    m_bIsRight;
 public :
     CPlayer();
     CPlayer(OBJ_TYPE _objGroup);
@@ -20,5 +23,8 @@ public :
 
     void            CreateMissile();
 
+    virtual void	OnCollision(CCollider* _pOther) ;
+    virtual void	OnCollisionEnter(CCollider* _pOther);
+    virtual void	OnCollisionExit(CCollider* _pOther);
 };
 
