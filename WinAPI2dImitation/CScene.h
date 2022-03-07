@@ -12,6 +12,9 @@ protected:
 	wstring					m_strName;
 	SCENE_TYPE				m_enumSceneType;
 
+	UINT m_iTileX;
+	UINT m_iTileY;
+
 public:
 	CScene();
 	CScene(wstring _sceneName, SCENE_TYPE _sceneType);
@@ -27,14 +30,21 @@ public:
 	void			SetName(const wstring& _strName){ m_strName = _strName; }
 	wstring			GetName()						{ return m_strName; }
 
+	UINT			GetTileX()						{	return m_iTileX;}
+	UINT			GetTileY()						{	return m_iTileY;}
+
 
 	void			AddObject(CGameObject* _pObj);
 	void			EraseObject(CGameObject* _pObj);
-
+	void			DeleteGroup(OBJ_TYPE group);
 	const vector<CGameObject*>& GetGroupObject(OBJ_TYPE _eType)
 	{
 		return m_vecObjectList[(UINT)_eType];
 	};
+
+	void CreateTile(UINT _xSize, UINT _ySize);
+	void LoadTile(const wstring& strPath);
+	void RenderTile(HDC _hDC);
 
 protected:
 	void			ClearObject();

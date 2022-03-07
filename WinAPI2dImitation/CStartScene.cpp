@@ -25,6 +25,10 @@ void CStartScene::Update()
 	{
  		CHANGESCENE(SCENE_TYPE::STAGE_01);
 	}
+	if (KEYCHECK(KEY::ESC) == KEY_STATE::TAP)
+	{
+		CHANGESCENE(SCENE_TYPE::TOOL);
+	}
 }
 
 void CStartScene::Enter()

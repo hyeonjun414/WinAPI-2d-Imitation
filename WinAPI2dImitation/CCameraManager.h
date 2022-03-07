@@ -38,5 +38,7 @@ public:
 	Vec2	GetRealPos(Vec2 _vRenderPos)		{ return _vRenderPos + m_vDiff; }
 
 	void	CheckBoundary();
+	void	Scroll(Vec2 vec, float velocity);
+
 };
 

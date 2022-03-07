@@ -11,7 +11,7 @@ CCameraManager::CCameraManager()
 	m_vPrevLookAt = m_vLookAt;
 	m_pTargetObj = nullptr;
 	m_fFlowTime = m_fTime;
-	m_fSpeed = 0;
+	m_fSpeed = 500;
 	m_fPreSpeed = m_fSpeed;
 	m_fAccel = 0;
 }
@@ -81,8 +81,8 @@ void CCameraManager::SetLookAt(Vec2 _vLook)
 
 	if(nullptr != m_pTargetObj)
 		m_fSpeed = fMoveDist / m_fTime * 2;
-	else
-		m_fSpeed = 0;
+	//else
+	//	m_fSpeed = 0;
 	m_fAccel = fMoveDist / m_fTime;
 
 	m_fFlowTime = 0.f;
@@ -106,4 +106,13 @@ void CCameraManager::CheckBoundary()
 	{
 		m_vCurLookAt.y = m_vWorldSize.y - m_vCamSize.y / 2;
 	}
+}
+
+void CCameraManager::Scroll(Vec2 vec, float velocity)
+{
+	m_vLookAt +=  vec * velocity * DT;
+	m_vCurLookAt +=  vec * velocity * DT;
+
+	Vec2 vCenter = Vec2(WINSIZEX / 2.f, WINSIZEY / 2.f);
+	m_vDiff = m_vCurLookAt - vCenter;
 }

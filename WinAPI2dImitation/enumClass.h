@@ -8,6 +8,7 @@ enum class OBJ_TYPE
 
 	IMAGE,
 	TEXT,
+	TILE,
 	
 	PLAYER,
 	MONSTER,

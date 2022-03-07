@@ -28,20 +28,23 @@
     <Filter Include="04.Scene">
       <UniqueIdentifier>{b6f1d04d-0718-4a1a-a69c-1b6e47616dfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Util\01.Manager">
-      <UniqueIdentifier>{feef7991-deb7-435f-b0ba-1d95d67afa62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Resource">
       <UniqueIdentifier>{ce542f78-d001-4fb6-9636-e6777c8f416b}</UniqueIdentifier>
     </Filter>
     <Filter Include="05.Resource\01.Texture">
       <UniqueIdentifier>{ad401253-6924-4644-a1cb-97a39ec50285}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Util\02.Other">
-      <UniqueIdentifier>{bb1e2a2f-9207-4044-8c2c-e26b4c79744f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="06.Component">
       <UniqueIdentifier>{69f5a52a-4f69-439a-a613-0af8bc40a818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.GameObject\Tile">
+      <UniqueIdentifier>{4b445f5a-02c9-4d42-a6b1-d154a65c6673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Util\Manager">
+      <UniqueIdentifier>{feef7991-deb7-435f-b0ba-1d95d67afa62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Util\Other">
+      <UniqueIdentifier>{bb1e2a2f-9207-4044-8c2c-e26b4c79744f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,13 +70,13 @@
       <Filter>04.Scene</Filter>
     </ClInclude>
     <ClInclude Include="CTimeManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CKeyManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CSceneManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CStartScene.h">
       <Filter>04.Scene</Filter>
@@ -100,40 +103,40 @@
       <Filter>05.Resource\01.Texture</Filter>
     </ClInclude>
     <ClInclude Include="CPathManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CImageObject.h">
       <Filter>03.GameObject</Filter>
     </ClInclude>
     <ClInclude Include="CResourceManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CSingleton.h">
-      <Filter>02.Util\02.Other</Filter>
+      <Filter>02.Util\Other</Filter>
     </ClInclude>
     <ClInclude Include="enumClass.h">
-      <Filter>02.Util\02.Other</Filter>
+      <Filter>02.Util\Other</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
-      <Filter>02.Util\02.Other</Filter>
+      <Filter>02.Util\Other</Filter>
     </ClInclude>
     <ClInclude Include="struct.h">
-      <Filter>02.Util\02.Other</Filter>
+      <Filter>02.Util\Other</Filter>
     </ClInclude>
     <ClInclude Include="CCollider.h">
       <Filter>06.Component</Filter>
     </ClInclude>
     <ClInclude Include="SelectGDI.h">
-      <Filter>02.Util\02.Other</Filter>
+      <Filter>02.Util\Other</Filter>
     </ClInclude>
     <ClInclude Include="CCollisionManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CEventManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClInclude>
     <ClInclude Include="function.h">
-      <Filter>02.Util\02.Other</Filter>
+      <Filter>02.Util\Other</Filter>
     </ClInclude>
     <ClInclude Include="CAnimator.h">
       <Filter>06.Component</Filter>
@@ -145,7 +148,10 @@
       <Filter>04.Scene</Filter>
     </ClInclude>
     <ClInclude Include="CCameraManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>03.GameObject\Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,13 +168,13 @@
       <Filter>04.Scene</Filter>
     </ClCompile>
     <ClCompile Include="CTimeManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CKeyManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CSceneManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CStartScene.cpp">
       <Filter>04.Scene</Filter>
@@ -195,25 +201,25 @@
       <Filter>05.Resource\01.Texture</Filter>
     </ClCompile>
     <ClCompile Include="CPathManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CImageObject.cpp">
       <Filter>03.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CResourceManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CCollider.cpp">
       <Filter>06.Component</Filter>
     </ClCompile>
     <ClCompile Include="SelectGDI.cpp">
-      <Filter>02.Util\02.Other</Filter>
+      <Filter>02.Util\Other</Filter>
     </ClCompile>
     <ClCompile Include="CCollisionManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CEventManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CAnimator.cpp">
       <Filter>06.Component</Filter>
@@ -225,7 +231,10 @@
       <Filter>04.Scene</Filter>
     </ClCompile>
     <ClCompile Include="CCameraManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>02.Util\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>03.GameObject\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

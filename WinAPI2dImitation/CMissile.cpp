@@ -87,4 +87,3 @@ void CMissile::OnCollisionEnter(CCollider* _pOther)
         DELETEOBJECT(this);
     }
 }
-
