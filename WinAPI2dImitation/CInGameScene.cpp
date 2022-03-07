@@ -36,6 +36,7 @@ void CInGameScene::Update()
 void CInGameScene::Enter()
 {
 	CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
+	obj->SetName(L"Player");
 	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	obj->SetScale(Vec2(50, 50));
 	obj->SetGravity(true);
@@ -46,6 +47,24 @@ void CInGameScene::Enter()
 	
 	obj = new CMonster(OBJ_TYPE::MONSTER);
 	obj->SetPos(Vec2(900, WINSIZEY / 2));
+	obj->Init();
+	obj->SetGravity(true);
+	CREATEOBJECT(obj);
+
+	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1440, WINSIZEY / 2));
+	obj->Init();
+	obj->SetGravity(true);
+	CREATEOBJECT(obj);
+
+	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1440, 1200));
+	obj->Init();
+	obj->SetGravity(true);
+	CREATEOBJECT(obj);
+
+	obj = new CMonster(OBJ_TYPE::MONSTER);
+	obj->SetPos(Vec2(1800, WINSIZEY / 2));
 	obj->Init();
 	obj->SetGravity(true);
 	CREATEOBJECT(obj);
@@ -107,29 +126,24 @@ void CInGameScene::Enter()
 	obj->SetName(L"Wall");
 	obj->CreateCollider();
 	obj->GetCollider()->SetOffsetPos(Vec2(1110, 1300));
-	obj->GetCollider()->SetScale(Vec2(10, 520));
+	obj->GetCollider()->SetScale(Vec2(10, 540));
 	CREATEOBJECT(obj);
 	obj = new CCollObject(OBJ_TYPE::Wall);
 	obj->SetName(L"Wall");
 	obj->CreateCollider();
 	obj->GetCollider()->SetOffsetPos(Vec2(1770, 1300));
-	obj->GetCollider()->SetScale(Vec2(10, 520));
+	obj->GetCollider()->SetScale(Vec2(10, 540));
 	CREATEOBJECT(obj);
 
-
-	
-
-
-	//SINGLE(CCameraManager)->SetLookAt(Vec2(WINSIZEX / 2, WINSIZEY / 2 + 300));
-	//SINGLE(CCameraManager)->SetLookAt(Vec2(0, 0));
 	
 
 	// 어떤 오브젝트 그룹끼리 충돌할것인지 미리 정함
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::MONSTER);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::Floor);
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MONSTER, OBJ_TYPE::Floor);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::Wall);
-	//SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MONSTER, OBJ_TYPE::Floor);
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MONSTER, OBJ_TYPE::Wall);
 }
 
 void CInGameScene::Exit()

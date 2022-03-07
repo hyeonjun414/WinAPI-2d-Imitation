@@ -6,15 +6,19 @@ class CTexture;
 class CMonster :
     public CGameObject
 {
-    Vec2        m_vec2CenterPos;
-    Vec2        m_vVelocity;
-    float       m_fDistance;
-    bool        m_bIsRight;
-    bool        m_bIsFloor;
+    Vec2            m_vec2CenterPos;
+    Vec2            m_vVelocity;
+    float           m_fDistance;
+    bool            m_bIsRight;
+    bool            m_bIsFloor;
+    bool            m_bIsErase;
+
+    unsigned int    m_iTime; 
 
 public:
     CMonster();
     CMonster(OBJ_TYPE _objType);
+    CMonster(const CMonster& _origin);
     virtual ~CMonster();
     CLONE(CMonster)
 
@@ -25,8 +29,10 @@ public:
     void            SetCenterPos(Vec2 _vec) { m_vec2CenterPos = _vec; }
     Vec2            GetCenterPos()          { return m_vec2CenterPos; }
 
-    virtual void	OnCollision(CCollider* _pOther) {}
+    void            DelayEraseObject(int _iTime);
+
+    virtual void	OnCollision(CCollider* _pOther);
     virtual void	OnCollisionEnter(CCollider* _pOther);
-    virtual void	OnCollisionExit(CCollider* _pOther) {};
+    virtual void	OnCollisionExit(CCollider* _pOther);
 };
 

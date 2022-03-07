@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CTimeManager.h"
 
+
 CTimeManager::CTimeManager()
 {
 	m_llCurCount = {};
@@ -35,7 +36,6 @@ void CTimeManager::Update()
 		m_uiFPS = updateCount;
 		m_uiPlayTime++;
 		m_bIsSecond = true;
-
 		updateOneSecond = 0;
 		updateCount = 0;
 	}

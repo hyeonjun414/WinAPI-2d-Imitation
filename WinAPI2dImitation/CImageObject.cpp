@@ -11,8 +11,6 @@ CImageObject::CImageObject()
 CImageObject::CImageObject(OBJ_TYPE _objGroup) :
 	CGameObject(_objGroup)
 {
-	m_pTex = SINGLE(CResourceManager)->LoadTexture(L"TitleImage", L"texture\\a.bmp");
-
 }
 
 CImageObject::CImageObject(OBJ_TYPE _objGroup, wstring _strTexName, wstring _strTexPath, bool _renderStyle):

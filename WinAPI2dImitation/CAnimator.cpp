@@ -9,6 +9,12 @@ CAnimator::CAnimator():
 {
 }
 
+CAnimator::CAnimator(const CAnimator& _origin):
+	m_pOwner(nullptr),
+	m_pCurAnim(nullptr)
+{
+}
+
 CAnimator::~CAnimator()
 {
 	Safe_Delete_Map(m_mapAnim);

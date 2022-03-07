@@ -72,6 +72,7 @@ enum class PEN_TYPE
 	RED,
 	GREEN,
 	BLUE,
+	WHITE,
 
 	SIZE
 };

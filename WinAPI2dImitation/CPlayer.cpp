@@ -31,9 +31,9 @@ CPlayer::CPlayer(OBJ_TYPE _objGroup) :
 	CTexture* m_pTexture = SINGLE(CResourceManager)->LoadTexture(L"PlayerTex", L"texture\\skul_Animation.bmp");
 	CreateAnimator();
 	GetAnimator()->CreateAnimation(L"Player_Idle_Right", m_pTexture, Vec2(1.f, 1.f), Vec2(90.f, 90.f),
-									Vec2(91.f, 0.f), 0.3f, 4);
+									Vec2(91.f, 0.f), 0.15f, 8);
 	GetAnimator()->CreateAnimation(L"Player_Idle_Left", m_pTexture, Vec2(1.f, 92.f), Vec2(90.f, 90.f),
-									Vec2(91.f, 0.f), 0.3f, 4);
+									Vec2(91.f, 0.f), 0.15f, 8);
 	GetAnimator()->CreateAnimation(L"Player_Move_Right", m_pTexture, Vec2(1.f, 183.f), Vec2(90.f, 90.f),
 									Vec2(91.f, 0.f), 0.1f, 8);
 	GetAnimator()->CreateAnimation(L"Player_Move_Left", m_pTexture, Vec2(1.f, 274.f), Vec2(90.f, 90.f),
@@ -168,7 +168,6 @@ void CPlayer::OnCollisionEnter(CCollider* _pOther)
 	if (_pOther->GetObj()->GetName() == L"Floor" && !m_bIsJumping)
 	{
 		m_vVelocity.y = 0;
-		//if (m_vec2Pos.y < _pOther->GetFinalPos().y)
 		{
 			m_vec2Pos.y = _pOther->GetFinalPos().y - _pOther->GetScale().y / 2 + 1;
 			m_bIsFloor = true;
@@ -177,8 +176,10 @@ void CPlayer::OnCollisionEnter(CCollider* _pOther)
 			else
 				GetAnimator()->Play(L"Player_Idle_Left", true);
 		}
-		//else
-		//	m_vec2Pos.y = _pOther->GetFinalPos().y + _pOther->GetScale().y / 2 + m_pCollider->GetOffsetPos().y;
+	}
+	if (_pOther->GetObj()->GetName() == L"Monster")
+	{
+		m_vVelocity.y = 300;
 	}
 
 }
