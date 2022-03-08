@@ -36,14 +36,14 @@ public:
 
 	void			AddObject(CGameObject* _pObj);
 	void			EraseObject(CGameObject* _pObj);
-	void			DeleteGroup(OBJ_TYPE group);
+	void			DeleteGroup(OBJ_TYPE _group);
 	const vector<CGameObject*>& GetGroupObject(OBJ_TYPE _eType)
 	{
 		return m_vecObjectList[(UINT)_eType];
 	};
 
 	void CreateTile(UINT _xSize, UINT _ySize);
-	void LoadTile(const wstring& strPath);
+	void LoadTile(const wstring& _strPath);
 	void RenderTile(HDC _hDC);
 
 protected:

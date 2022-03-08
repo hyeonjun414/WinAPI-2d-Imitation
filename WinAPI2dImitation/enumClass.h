@@ -17,7 +17,7 @@ enum class OBJ_TYPE
 	MISSILE,
 
 
-
+	UI,
 	SIZE,
 };
 

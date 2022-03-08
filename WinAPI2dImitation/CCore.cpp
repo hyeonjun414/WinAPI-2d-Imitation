@@ -48,6 +48,7 @@ void CCore::Update()
 	SINGLE(CSceneManager)->Update();
 	SINGLE(CCollisionManager)->Update();
 	SINGLE(CCameraManager)->Update();
+	SINGLE(CUIManager)->Update();
 
 	if (KEYCHECK(KEY::CTRL) == KEY_STATE::TAP)
 	{

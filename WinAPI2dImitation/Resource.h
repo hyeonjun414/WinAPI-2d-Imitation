@@ -13,12 +13,13 @@
 #define IDD_TILEBOX                     108
 #define IDC_WINAPI2DIMITATION           109
 #define IDR_MAINFRAME                   128
+#define IDSAVE                          128
 #define IDC_EDIT_SIZEX                  1000
 #define IDC_EDIT_SIZEY                  1001
 #define IDC_BUTTON_SIZE                 1002
 #define IDC_EDIT_TILE                   1003
-#define IDC_BUTTON_SIZE2                1004
 #define IDC_BUTTON_TILE                 1004
+#define IDLOAD                          1005
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -28,7 +29,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        130
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1004
+#define _APS_NEXT_CONTROL_VALUE         1006
 #define _APS_NEXT_SYMED_VALUE           110
 #endif
 #endif

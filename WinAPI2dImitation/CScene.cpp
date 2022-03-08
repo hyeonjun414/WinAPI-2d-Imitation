@@ -103,17 +103,19 @@ void CScene::EraseObject(CGameObject* _pObj)
 
 }
 
-void CScene::DeleteGroup(OBJ_TYPE group)
+void CScene::DeleteGroup(OBJ_TYPE _group)
 {
-	for (int i = 0; i < m_vecObjectList[(UINT)group].size(); i++)
+	for (int i = 0; i < m_vecObjectList[(UINT)_group].size(); i++)
 	{
-		delete m_vecObjectList[(UINT)group][i];
+		delete m_vecObjectList[(UINT)_group][i];
 	}
-	m_vecObjectList[(UINT)group].clear();
+	m_vecObjectList[(UINT)_group].clear();
 }
 
 void CScene::CreateTile(UINT _xSize, UINT _ySize)
 {
+	DeleteGroup(OBJ_TYPE::TILE);
+
 	m_iTileX = _xSize;
 	m_iTileY = _ySize;
 
@@ -126,16 +128,17 @@ void CScene::CreateTile(UINT _xSize, UINT _ySize)
 			CTile* pTile = new CTile();
 			pTile->SetPos(Vec2((float)(j * CTile::SIZE_TILE), (float)(i * CTile::SIZE_TILE)));
 			pTile->SetTexture(pTileTex);
-			CREATEOBJECT(pTile);
+			AddObject(pTile);
+			//CREATEOBJECT(pTile);
 		}
 	}
 }
 
-void CScene::LoadTile(const wstring& strPath)
+void CScene::LoadTile(const wstring& _strPath)
 {
 	FILE* pFile = nullptr;
 
-	_wfopen_s(&pFile, strPath.c_str(), L"rb");      // w : write, b : binary
+	_wfopen_s(&pFile, _strPath.c_str(), L"rb");      // w : write, b : binary
 	assert(pFile);
 
 	UINT	xCount = 0;

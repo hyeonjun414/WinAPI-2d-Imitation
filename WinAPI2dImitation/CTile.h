@@ -25,7 +25,7 @@ public:
     virtual void Load(FILE* _pFile);
 
     void SetTexture(CTexture* _pTex) { m_pTex = _pTex; }
-    void SetImgIdx(UINT idx)         { m_iIdx = idx; }
+    void SetImgIdx(UINT _idx)         { m_iIdx = _idx; }
 
     
 };

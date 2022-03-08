@@ -31,7 +31,7 @@ public:
 	virtual void	Update() = 0;
 	virtual void	Render(HDC _hDC) = 0;
 
-	virtual void	FinalUpdate() final;	// 컴포넌트의 실행 유무는 오브젝트의 최상위 클래스에서 판단한다.
+	virtual void	FinalUpdate();	// 컴포넌트의 실행 유무는 오브젝트의 최상위 클래스에서 판단한다.
 	virtual void	ComponentRender(HDC _hDC) final; // 컴포넌트가 있는 경우 하위 클래스에서 구현된 Render에서 호출한다.
 
 	void			SetName(const wstring& _strName)	{ m_strName = _strName; }

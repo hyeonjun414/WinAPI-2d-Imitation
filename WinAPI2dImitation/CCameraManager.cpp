@@ -32,7 +32,7 @@ void CCameraManager::CalDiff()
 	}
 
 	// 월드 크기를 고려해 카메라 이동 반경을 제어한다.
-	CheckBoundary();
+	//CheckBoundary();
 
 	// 화면의 중앙 좌표를 가져옴
 	Vec2 vCenter = Vec2(WINSIZEX / 2.f, WINSIZEY / 2.f);

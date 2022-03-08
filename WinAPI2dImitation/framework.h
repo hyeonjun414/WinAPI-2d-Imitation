@@ -49,6 +49,7 @@ using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도�
 #include "CPathManager.h"
 #include "CEventManager.h"
 #include "CCameraManager.h"
+#include "CUIManager.h"
 
 
 // 정의

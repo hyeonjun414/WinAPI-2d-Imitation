@@ -4,6 +4,9 @@
 #include "resource.h"
 #include "CTile.h"
 #include "commdlg.h"
+#include "CUI.h"
+#include "CButtonUI.h"
+#include "CPanelUI.h"
 
 INT_PTR CALLBACK TileWndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -47,6 +50,10 @@ void CToolScene::Update()
 }
 
 
+void CALLBACK test(DWORD_PTR _param1, DWORD_PTR _param2)
+{
+	CHANGESCENE(SCENE_TYPE::START);
+}
 void CToolScene::Enter()
 {
 	SINGLE(CCameraManager)->SetWorldSize(Vec2(10000, 10000));
@@ -55,11 +62,31 @@ void CToolScene::Enter()
 	// 모달리스 방식으로 다이얼로그를 띄우고 출력한다.
 	m_hWnd = CreateDialog(hInst, MAKEINTRESOURCE(IDD_TILEBOX), hWnd, TileWndProc);
 	ShowWindow(m_hWnd, SW_SHOW);
+
+	// UI 생성
+	CPanelUI* pUI = new CPanelUI(OBJ_TYPE::UI);
+	pUI->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
+	pUI->SetCameraAffected(false);
+	AddObject(pUI);
+
+	CButtonUI* pChildUI = new CButtonUI(OBJ_TYPE::UI);
+	pChildUI->SetPos(Vec2(25,25));
+	pChildUI->SetScale(Vec2(50, 50));
+	pChildUI->SetClickCallBack(test, 0,0);
+	pUI->AddChild(pChildUI);
+
+	CPanelUI* pUI2 = pUI->Clone();
+	pUI2->SetPos(Vec2(WINSIZEX / 2 -300, WINSIZEY / 2));
+	AddObject(pUI2);
+
+
+
 }
 
 void CToolScene::Exit()
 {
 	DeleteGroup(OBJ_TYPE::TILE);
+	DeleteGroup(OBJ_TYPE::UI);
 	EndDialog(m_hWnd, IDOK);
 }
 
@@ -78,25 +105,25 @@ void CToolScene::SetTileIdx()
 		int iTileX = (int)GetTileX();
 		int iTileY = (int)GetTileY();
 
-		int iCol = (int)vMousePos.x / CTile::SIZE_TILE;
-		int iRow = (int)vMousePos.y / CTile::SIZE_TILE;
+		int iX = (int)vMousePos.x / CTile::SIZE_TILE;
+		int iY = (int)vMousePos.y / CTile::SIZE_TILE;
 
-		if (vMousePos.x < 0.f || iTileX <= iCol ||
-			vMousePos.y < 0.f || iTileY <= iRow)
+		if (vMousePos.x < 0.f || iTileX <= iX ||
+			vMousePos.y < 0.f || iTileY <= iY)
 		{
 			return;		// 타일이 없는 위치 무시
 		}
 
-		UINT iIdx = iRow * iTileX + iCol;
+		UINT iIdx = iY * iTileX + iX;
 		const vector<CGameObject*>& vecTile = GetGroupObject(OBJ_TYPE::TILE);
 		((CTile*)vecTile[iIdx])->SetImgIdx(m_iIdx);
 	}
 }
-void CToolScene::SaveTile(const wstring& strPath)
+void CToolScene::SaveTile(const wstring& _strPath)
 {
 	FILE* pFile = nullptr;
 
-	_wfopen_s(&pFile, strPath.c_str(), L"wb");
+	_wfopen_s(&pFile, _strPath.c_str(), L"wb");
 	assert(pFile);
 
 	UINT	xCount = GetTileX();
@@ -117,18 +144,18 @@ void CToolScene::SaveTileData()
 {
 	OPENFILENAME ofn = {};
 
-	ofn.lStructSize = sizeof(OPENFILENAME);  // 구조체 사이즈.
-	ofn.hwndOwner = hWnd;					// 부모 윈도우 지정.
+	ofn.lStructSize = sizeof(OPENFILENAME);			// 구조체 사이즈.
+	ofn.hwndOwner = hWnd;							// 부모 윈도우 지정.
 	wchar_t szName[256] = {};
-	ofn.lpstrFile = szName; // 나중에 완성된 경로가 채워질 버퍼 지정.
-	ofn.nMaxFile = sizeof(szName); // lpstrFile에 지정된 버퍼의 문자 수.
-	ofn.lpstrFilter = L"ALL\0*.*\0tile\0*.tile"; // 필터 설정
-	ofn.nFilterIndex = 0; // 기본 필터 세팅. 0는 all로 초기 세팅됨. 처음꺼.
-	ofn.lpstrFileTitle = nullptr; // 타이틀 바
-	ofn.nMaxFileTitle = 0; // 타이틀 바 문자열 크기. nullptr이면 0.
+	ofn.lpstrFile = szName;							// 나중에 완성된 경로가 채워질 버퍼 지정.
+	ofn.nMaxFile = sizeof(szName);					// lpstrFile에 지정된 버퍼의 문자 수.
+	ofn.lpstrFilter = L"ALL\0*.*\0tile\0*.tile";	// 필터 설정
+	ofn.nFilterIndex = 0;							// 기본 필터 세팅. 0는 all로 초기 세팅됨. 처음꺼.
+	ofn.lpstrFileTitle = nullptr;					// 타이틀 바
+	ofn.nMaxFileTitle = 0;							// 타이틀 바 문자열 크기. nullptr이면 0.
 	wstring strTileFolder = SINGLE(CPathManager)->GetContentPath();
 	strTileFolder += L"tile";
-	ofn.lpstrInitialDir = strTileFolder.c_str(); // 초기경로. 우리는 타일 저장할거기 때문에, content->tile 경로로 해두자.
+	ofn.lpstrInitialDir = strTileFolder.c_str();	// 초기경로. 우리는 타일 저장할거기 때문에, content->tile 경로로 해두자.
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST; // 스타일
 
 	if (GetSaveFileName(&ofn))
@@ -140,18 +167,18 @@ void CToolScene::LoadTileData()
 {
 	OPENFILENAME ofn = {};
 
-	ofn.lStructSize = sizeof(OPENFILENAME);  // 구조체 사이즈.
-	ofn.hwndOwner = hWnd; // 부모 윈도우 지정.
+	ofn.lStructSize = sizeof(OPENFILENAME);			// 구조체 사이즈.
+	ofn.hwndOwner = hWnd;							// 부모 윈도우 지정.
 	wchar_t szName[256] = {};
-	ofn.lpstrFile = szName; // 나중에 완성된 경로가 채워질 버퍼 지정.
-	ofn.nMaxFile = sizeof(szName); // lpstrFile에 지정된 버퍼의 문자 수.
-	ofn.lpstrFilter = L"ALL\0*.*\0tile\0*.tile"; // 필터 설정
-	ofn.nFilterIndex = 0; // 기본 필터 세팅. 0는 all로 초기 세팅됨. 처음꺼.
-	ofn.lpstrFileTitle = nullptr; // 타이틀 바
-	ofn.nMaxFileTitle = 0; // 타이틀 바 문자열 크기. nullptr이면 0.
+	ofn.lpstrFile = szName;							// 나중에 완성된 경로가 채워질 버퍼 지정.
+	ofn.nMaxFile = sizeof(szName);					// lpstrFile에 지정된 버퍼의 문자 수.
+	ofn.lpstrFilter = L"ALL\0*.*\0tile\0*.tile";	// 필터 설정
+	ofn.nFilterIndex = 0;							// 기본 필터 세팅. 0는 all로 초기 세팅됨. 처음꺼.
+	ofn.lpstrFileTitle = nullptr;					// 타이틀 바
+	ofn.nMaxFileTitle = 0;							// 타이틀 바 문자열 크기. nullptr이면 0.
 	wstring strTileFolder = SINGLE(CPathManager)->GetContentPath();
 	strTileFolder += L"tile";
-	ofn.lpstrInitialDir = strTileFolder.c_str(); // 초기경로. 우리는 타일 저장할거기 때문에, content->tile 경로로 해두자.
+	ofn.lpstrInitialDir = strTileFolder.c_str();	// 초기경로. 우리는 타일 저장할거기 때문에, content->tile 경로로 해두자.
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST; // 스타일
 
 	if (GetOpenFileName(&ofn))
@@ -174,7 +201,7 @@ INT_PTR CALLBACK TileWndProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		return (INT_PTR)TRUE;
 
 	case WM_COMMAND:
-		if (LOWORD(wParam) == IDOK)
+		if (LOWORD(wParam) == IDSAVE)
 		{
 			CScene* pCurScene = SINGLE(CSceneManager)->GetCurScene();
 			CToolScene* pToolScene = dynamic_cast<CToolScene*>(pCurScene);
@@ -184,7 +211,7 @@ INT_PTR CALLBACK TileWndProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 
 			return (INT_PTR)TRUE;
 		}
-		else if (LOWORD(wParam) == IDCANCEL)
+		else if (LOWORD(wParam) == IDLOAD)
 		{
 			CScene* pCurScene = SINGLE(CSceneManager)->GetCurScene();
 			CToolScene* pToolScene = dynamic_cast<CToolScene*>(pCurScene);
@@ -204,7 +231,6 @@ INT_PTR CALLBACK TileWndProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			CToolScene* pToolScene = dynamic_cast<CToolScene*>(pCurScene);
 			assert(pToolScene);
 
-			pToolScene->DeleteGroup(OBJ_TYPE::TILE);
 			pToolScene->CreateTile(x, y);
 
 		}
