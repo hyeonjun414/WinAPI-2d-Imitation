@@ -171,6 +171,12 @@
     <ClInclude Include="CPanelUI.h">
       <Filter>03.GameObject\UI</Filter>
     </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>05.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoundManager.h">
+      <Filter>02.Util\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI2dImitation.cpp">
@@ -265,6 +271,12 @@
     </ClCompile>
     <ClCompile Include="CPanelUI.cpp">
       <Filter>03.GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CSound.cpp">
+      <Filter>05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundManager.cpp">
+      <Filter>02.Util\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

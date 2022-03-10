@@ -9,5 +9,6 @@ private:
 public:
 	void			Init();
 	const wchar_t*	GetContentPath() { return m_strContentPath; }
+	const wchar_t*	GetContextRelativePath();
 };
 

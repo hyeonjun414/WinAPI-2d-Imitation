@@ -2,6 +2,7 @@
 #include "CStartScene.h"
 #include "CTextObject.h"
 #include "CImageObject.h"
+#include "CSound.h"
 
 CStartScene::CStartScene()
 {
@@ -18,6 +19,8 @@ CStartScene::~CStartScene()
 {
 }
 
+CSound* pSound;
+
 void CStartScene::Update()
 {
 	// 스페이스바를 누르면 게임 시작
@@ -28,6 +31,17 @@ void CStartScene::Update()
 	if (KEYCHECK(KEY::ESC) == KEY_STATE::TAP)
 	{
 		CHANGESCENE(SCENE_TYPE::TOOL);
+	}
+	if (KEYCHECK(KEY::Z) == KEY_STATE::TAP)
+	{
+		
+		SINGLE(CSoundManager)->AddSound(L"DingDing", L"sound\\dingding.wav", false);
+
+	}
+	if (KEYCHECK(KEY::X) == KEY_STATE::TAP)
+	{
+		//pSound->Play();
+		SINGLE(CSoundManager)->Play(L"DingDing");
 	}
 }
 

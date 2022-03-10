@@ -7,12 +7,12 @@ private:
     HWND    m_hWnd;
     UINT    m_iIdx;
     float   m_velocity;
+
 public:
     CToolScene();
     CToolScene(wstring _sceneName, SCENE_TYPE _sceneType);
     ~CToolScene();
 
-    
 
     virtual void Update();
     virtual void Enter();

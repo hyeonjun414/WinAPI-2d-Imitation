@@ -26,7 +26,13 @@ CButtonUI* CButtonUI::Clone()
 
 void CButtonUI::MouseOn()
 {
+	//if (IsMouseOn())
+	//{
+	//	m_pTex = SINGLE(CResourceManager)->FindTexture(L"BtnClick")
+	//}
+	
 	// 마우스가 올라갔을때 
+	LOG(L"마우스 올라감")
 }
 
 void CButtonUI::MouseLbtnDown()
@@ -43,6 +49,7 @@ void CButtonUI::MouseLbtnUp()
 
 void CButtonUI::MouseLbtnClick()
 {
+	LOG(L"마우스 클릭")
 	if (nullptr != m_pFunc)
 	{
 		m_pFunc(m_pParam1, m_pParam2);

@@ -50,6 +50,7 @@ using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도�
 #include "CEventManager.h"
 #include "CCameraManager.h"
 #include "CUIManager.h"
+#include "CSoundManager.h"
 
 
 // 정의
