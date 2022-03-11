@@ -85,3 +85,12 @@ enum class EVENT_TYPE
 
 	SIZE
 };
+
+// 카메라 효과
+enum class CAM_EFFECT
+{
+	FADE_IN,
+	FADE_OUT,
+
+	NONE,
+};

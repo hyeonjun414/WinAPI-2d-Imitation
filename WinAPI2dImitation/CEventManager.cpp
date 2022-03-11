@@ -33,6 +33,7 @@ void CEventManager::Excute(const tEvent& _event)
 	case EVENT_TYPE::SCENE_CHANGE:
 	{
 		SINGLE(CSceneManager)->ChangeScene((SCENE_TYPE)_event.lParam);
+		SINGLE(CUIManager)->SetFocusedUI(nullptr);
 		break;
 	}
 

@@ -12,6 +12,7 @@ private:
 	map<wstring, CSound*>			m_mapSound;
 
 public:
+	CTexture*	CreateTexture(const wstring& _strKey, UINT _width, UINT _height);
 	CTexture*	LoadTexture(const wstring& _strKey, const wstring& _strRelativePath);
 	CTexture*	FindTexture(const wstring& _strKey);
 

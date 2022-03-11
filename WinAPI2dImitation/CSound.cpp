@@ -5,18 +5,12 @@ CSound::CSound():
 	m_pSound(nullptr),
 	m_pChannel(nullptr)
 {
-	
 }
 
 CSound::~CSound()
 {
 	Stop();
-
-	if (nullptr != m_pSound)
-	{
-		m_pSound->release();
-		delete m_pSound;
-	}
+	m_pSound->release();
 }
 
 void CSound::Play()
@@ -51,9 +45,6 @@ void CSound::Load(const wstring& _strFilePath)
 
 	result = SINGLE(CSoundManager)->GetSystem()->createSound(str, FMOD_DEFAULT, nullptr, &m_pSound);
 	assert(!result);
-	result = m_pSound->setMode(FMOD_LOOP_OFF);
-	assert(!result);
-	
 }
 
 void CSound::SetLoop(bool _loop)

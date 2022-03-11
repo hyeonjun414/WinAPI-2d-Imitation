@@ -9,8 +9,8 @@ CSoundManager::CSoundManager():
 }
 CSoundManager::~CSoundManager()
 {
-	m_pSystem->release();
 	m_pSystem->close();
+	m_pSystem->release();
 }
 
 void CSoundManager::Init()

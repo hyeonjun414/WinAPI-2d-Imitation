@@ -1,13 +1,14 @@
 #pragma once
+
+class CTexture;
+
 class CCore
 {
 	SINGLETON(CCore);
 
 private:
 	HDC			m_hDC;
-	
-	HBITMAP		m_hBMP;
-	HDC			m_hMemDC;
+	CTexture*	m_pMemTex;
 
 	// 자주 사용할 그리기용 펜을 관리
 	HBRUSH		m_arrBrush[(UINT)BRUSH_TYPE::SIZE];

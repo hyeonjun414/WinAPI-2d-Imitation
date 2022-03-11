@@ -43,6 +43,14 @@ void CStartScene::Update()
 		//pSound->Play();
 		SINGLE(CSoundManager)->Play(L"DingDing");
 	}
+	if (KEYCHECK(KEY::C) == KEY_STATE::TAP)
+	{
+		SINGLE(CCameraManager)->FadeIn(1.0f);
+	}
+	if (KEYCHECK(KEY::V) == KEY_STATE::TAP)
+	{
+		SINGLE(CCameraManager)->FadeOut(1.0f);
+	}
 }
 
 void CStartScene::Enter()

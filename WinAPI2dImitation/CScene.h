@@ -41,6 +41,10 @@ public:
 	{
 		return m_vecObjectList[(UINT)_eType];
 	};
+	vector<CGameObject*>& GetUIGroup()
+	{
+		return m_vecObjectList[(UINT)OBJ_TYPE::UI];
+	};
 
 	void CreateTile(UINT _xSize, UINT _ySize);
 	void LoadTile(const wstring& _strPath);

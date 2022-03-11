@@ -1,6 +1,7 @@
 #pragma once
 
 class CGameObject;
+class CTexture;
 
 class CCameraManager
 {
@@ -24,11 +25,17 @@ private:
 	float			m_fAccel;					// 타겟을 따라가는 등가속도
 	float			m_fAccelRate = 100.f;		// 가속 수치
 
+	CAM_EFFECT	m_eEffect;
+	CTexture*	m_pTex;
+	float	m_fEffectDuration;
+	float	m_fCurTime;
+
 	void CalDiff();
 
 public:
 	void Init();
 	void Update();
+	void Render(HDC _hDC);
 
 	void	SetWorldSize(Vec2 _vWorldSize) { m_vWorldSize = _vWorldSize; }
 	void	SetLookAt(Vec2 _vLook);
@@ -36,6 +43,10 @@ public:
 	Vec2	GetLookAt()							{ return m_vCurLookAt; }
 	Vec2	GetRenderPos(Vec2 _vObjPos)			{ return _vObjPos - m_vDiff; }
 	Vec2	GetRealPos(Vec2 _vRenderPos)		{ return _vRenderPos + m_vDiff; }
+
+	void FadeIn(float _duration);
+	void FadeOut(float _duration);
+
 
 	void	CheckBoundary();
 	void	Scroll(Vec2 vec, float velocity);
