@@ -3,25 +3,20 @@
 #include "CGameObject.h"
 #include "CTexture.h"
 
-CCameraManager::CCameraManager()
-{
-	m_vLookAt = Vec2(WINSIZEX / 2.f, WINSIZEY / 2.f);
-	m_vCamSize = Vec2(1280.f, 720.f);
-	m_vWorldSize = Vec2(1280.f, 720.f);
-	m_vCurLookAt = m_vLookAt;
-	m_vPrevLookAt = m_vLookAt;
-	m_pTargetObj = nullptr;
-	m_fFlowTime = m_fTime;
-	m_fSpeed = 500;
-	m_fPreSpeed = m_fSpeed;
-	m_fAccel = 0;
-
-	
-}
-
-CCameraManager::~CCameraManager()
+CCameraManager::CCameraManager():
+	m_vLookAt(Vec2(WINSIZEX / 2.f, WINSIZEY / 2.f)),
+	m_vCamSize(Vec2(1280.f, 720.f)),
+	m_vWorldSize(Vec2(1280.f, 720.f)),
+	m_vCurLookAt(m_vLookAt),
+	m_vPrevLookAt(m_vLookAt),
+	m_pTargetObj(nullptr),
+	m_fFlowTime(m_fTime),
+	m_fSpeed(500),
+	m_fPreSpeed(m_fSpeed),
+	m_fAccel(0)
 {
 }
+CCameraManager::~CCameraManager(){}
 
 void CCameraManager::CalDiff()
 {
@@ -55,7 +50,7 @@ void CCameraManager::Init()
 
 void CCameraManager::Update()
 {
-	// 타켓이 있다면
+	// 타겟이 있다면
 	if (m_pTargetObj)
 	{
 		if (!m_pTargetObj->GetActive())
@@ -63,6 +58,7 @@ void CCameraManager::Update()
 		else
 			SetLookAt(m_pTargetObj->GetPos());//+ Vec2(0.f, -200.f));
 	}
+	// 타겟이 없다면
 	else
 	{
 		if (KEYCHECK(KEY::UP) == KEY_STATE::HOLD)
@@ -95,6 +91,7 @@ void CCameraManager::SetLookAt(Vec2 _vLook)
 
 void CCameraManager::Render(HDC _hDC)
 {
+	// 카메라 효과가 시작되었을때만 렌더가 작동한다.
 	if (CAM_EFFECT::NONE == m_eEffect)
 		return;
 
@@ -138,21 +135,6 @@ void CCameraManager::Render(HDC _hDC)
 
 }
 
-void CCameraManager::FadeIn(float _duration)
-{
-	m_eEffect = CAM_EFFECT::FADE_IN;
-	m_fEffectDuration = _duration;
-	m_fCurTime = 0.f;
-}
-
-void CCameraManager::FadeOut(float _duration)
-{
-	m_eEffect = CAM_EFFECT::FADE_OUT;
-	m_fEffectDuration = _duration;
-	m_fCurTime = 0.f;
-}
-
-
 void CCameraManager::CheckBoundary()
 {
 	if (m_vCurLookAt.x - m_vCamSize.x / 2 < 0)
@@ -180,5 +162,19 @@ void CCameraManager::Scroll(Vec2 vec, float velocity)
 
 	Vec2 vCenter = Vec2(WINSIZEX / 2.f, WINSIZEY / 2.f);
 	m_vDiff = m_vCurLookAt - vCenter;
+}
+
+void CCameraManager::FadeIn(float _duration)
+{
+	m_eEffect = CAM_EFFECT::FADE_IN;
+	m_fEffectDuration = _duration;
+	m_fCurTime = 0.f;
+}
+
+void CCameraManager::FadeOut(float _duration)
+{
+	m_eEffect = CAM_EFFECT::FADE_OUT;
+	m_fEffectDuration = _duration;
+	m_fCurTime = 0.f;
 }
 

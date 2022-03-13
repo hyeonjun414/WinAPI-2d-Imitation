@@ -33,16 +33,16 @@ void CInGameScene::Update()
 
 void CInGameScene::Enter()
 {
-	CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
-	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
-	obj->SetScale(Vec2(50, 50));
-	obj->SetGravity(true);
-	CREATEOBJECT(obj);
+	//CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
+	//obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
+	//obj->SetScale(Vec2(50, 50));
+	//obj->SetGravity(true);
+	//CREATEOBJECT(obj);
 
 	SINGLE(CCameraManager)->SetWorldSize(Vec2(1920.f, 1080.f));
-	SINGLE(CCameraManager)->SetTarget(obj);
+	//SINGLE(CCameraManager)->SetTarget(obj);
 
-	obj = new CMonster(OBJ_TYPE::MONSTER);
+	CGameObject* obj = new CMonster(OBJ_TYPE::MONSTER);
 	obj->SetPos(Vec2(1100, WINSIZEY / 2));
 	obj->Init();
 	obj->SetGravity(true);

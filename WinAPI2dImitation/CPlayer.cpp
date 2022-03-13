@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "CPlayer.h"
-#include "CMissile.h"
 #include "CScene.h"
 #include "CTexture.h"
 #include "CCollider.h"
@@ -19,7 +18,7 @@ CPlayer::CPlayer(OBJ_TYPE _objGroup) :
 	SetScale(Vec2(70.f, 70.f));
 	// Collider 만들기
 	CreateCollider();
-	m_pCollider->SetOffsetPos(Vec2(0, -m_vec2Scale.y / 2));
+	m_pCollider->SetOffsetPos(Vec2(0, -m_vScale.y / 2));
 	m_pCollider->SetScale(Vec2(50, 50));
 
 	// 애니메이터 만들기
@@ -59,10 +58,10 @@ void CPlayer::Init()
 void CPlayer::Update()
 {
 	if (m_bIsGravity) m_vVelocity.y -= 1;
-	m_vec2Pos.y += -m_vVelocity.y * DT;
-	if (m_vec2Pos.y >= 910)
+	m_vPos.y += -m_vVelocity.y * DT;
+	if (m_vPos.y >= 910)
 	{
-		m_vec2Pos.y = 910;
+		m_vPos.y = 910;
 		m_vVelocity.y = 0;
 	}
 	
@@ -70,7 +69,7 @@ void CPlayer::Update()
 	if (KEYCHECK(KEY::A) == KEY_STATE::HOLD)
 	{
 		// 왼쪽
-		m_vec2Pos.x -= 300 * DT;
+		m_vPos.x -= 300 * DT;
 		GetAnimator()->Play(L"Player_Move_Left", true);
 	}
 	if (KEYCHECK(KEY::A) == KEY_STATE::AWAY)
@@ -80,7 +79,7 @@ void CPlayer::Update()
 	if (KEYCHECK(KEY::D) == KEY_STATE::HOLD)
 	{
 		// 오른쪽
-		m_vec2Pos.x += 300 * DT;
+		m_vPos.x += 300 * DT;
 		GetAnimator()->Play(L"Player_Move_Right", true);
 	}
 	if (KEYCHECK(KEY::D) == KEY_STATE::AWAY)
@@ -94,8 +93,6 @@ void CPlayer::Update()
 		m_vVelocity.y += 300;
 	}
 
-	if (KEYCHECK(KEY::SPACE) == KEY_STATE::TAP)
-		CreateMissile();
 
 	GetAnimator()->Update();
 }
@@ -105,13 +102,3 @@ void CPlayer::Render(HDC _hDC)
 	ComponentRender(_hDC);
 }
 
-void CPlayer::CreateMissile()
-{
-	CMissile* pMissile = new CMissile(OBJ_TYPE::MISSILE, DEG(0));
-	pMissile->SetName(L"Missile_Player");
-	pMissile->SetPos(Vec2(m_vec2Pos.x + m_vec2Scale.x/2+ pMissile->GetScale().x, m_vec2Pos.y));
-	pMissile->SetGravity(false);
-	pMissile->SetScale(m_vec2Scale);
-	pMissile->GetCollider()->SetOffsetPos(Vec2(0, -m_vec2Scale.y / 2));
-	CREATEOBJECT(pMissile);
-}

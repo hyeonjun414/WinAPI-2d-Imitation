@@ -67,6 +67,11 @@ using namespace std; // --> 같은 이름을 지닌 기능과 겹치지 않도�
 #define SINGLE(manager) manager::GetInst()
 #define DT (float)CTimeManager::GetInst()->GetDT()
 #define KEYCHECK(vk_Key) CKeyManager::GetInst()->GetKeyState(vk_Key)
+#define KEYHOLD(vk_key) KEYCHECK(vk_key) == KEY_STATE::HOLD
+#define KEYAWAY(vk_key)   KEYCHECK(vk_key) == KEY_STATE::AWAY
+#define KEYTAP(vk_key)  KEYCHECK(vk_key) == KEY_STATE::TAP
+#define PATH			SINGLE(CPathManager)->GetContentPath()
+#define RELATIVEPATH	SINGLE(CPathManager)->GetRelativePath()
 #define LOG(str) Logger::debug(str);
 #define CLONE(type) type* Clone() {return new type(*this);}
 

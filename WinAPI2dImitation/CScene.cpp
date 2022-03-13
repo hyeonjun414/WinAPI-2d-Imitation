@@ -3,16 +3,20 @@
 #include "CGameObject.h"
 #include "CTile.h"
 
-CScene::CScene()
+CScene::CScene():
+	m_strName{},
+	m_eType(SCENE_TYPE::NONE),
+	m_iTileX(0),
+	m_iTileY(0)
 {
-	m_strName = L"";
-	m_enumSceneType = SCENE_TYPE::NONE;
 }
 
-CScene::CScene(wstring _sceneName, SCENE_TYPE _sceneType)
+CScene::CScene(wstring _strName, SCENE_TYPE _eTYpe):
+	m_strName(_strName),
+	m_eType(_eTYpe),
+	m_iTileX(0),
+	m_iTileY(0)
 {
-	m_strName = _sceneName;
-	m_enumSceneType = _sceneType;
 }
 
 CScene::~CScene()
@@ -20,11 +24,7 @@ CScene::~CScene()
 	// 장면이 사라질때 장면에 동적할당으로 추가된 오브젝트를 메모리 해제시켜준다.
 	for (int i = 0; i < (int)OBJ_TYPE::SIZE; i++)
 	{
-		vector<CGameObject*>::iterator iter = m_vecObjectList[i].begin();
-		for (; iter != m_vecObjectList[i].end(); iter++)
-		{
-			delete* iter;
-		}
+		Safe_Delete_Vec(m_vecObjectList[i]);
 	}
 }
 
@@ -100,7 +100,6 @@ void CScene::EraseObject(CGameObject* _pObj)
 			iter++;
 		}
 	}
-
 }
 
 void CScene::DeleteGroup(OBJ_TYPE _group)
@@ -129,7 +128,6 @@ void CScene::CreateTile(UINT _xSize, UINT _ySize)
 			pTile->SetPos(Vec2((float)(j * CTile::SIZE_TILE), (float)(i * CTile::SIZE_TILE)));
 			pTile->SetTexture(pTileTex);
 			AddObject(pTile);
-			//CREATEOBJECT(pTile);
 		}
 	}
 }

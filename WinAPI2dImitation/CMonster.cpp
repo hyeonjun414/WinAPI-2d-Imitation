@@ -22,7 +22,7 @@ CMonster::CMonster(OBJ_TYPE _objType) :
 
     CreateCollider();
     m_pCollider->SetScale(GetScale());
-    m_pCollider->SetOffsetPos(Vec2(0.f, -m_vec2Scale.y / 2));
+    m_pCollider->SetOffsetPos(Vec2(0.f, -m_vScale.y / 2));
 
 
     CTexture* m_pTex = SINGLE(CResourceManager)->LoadTexture(L"Monster", L"texture\\Animation_Monster.bmp");
@@ -57,23 +57,23 @@ CMonster::~CMonster()
 
 void CMonster::Init()
 {
-    SetCenterPos(m_vec2Pos);
+    SetCenterPos(m_vPos);
 }
 
 void CMonster::Update()
 {
     if (m_bIsGravity) m_vVelocity.y -= 1;
-    m_vec2Pos.y += -m_vVelocity.y * DT;
-    if (m_vec2Pos.y >= 910)
+    m_vPos.y += -m_vVelocity.y * DT;
+    if (m_vPos.y >= 910)
     {
-        m_vec2Pos.y = 910;
+        m_vPos.y = 910;
         m_vVelocity.y = 0;
     }
 
     if (m_bIsRight)
     {
-        m_vec2Pos.x += m_vVelocity.x * DT;
-        if (m_vec2Pos.x > m_vec2CenterPos.x + m_fDistance)
+        m_vPos.x += m_vVelocity.x * DT;
+        if (m_vPos.x > m_vec2CenterPos.x + m_fDistance)
         {
             GetAnimator()->Play(L"Monster_Move_Left", true);
             m_bIsRight = !m_bIsRight;
@@ -81,8 +81,8 @@ void CMonster::Update()
     }
     else
     {
-        m_vec2Pos.x -= m_vVelocity.x * DT;
-        if (m_vec2Pos.x < m_vec2CenterPos.x - m_fDistance)
+        m_vPos.x -= m_vVelocity.x * DT;
+        if (m_vPos.x < m_vec2CenterPos.x - m_fDistance)
         {
             GetAnimator()->Play(L"Monster_Move_Right", true);
             m_bIsRight = !m_bIsRight;

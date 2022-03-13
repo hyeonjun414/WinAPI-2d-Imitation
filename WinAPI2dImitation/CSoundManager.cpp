@@ -15,7 +15,6 @@ CSoundManager::~CSoundManager()
 
 void CSoundManager::Init()
 {
-
 	FMOD_RESULT result;
 
 	System_Create(&m_pSystem);

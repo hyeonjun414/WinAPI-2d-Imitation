@@ -10,13 +10,12 @@ class CSound;
 
 class CSoundManager
 {
-	SINGLETON(CSoundManager)
+	SINGLETON(CSoundManager);
 
 private:
 	map<wstring, CSound*> m_mapSound;	// 사운드들을 관리하기 위한 자료구조
 
 	System* m_pSystem;
-
 
 public:
 	void Init();

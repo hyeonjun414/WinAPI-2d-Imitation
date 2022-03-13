@@ -5,18 +5,16 @@
 
 CUIManager::CUIManager():
 	m_pFocusedUI(nullptr)
-{
-
-}
+{}
 CUIManager::~CUIManager()
-{
+{}
 
-}
 void CUIManager::Update()
 {
 	// UI매니저가 계속해서 포커싱된 UI를 가지고있도록 만들어준다.
 	m_pFocusedUI = GetFocusedUI();
 	if (nullptr == m_pFocusedUI) return;
+
 	// 이미 GetFocusedUI에서 모든 UI를 순회하면 포커싱된 UI를 구했으므로
 	// pUI를 m_pFocusedUI로 받아와 타겟으로 실행하면 된다.
 	CUI* pUI = GetTargetUI(m_pFocusedUI);

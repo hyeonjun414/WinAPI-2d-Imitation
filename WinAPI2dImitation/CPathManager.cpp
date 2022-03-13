@@ -3,12 +3,10 @@
 
 CPathManager::CPathManager():
 	m_strContentPath{}
-{
-}
+{}
 
 CPathManager::~CPathManager()
-{
-}
+{}
 
 void CPathManager::Init()
 {

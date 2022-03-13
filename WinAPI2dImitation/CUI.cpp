@@ -67,7 +67,7 @@ void CUI::FinalUpdate()
 void CUI::Render(HDC _hDC)
 {
 	Vec2 vPos = m_vFinalPos;
-	Vec2 vScale = m_vec2Scale;
+	Vec2 vScale = m_vScale;
 
 	if (m_bCameraAffected)
 	{

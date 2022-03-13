@@ -3,10 +3,8 @@
 #include "CScene.h"
 #include "CGameObject.h"
 
-CEventManager::CEventManager()
-{}
-CEventManager::~CEventManager()
-{}
+CEventManager::CEventManager(){}
+CEventManager::~CEventManager(){}
 
 void CEventManager::Excute(const tEvent& _event)
 {
@@ -36,24 +34,23 @@ void CEventManager::Excute(const tEvent& _event)
 		SINGLE(CUIManager)->SetFocusedUI(nullptr);
 		break;
 	}
-
 	}
 }
 
 void CEventManager::Update()
 {
+	// 삭제 예정 오브젝트를 삭제한다.
 	for (size_t i = 0; i < m_vecDead.size(); i++)
 	{
 		delete m_vecDead[i];
 	}
-
 	m_vecDead.clear();
 
+	// 저장된 이벤트를 순서대로 처리한다.
 	for (size_t i = 0; i < m_vecEvent.size(); i++)
 	{
 		Excute(m_vecEvent[i]);
 	}
-	// 이벤트를 모두 처리하고 초기화
 	m_vecEvent.clear();
 }
 

@@ -24,7 +24,6 @@ void CTile::Update()
 
 void CTile::Render(HDC _hDC)
 {
-
 	if (nullptr == m_pTex) return;
 
 	UINT iWidth = m_pTex->Width();
@@ -37,10 +36,24 @@ void CTile::Render(HDC _hDC)
 	UINT iCurY = (m_iIdx / iMaxX) % iMaxY;
 
 	Vec2 vRenderPos = SINGLE(CCameraManager)->GetRenderPos(GetPos());
+	if (vRenderPos.x < 200 || vRenderPos.x > WINSIZEX - 200 ||
+		vRenderPos.y < 200 || vRenderPos.y > WINSIZEY - 200)
+		return;
+
 	Vec2 vScale = GetScale();
 
 
-	BitBlt(_hDC,
+	//BitBlt(_hDC,
+	//	(int)(vRenderPos.x),
+	//	(int)(vRenderPos.y),
+	//	(int)(vScale.x),
+	//	(int)(vScale.y),
+	//	m_pTex->GetDC(),
+	//	iCurX * SIZE_TILE,
+	//	iCurY * SIZE_TILE,
+	//	SRCCOPY);
+
+	TransparentBlt(_hDC,
 		(int)(vRenderPos.x),
 		(int)(vRenderPos.y),
 		(int)(vScale.x),
@@ -48,7 +61,9 @@ void CTile::Render(HDC _hDC)
 		m_pTex->GetDC(),
 		iCurX * SIZE_TILE,
 		iCurY * SIZE_TILE,
-		SRCCOPY);
+		SIZE_TILE,
+		SIZE_TILE,
+		RGB(255, 0, 255));
 }
 
 void CTile::Save(FILE* _pFile)

@@ -18,7 +18,6 @@ public :
     virtual void    Update();
     virtual void    Render(HDC _hDC);
 
-    void            CreateMissile();
 
 };
 
