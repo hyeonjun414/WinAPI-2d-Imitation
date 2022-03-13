@@ -3,12 +3,10 @@
 
 CPathManager::CPathManager():
 	m_strContentPath{}
-{
-}
+{}
 
 CPathManager::~CPathManager()
-{
-}
+{}
 
 void CPathManager::Init()
 {
@@ -18,4 +16,9 @@ void CPathManager::Init()
 
 	// 필요 경로 추가
 	wcscat_s(m_strContentPath, 255, L"\\bin\\");
+}
+
+const wchar_t* CPathManager::GetContextRelativePath()
+{
+	return L"..\\Release\\bin\\";
 }

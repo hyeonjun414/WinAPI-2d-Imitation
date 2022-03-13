@@ -5,16 +5,15 @@
 #include "CCollider.h"
 
 CCollisionManager::CCollisionManager():
+	m_mapColInfo{},
 	m_arrCheck{}
-{
-}
+{}
 CCollisionManager::~CCollisionManager()
-{
-}
+{}
 
 void CCollisionManager::Init()
 {
-	Reset();
+	Reset(); // 충돌정보를 초기화한다.
 }
 
 void CCollisionManager::Update()

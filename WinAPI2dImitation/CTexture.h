@@ -19,6 +19,7 @@ private:
 
 public:
     void        Load(const wstring& _strFilePath);
+    void        Create(UINT _width, UINT _height);
     //void        Render(HDC _hDC);
 
     UINT        Width() { return m_bmpInfo.bmWidth; }

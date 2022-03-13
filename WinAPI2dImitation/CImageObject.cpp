@@ -33,7 +33,8 @@ void CImageObject::Update()
 }
 
 void CImageObject::Render(HDC _hDC)
-{
+{ 
+	
 	int iWidth = (int)m_pTex->Width();
 	int iHeight = (int)m_pTex->Height();
 
@@ -44,7 +45,20 @@ void CImageObject::Render(HDC _hDC)
 		(int)(pos.y - (iHeight / 2) - m_vec2Scale.y / 2),
 		iWidth, iHeight,
 		m_pTex->GetDC(),
-		0, 0, iWidth, iHeight,
-		RGB(255, 0, 255));
+		0, 0, SRCCOPY);
+
+	//Vec2 vCameraPos = SINGLE(CCameraManager)->GetLookAt();
+
+	//TransparentBlt(_hDC,
+	//	(int)(m_vRenderPos.x - (float)(iWidth / 2)) + vCameraPos.x - WINSIZEX / 2,
+	//	(int)(m_vRenderPos.y - (float)(iHeight / 2)) + vCameraPos.y - WINSIZEY / 2,
+	//	WINSIZEX,
+	//	WINSIZEY,
+	//	m_pTex->GetDC(),
+	//	vCameraPos.x - WINSIZEX / 2,
+	//	vCameraPos.y - WINSIZEY / 2,
+	//	WINSIZEX,
+	//	WINSIZEY,
+	//	RGB(255, 0, 255));
 
 }

@@ -1,19 +1,12 @@
 #pragma once
 
-// 1. 프레임 동기화
-// 동일 프레임 내에서 같은 키 입력 이벤트를 가져간다.
-//
-// 2. 키 입력 이벤트 처리
-//	tap, hold, away
-//
-
 class CKeyManager
 {
 	SINGLETON(CKeyManager);
 
 private:
-	vector<tKeyInfo>	m_vecKey;
-	Vec2				m_vCurMousePos;
+	vector<tKeyInfo>	m_vecKey;		// 키와 현재 프레임의 키 상태를 저장하는 벡터
+	Vec2				m_vCurMousePos; // 현재 프레임의 마우스 위치
 public:
 	void				Init();
 	void				Update();

@@ -16,9 +16,6 @@
     <Filter Include="01.Engine">
       <UniqueIdentifier>{9ef21898-24c4-42e2-b392-4de4efc17294}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Engine\01.Core">
-      <UniqueIdentifier>{61638e5b-e3f9-4c47-86d3-7b95c965f417}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Util">
       <UniqueIdentifier>{7cdb8ba6-44e9-40c0-93bb-672ff8f9aae1}</UniqueIdentifier>
     </Filter>
@@ -28,20 +25,29 @@
     <Filter Include="04.Scene">
       <UniqueIdentifier>{b6f1d04d-0718-4a1a-a69c-1b6e47616dfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Util\01.Manager">
-      <UniqueIdentifier>{feef7991-deb7-435f-b0ba-1d95d67afa62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Resource">
       <UniqueIdentifier>{ce542f78-d001-4fb6-9636-e6777c8f416b}</UniqueIdentifier>
     </Filter>
     <Filter Include="05.Resource\01.Texture">
       <UniqueIdentifier>{ad401253-6924-4644-a1cb-97a39ec50285}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Util\02.Other">
-      <UniqueIdentifier>{bb1e2a2f-9207-4044-8c2c-e26b4c79744f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="06.Component">
       <UniqueIdentifier>{69f5a52a-4f69-439a-a613-0af8bc40a818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.GameObject\Tile">
+      <UniqueIdentifier>{4b445f5a-02c9-4d42-a6b1-d154a65c6673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.GameObject\Object">
+      <UniqueIdentifier>{a8e8f6cc-646f-46d0-aef6-f15af30527c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.GameObject\UI">
+      <UniqueIdentifier>{e4512a44-bbf9-4044-886f-17e185cb27aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Engine\Manager">
+      <UniqueIdentifier>{feef7991-deb7-435f-b0ba-1d95d67afa62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Engine\Core">
+      <UniqueIdentifier>{61638e5b-e3f9-4c47-86d3-7b95c965f417}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,37 +64,16 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CCore.h">
-      <Filter>01.Engine\01.Core</Filter>
-    </ClInclude>
-    <ClInclude Include="CGameObject.h">
-      <Filter>03.GameObject</Filter>
+      <Filter>01.Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="CScene.h">
       <Filter>04.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CTimeManager.h">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CKeyManager.h">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CSceneManager.h">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClInclude>
     <ClInclude Include="CStartScene.h">
       <Filter>04.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CTextObject.h">
-      <Filter>03.GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="CPlayer.h">
-      <Filter>03.GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="CInGameScene.h">
       <Filter>04.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="CMissile.h">
-      <Filter>03.GameObject</Filter>
     </ClInclude>
     <ClInclude Include="CResource.h">
       <Filter>05.Resource</Filter>
@@ -96,41 +81,8 @@
     <ClInclude Include="CTexture.h">
       <Filter>05.Resource\01.Texture</Filter>
     </ClInclude>
-    <ClInclude Include="CPathManager.h">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CImageObject.h">
-      <Filter>03.GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="CResourceManager.h">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CSingleton.h">
-      <Filter>02.Util\02.Other</Filter>
-    </ClInclude>
-    <ClInclude Include="enumClass.h">
-      <Filter>02.Util\02.Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>02.Util\02.Other</Filter>
-    </ClInclude>
-    <ClInclude Include="struct.h">
-      <Filter>02.Util\02.Other</Filter>
-    </ClInclude>
     <ClInclude Include="CCollider.h">
       <Filter>06.Component</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectGDI.h">
-      <Filter>02.Util\02.Other</Filter>
-    </ClInclude>
-    <ClInclude Include="CCollisionManager.h">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CEventManager.h">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="function.h">
-      <Filter>02.Util\02.Other</Filter>
     </ClInclude>
     <ClInclude Include="CAnimator.h">
       <Filter>06.Component</Filter>
@@ -141,8 +93,80 @@
     <ClInclude Include="CToolScene.h">
       <Filter>04.Scene</Filter>
     </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>03.GameObject\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
+      <Filter>03.GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CImageObject.h">
+      <Filter>03.GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>03.GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>03.GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI.h">
+      <Filter>03.GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CButtonUI.h">
+      <Filter>03.GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPanelUI.h">
+      <Filter>03.GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>05.Resource</Filter>
+    </ClInclude>
     <ClInclude Include="CCameraManager.h">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CEventManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CResourceManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoundManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIManager.h">
+      <Filter>01.Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CSingleton.h">
+      <Filter>02.Util</Filter>
+    </ClInclude>
+    <ClInclude Include="enumClass.h">
+      <Filter>02.Util</Filter>
+    </ClInclude>
+    <ClInclude Include="function.h">
+      <Filter>02.Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>02.Util</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectGDI.h">
+      <Filter>02.Util</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>02.Util</Filter>
     </ClInclude>
     <ClInclude Include="CMonster.h">
       <Filter>03.GameObject</Filter>
@@ -156,40 +180,16 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CCore.cpp">
-      <Filter>01.Engine\01.Core</Filter>
-    </ClCompile>
-    <ClCompile Include="CGameObject.cpp">
-      <Filter>03.GameObject</Filter>
+      <Filter>01.Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="CScene.cpp">
       <Filter>04.Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CTimeManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="CKeyManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="CSceneManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClCompile>
     <ClCompile Include="CStartScene.cpp">
       <Filter>04.Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CTextObject.cpp">
-      <Filter>03.GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlayer.cpp">
-      <Filter>03.GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="CInGameScene.cpp">
       <Filter>04.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="CMonster.cpp">
-      <Filter>03.GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="CMissile.cpp">
-      <Filter>03.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CResource.cpp">
       <Filter>05.Resource</Filter>
@@ -197,26 +197,8 @@
     <ClCompile Include="CTexture.cpp">
       <Filter>05.Resource\01.Texture</Filter>
     </ClCompile>
-    <ClCompile Include="CPathManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="CImageObject.cpp">
-      <Filter>03.GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="CResourceManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClCompile>
     <ClCompile Include="CCollider.cpp">
       <Filter>06.Component</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectGDI.cpp">
-      <Filter>02.Util\02.Other</Filter>
-    </ClCompile>
-    <ClCompile Include="CCollisionManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="CEventManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
     </ClCompile>
     <ClCompile Include="CAnimator.cpp">
       <Filter>06.Component</Filter>
@@ -227,8 +209,65 @@
     <ClCompile Include="CToolScene.cpp">
       <Filter>04.Scene</Filter>
     </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>03.GameObject\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>03.GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CImageObject.cpp">
+      <Filter>03.GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>03.GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>03.GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>03.GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CButtonUI.cpp">
+      <Filter>03.GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPanelUI.cpp">
+      <Filter>03.GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CSound.cpp">
+      <Filter>05.Resource</Filter>
+    </ClCompile>
     <ClCompile Include="CCameraManager.cpp">
-      <Filter>02.Util\01.Manager</Filter>
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CResourceManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIManager.cpp">
+      <Filter>01.Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGDI.cpp">
+      <Filter>02.Util</Filter>
     </ClCompile>
     <ClCompile Include="CCollObject.cpp">
       <Filter>03.GameObject</Filter>

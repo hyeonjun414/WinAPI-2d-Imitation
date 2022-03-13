@@ -8,6 +8,7 @@ enum class OBJ_TYPE
 
 	IMAGE,
 	TEXT,
+	TILE,
 	
 	PLAYER,
 	MONSTER,
@@ -17,7 +18,7 @@ enum class OBJ_TYPE
 	Floor,
 	Wall,
 
-
+	UI,
 	SIZE,
 };
 
@@ -85,4 +86,13 @@ enum class EVENT_TYPE
 	SCENE_CHANGE,
 
 	SIZE
+};
+
+// 카메라 효과
+enum class CAM_EFFECT
+{
+	FADE_IN,
+	FADE_OUT,
+
+	NONE,
 };

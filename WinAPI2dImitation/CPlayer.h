@@ -21,7 +21,6 @@ public :
     virtual void    Update();
     virtual void    Render(HDC _hDC);
 
-    void            CreateMissile();
 
     virtual void	OnCollision(CCollider* _pOther) ;
     virtual void	OnCollisionEnter(CCollider* _pOther);

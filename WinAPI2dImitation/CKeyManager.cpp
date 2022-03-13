@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "CKeyManager.h"
 
-// 가상 키값을 알아야한다. -> 설정한 키 인덱스와 순서를 일치.
+// 설정한 키 인덱스와 순서를 일치시킨 가상 키값 배열
 int g_arrVK[(int)KEY::SIZE] = 
 {
 	VK_UP,		//	UP,
@@ -23,23 +23,12 @@ int g_arrVK[(int)KEY::SIZE] =
 	//	LAST
 };
 
-
-CKeyManager::CKeyManager()
-{
-
-}
-
-CKeyManager::~CKeyManager()
-{
-
-}
+CKeyManager::CKeyManager(){}
+CKeyManager::~CKeyManager(){}
 
 void CKeyManager::Init()
 {
-	// 키 매니저 초기화
-	
-	// 우선 벡터에 키 정보를 초기화 해줘야한다.
-	// LAST가 KEY INDEX의 끝에 있기 때문에 반복해야하는 횟수로 사용할 수 있다. ==> size()
+	// 키의 수 만큼 정보를 넣어 초기화 시킨다.
 	for (int i = 0; i < (int)KEY::SIZE; ++i)
 	{
 		m_vecKey.push_back(tKeyInfo{ KEY_STATE::NONE, false });
@@ -48,7 +37,7 @@ void CKeyManager::Init()
 
 void CKeyManager::Update()
 {
-	// 현재 선택된 윈도우가 게임 윈도우인가를 확인한다.
+	// 현재 선택된 윈도우가 게임 윈도우인가를 확인
 	HWND curWnd = GetFocus();
 
 	// 게임 윈도우가 선택되지 않은 상태를 경우
@@ -112,6 +101,8 @@ void CKeyManager::Update()
 		POINT ptPos = {};
 		GetCursorPos(&ptPos);
 		ScreenToClient(hWnd, &ptPos);
+
+		// 화면을 벗어난 마우스위치는 마우스 이동이 발생하지 않도록 가운데를 가리키도록 ㅏㅎㄴ다.
 		if (ptPos.x < 0 || ptPos.x > WINSIZEX ||
 			ptPos.y < 0 || ptPos.y > WINSIZEY)
 		{

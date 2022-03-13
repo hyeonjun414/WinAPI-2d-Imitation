@@ -4,6 +4,7 @@
 #include "CGameObject.h"
 
 CAnimator::CAnimator():
+	m_bRepeat(false),
 	m_pOwner(nullptr),
 	m_pCurAnim(nullptr)
 {

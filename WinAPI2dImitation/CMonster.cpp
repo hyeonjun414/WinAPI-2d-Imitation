@@ -76,7 +76,7 @@ CMonster::~CMonster()
 
 void CMonster::Init()
 {
-    SetCenterPos(m_vec2Pos);
+    SetCenterPos(m_vPos);
 }
 
 void CMonster::Update()
@@ -86,8 +86,8 @@ void CMonster::Update()
 
     if (m_bIsRight)
     {
-        m_vec2Pos.x += m_vVelocity.x * DT;
-        if (m_vec2Pos.x > m_vec2CenterPos.x + m_fDistance)
+        m_vPos.x += m_vVelocity.x * DT;
+        if (m_vPos.x > m_vec2CenterPos.x + m_fDistance)
         {
             GetAnimator()->Play(L"Monster_Move_Left", true);
             m_bIsRight = !m_bIsRight;
@@ -95,8 +95,8 @@ void CMonster::Update()
     }
     else
     {
-        m_vec2Pos.x -= m_vVelocity.x * DT;
-        if (m_vec2Pos.x < m_vec2CenterPos.x - m_fDistance)
+        m_vPos.x -= m_vVelocity.x * DT;
+        if (m_vPos.x < m_vec2CenterPos.x - m_fDistance)
         {
             GetAnimator()->Play(L"Monster_Move_Right", true);
             m_bIsRight = !m_bIsRight;

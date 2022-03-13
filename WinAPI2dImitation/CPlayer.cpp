@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "CPlayer.h"
-#include "CMissile.h"
 #include "CScene.h"
 #include "CTexture.h"
 #include "CCollider.h"
@@ -141,53 +140,3 @@ void CPlayer::Render(HDC _hDC)
 	ComponentRender(_hDC);
 }
 
-void CPlayer::CreateMissile()
-{
-	CMissile* pMissile = new CMissile(OBJ_TYPE::MISSILE, DEG(0));
-	pMissile->SetName(L"Missile_Player");
-	pMissile->SetPos(Vec2(m_vec2Pos.x + m_vec2Scale.x/2+ pMissile->GetScale().x, m_vec2Pos.y));
-	pMissile->SetGravity(false);
-	pMissile->SetScale(m_vec2Scale);
-	pMissile->GetCollider()->SetOffsetPos(Vec2(0, -m_vec2Scale.y / 2));
-	CREATEOBJECT(pMissile);
-}
-
-void CPlayer::OnCollision(CCollider* _pOther)
-{
-	if (_pOther->GetObj()->GetName() == L"Wall" ) 
-	{
-		if (m_vec2Pos.x < _pOther->GetFinalPos().x)
-			m_vec2Pos.x = _pOther->GetFinalPos().x - _pOther->GetScale().x / 2 - m_pCollider->GetScale().x / 2;
-		else
-			m_vec2Pos.x = _pOther->GetFinalPos().x + _pOther->GetScale().x/2 + m_pCollider->GetScale().x / 2;
-	}
-}
- 
-void CPlayer::OnCollisionEnter(CCollider* _pOther)
-{
-	if (_pOther->GetObj()->GetName() == L"Floor" && !m_bIsJumping)
-	{
-		m_vVelocity.y = 0;
-		{
-			m_vec2Pos.y = _pOther->GetFinalPos().y - _pOther->GetScale().y / 2 + 1;
-			m_bIsFloor = true;
-			if (m_bIsRight)
-				GetAnimator()->Play(L"Player_Idle_Right", true);
-			else
-				GetAnimator()->Play(L"Player_Idle_Left", true);
-		}
-	}
-	if (_pOther->GetObj()->GetName() == L"Monster")
-	{
-		m_vVelocity.y = 300;
-	}
-
-}
-
-void CPlayer::OnCollisionExit(CCollider* _pOther)
-{
-	if (_pOther->GetObj()->GetName() == L"Floor")
-	{
-		m_bIsFloor = false;
-	}
-}
