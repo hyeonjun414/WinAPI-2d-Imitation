@@ -6,6 +6,8 @@
 CScene::CScene():
 	m_strName{},
 	m_eType(SCENE_TYPE::NONE),
+	m_eNextScene(SCENE_TYPE::NONE),
+	m_bIsChange(false),
 	m_iTileX(0),
 	m_iTileY(0)
 {
@@ -14,6 +16,8 @@ CScene::CScene():
 CScene::CScene(wstring _strName, SCENE_TYPE _eTYpe):
 	m_strName(_strName),
 	m_eType(_eTYpe),
+	m_eNextScene(SCENE_TYPE::NONE),
+	m_bIsChange(false),
 	m_iTileX(0),
 	m_iTileY(0)
 {
@@ -38,6 +42,9 @@ void CScene::Update()
 				m_vecObjectList[i][j]->Update();
 		}
 	}
+
+	if (m_bIsChange)
+		DelayChange(SINGLE(CTimeManager)->GetPlayTime());
 }
 
 void CScene::FinalUpdate()
@@ -183,6 +190,29 @@ void CScene::RenderTile(HDC _hDC)
 		}
 	}
 }
+
+void CScene::ChangeNextScene(SCENE_TYPE _eType)
+{
+	if (m_bIsChange)
+		return;
+
+	SINGLE(CCameraManager)->FadeOut(1.0f);
+	m_eNextScene = _eType;
+	m_bIsChange = true;
+	m_iTime = SINGLE(CTimeManager)->GetPlayTime();
+}
+
+void CScene::DelayChange(int _iTime)
+{
+	if (m_iTime + 1 <= _iTime)
+	{
+		CHANGESCENE(m_eNextScene);
+		m_eNextScene = SCENE_TYPE::NONE;
+		m_bIsChange = false;
+	}
+}
+
+
 
 void CScene::ClearObject()
 {

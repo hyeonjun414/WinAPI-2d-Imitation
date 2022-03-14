@@ -11,6 +11,7 @@ private:
     bool    m_bIsFloor;
     bool    m_bIsJumping;
     bool    m_bIsRight;
+    int     m_iCollCount;
 public :
     CPlayer();
     CPlayer(OBJ_TYPE _objGroup);

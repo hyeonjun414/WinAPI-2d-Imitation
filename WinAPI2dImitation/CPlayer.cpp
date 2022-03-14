@@ -16,6 +16,7 @@ CPlayer::CPlayer(OBJ_TYPE _objGroup) :
 	m_bIsFloor = false;
 	m_bIsJumping = false;
 	m_bIsRight = true;
+	m_iCollCount = 0;
 
 
 	// 텍스쳐 불러오기
@@ -69,7 +70,7 @@ void CPlayer::Init()
 void CPlayer::Update()
 {
 	if (m_bIsGravity && !m_bIsFloor) m_vVelocity.y -= 700 * DT;
-	m_vec2Pos.y += -m_vVelocity.y * DT;
+	m_vPos.y += -m_vVelocity.y * DT;
 	
 	if (m_vVelocity.y > 0)
 	{
@@ -100,7 +101,7 @@ void CPlayer::Update()
 	if (KEYCHECK(KEY::A) == KEY_STATE::HOLD)
 	{
 		// 왼쪽
-		m_vec2Pos.x -= 300 * DT;
+		m_vPos.x -= 300 * DT;
 		m_bIsRight = false;
 		if (m_bIsFloor && !m_bIsJumping)
 			GetAnimator()->Play(L"Player_Move_Left", true);
@@ -114,7 +115,7 @@ void CPlayer::Update()
 	if (KEYCHECK(KEY::D) == KEY_STATE::HOLD)
 	{
 		// 오른쪽
-		m_vec2Pos.x += 300 * DT;
+		m_vPos.x += 300 * DT;
 		m_bIsRight = true;
 		if(m_bIsFloor && !m_bIsJumping)
 			GetAnimator()->Play(L"Player_Move_Right", true);
@@ -138,5 +139,65 @@ void CPlayer::Update()
 void CPlayer::Render(HDC _hDC)
 {
 	ComponentRender(_hDC);
+}
+
+void CPlayer::OnCollision(CCollider* _pOther)
+{
+	if (_pOther->GetObj()->GetName() == L"Wall")
+	{
+		if (m_vPos.x < _pOther->GetFinalPos().x)
+			m_vPos.x = _pOther->GetFinalPos().x - _pOther->GetScale().x / 2 - m_pCollider->GetScale().x / 2;
+		else
+			m_vPos.x = _pOther->GetFinalPos().x + _pOther->GetScale().x / 2 + m_pCollider->GetScale().x / 2;
+	}
+}
+
+void CPlayer::OnCollisionEnter(CCollider* _pOther)
+{
+	//if (_pOther->GetObj()->GetName() == L"Floor" && !m_bIsJumping)
+	//{
+	//	m_vVelocity.y = 0;
+	//	{
+	//		m_vPos.y = _pOther->GetFinalPos().y - _pOther->GetScale().y / 2 + 1;
+	//		m_bIsFloor = true;
+	//		if (m_bIsRight)
+	//			GetAnimator()->Play(L"Player_Idle_Right", true);
+	//		else
+	//			GetAnimator()->Play(L"Player_Idle_Left", true);
+	//	}
+	//}
+	//if (_pOther->GetObj()->GetName() == L"Monster")
+	//{
+	//	m_vVelocity.y = 300;
+	//}
+	m_iCollCount++;
+	if (_pOther->GetObj()->GetObjGroup() == OBJ_TYPE::TILE && !m_bIsJumping && m_iCollCount == 1)
+	{
+
+		LOG(L"바닥 충돌");
+		
+		m_vVelocity.y = 0;
+
+		m_vPos.y = _pOther->GetFinalPos().y - _pOther->GetScale().y / 2 + 1;
+		m_bIsFloor = true;
+		if (m_bIsRight)
+			GetAnimator()->Play(L"Player_Idle_Right", true);
+		else
+			GetAnimator()->Play(L"Player_Idle_Left", true);
+
+
+	}
+}
+
+void CPlayer::OnCollisionExit(CCollider* _pOther)
+{
+	m_iCollCount--;
+	if (_pOther->GetObj()->GetObjGroup() == OBJ_TYPE::TILE && m_iCollCount == 0)
+	{
+
+		LOG(L"바닥 충돌 해제");
+		
+		m_bIsFloor = false;
+	}
 }
 

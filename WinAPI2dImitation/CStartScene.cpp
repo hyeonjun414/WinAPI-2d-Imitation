@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "CStartScene.h"
-#include "CTextObject.h"
 #include "CImageObject.h"
 #include "CSound.h"
 
@@ -23,14 +22,17 @@ CSound* pSound;
 
 void CStartScene::Update()
 {
+	CScene::Update();
 	// 스페이스바를 누르면 게임 시작
 	if (KEYCHECK(KEY::SPACE) == KEY_STATE::TAP)
 	{
- 		CHANGESCENE(SCENE_TYPE::STAGE_01);
+		ChangeNextScene(SCENE_TYPE::STAGE_01);
+ 		//CHANGESCENE(SCENE_TYPE::STAGE_01);
 	}
 	if (KEYCHECK(KEY::ESC) == KEY_STATE::TAP)
 	{
-		CHANGESCENE(SCENE_TYPE::TOOL);
+		ChangeNextScene(SCENE_TYPE::TOOL);
+		//CHANGESCENE(SCENE_TYPE::TOOL);
 	}
 	if (KEYCHECK(KEY::Z) == KEY_STATE::TAP)
 	{
@@ -55,11 +57,9 @@ void CStartScene::Update()
 
 void CStartScene::Enter()
 {
+	SINGLE(CCameraManager)->FadeIn(1.f);
 
-	CGameObject* obj = new CTextObject(L"스페이스바를 누르면 게임이 시작됩니다.", OBJ_TYPE::TEXT);
-	obj->SetPos(Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 150));
-	CREATEOBJECT(obj);
-	 obj = new CImageObject(OBJ_TYPE::IMAGE,
+	CGameObject* obj = new CImageObject(OBJ_TYPE::IMAGE,
 		L"StartGameSceneBG",
 		L"texture\\startscene_bg.bmp", false);
 	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));

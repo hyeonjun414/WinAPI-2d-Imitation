@@ -4,7 +4,6 @@
 #include "CMonster.h"
 #include "CImageObject.h"
 #include "CTexture.h"
-#include "CCollObject.h"
 #include "CCollider.h"
 
 CInGameScene::CInGameScene()
@@ -35,6 +34,8 @@ void CInGameScene::Update()
 
 void CInGameScene::Enter()
 {
+	SINGLE(CCameraManager)->FadeIn(1.f);
+
 	CGameObject* obj = new CPlayer(OBJ_TYPE::PLAYER);
 	obj->SetName(L"Player");
 	obj->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
@@ -81,7 +82,13 @@ void CInGameScene::Enter()
 	BgObj->SetPos(Vec2((float)(BgObj->GetTexture()->Width() / 2), (float)(BgObj->GetTexture()->Height() / 2)));
 	CREATEOBJECT(BgObj);
 
-	obj = new CCollObject(OBJ_TYPE::Floor);
+	
+
+	wstring strPath = SINGLE(CPathManager)->GetContentPath();
+	strPath += L"texture\\tile\\Map\\tile.tile";
+	LoadTile(strPath);
+
+	/*obj = new CCollObject(OBJ_TYPE::Floor);
 	obj->SetName(L"Floor");
 	obj->CreateCollider();
 	obj->GetCollider()->SetOffsetPos(Vec2(560, 1030));
@@ -133,7 +140,7 @@ void CInGameScene::Enter()
 	obj->CreateCollider();
 	obj->GetCollider()->SetOffsetPos(Vec2(1770, 1300));
 	obj->GetCollider()->SetScale(Vec2(10, 540));
-	CREATEOBJECT(obj);
+	CREATEOBJECT(obj);*/
 
 	
 
@@ -141,6 +148,7 @@ void CInGameScene::Enter()
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MISSILE, OBJ_TYPE::MONSTER);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::MONSTER);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::Floor);
+	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::TILE);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MONSTER, OBJ_TYPE::Floor);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::PLAYER, OBJ_TYPE::Wall);
 	SINGLE(CCollisionManager)->CheckGroup(OBJ_TYPE::MONSTER, OBJ_TYPE::Wall);

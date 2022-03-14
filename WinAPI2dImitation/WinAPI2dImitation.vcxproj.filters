@@ -171,9 +171,6 @@
     <ClInclude Include="CMonster.h">
       <Filter>03.GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="CCollObject.h">
-      <Filter>03.GameObject</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI2dImitation.cpp">
@@ -269,9 +266,6 @@
     <ClCompile Include="SelectGDI.cpp">
       <Filter>02.Util</Filter>
     </ClCompile>
-    <ClCompile Include="CCollObject.cpp">
-      <Filter>03.GameObject</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WinAPI2dImitation.rc">
@@ -285,5 +279,9 @@
     <Image Include="WinAPI2dImitation.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

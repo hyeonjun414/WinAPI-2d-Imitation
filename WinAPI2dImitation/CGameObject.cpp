@@ -64,9 +64,9 @@ void CGameObject::ComponentRender(HDC _hDC)
 {
 	if (nullptr != m_pAnimator)
 		m_pAnimator->Render(_hDC);
+
 	if (nullptr != m_pCollider && SINGLE(CCore)->GetDebugMode())
 		m_pCollider->Render(_hDC);
-
 
 }
 

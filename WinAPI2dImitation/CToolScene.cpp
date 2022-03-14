@@ -7,6 +7,8 @@
 #include "CUI.h"
 #include "CButtonUI.h"
 #include "CPanelUI.h"
+#include "CCollider.h"
+#include "CImageObject.h"
 
 INT_PTR CALLBACK TileWndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -27,7 +29,7 @@ void CToolScene::Update()
 {
 	CScene::Update();
 	if (KEYCHECK(KEY::ESC) == KEY_STATE::TAP)
-		CHANGESCENE(SCENE_TYPE::START);
+		ChangeNextScene(SCENE_TYPE::START);
 
 	if (KEYCHECK(KEY::A) == KEY_STATE::HOLD)
 	{
@@ -56,6 +58,8 @@ void CALLBACK test(DWORD_PTR _param1, DWORD_PTR _param2)
 }
 void CToolScene::Enter()
 {
+	SINGLE(CCameraManager)->FadeIn(2.f);
+
 	SINGLE(CCameraManager)->SetWorldSize(Vec2(10000, 10000));
 	SINGLE(CCameraManager)->SetLookAt(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	
@@ -63,24 +67,31 @@ void CToolScene::Enter()
 	m_hWnd = CreateDialog(hInst, MAKEINTRESOURCE(IDD_TILEBOX), hWnd, TileWndProc);
 	ShowWindow(m_hWnd, SW_SHOW);
 
+	CGameObject* BgObj = new CImageObject(OBJ_TYPE::IMAGE,
+		L"InGameSceneTile",
+		L"texture\\map1.bmp", true);
+	BgObj->SetPos(Vec2((float)(BgObj->GetTexture()->Width() / 2), (float)(BgObj->GetTexture()->Height() / 2)));
+	AddObject(BgObj);
+
+	SINGLE(CCameraManager)->SetLookAt(Vec2((float)(BgObj->GetTexture()->Width() / 2), (float)(BgObj->GetTexture()->Height() / 2)));
+	SINGLE(CCameraManager)->SetWorldSize(Vec2((float)(BgObj->GetTexture()->Width()), (float)(BgObj->GetTexture()->Height())));
+
 	// UI 생성
-	CPanelUI* pUI = new CPanelUI(OBJ_TYPE::UI);
-	pUI->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
-	pUI->SetCameraAffected(false);
-	AddObject(pUI);
 
-	CButtonUI* pChildUI = new CButtonUI(OBJ_TYPE::UI);
-	pChildUI->SetPos(Vec2(25,25));
-	pChildUI->SetScale(Vec2(50, 50));
-	pChildUI->SetClickCallBack(test, 0,0);
-	pUI->AddChild(pChildUI);
+	//CPanelUI* pUI = new CPanelUI(OBJ_TYPE::UI);
+	//pUI->SetPos(Vec2(WINSIZEX / 2, WINSIZEY / 2));
+	//pUI->SetCameraAffected(false);
+	//AddObject(pUI);
 
-	CPanelUI* pUI2 = pUI->Clone();
-	pUI2->SetPos(Vec2(WINSIZEX / 2 -300, WINSIZEY / 2));
-	AddObject(pUI2);
+	//CButtonUI* pChildUI = new CButtonUI(OBJ_TYPE::UI);
+	//pChildUI->SetPos(Vec2(25,25));
+	//pChildUI->SetScale(Vec2(50, 50));
+	//pChildUI->SetClickCallBack(test, 0,0);
+	//pUI->AddChild(pChildUI);
 
-
-
+	//CPanelUI* pUI2 = pUI->Clone();
+	//pUI2->SetPos(Vec2(WINSIZEX / 2 -300, WINSIZEY / 2));
+	//AddObject(pUI2);
 }
 
 void CToolScene::Exit()
@@ -93,6 +104,11 @@ void CToolScene::Exit()
 void CToolScene::SetIdx(UINT _idx)
 {
 	m_iIdx = _idx;
+}
+
+void CToolScene::SetTileColl(bool _bTileColl)
+{
+	m_bIsTileCol = _bTileColl;
 }
 
 void CToolScene::SetTileIdx()
@@ -117,6 +133,19 @@ void CToolScene::SetTileIdx()
 		UINT iIdx = iY * iTileX + iX;
 		const vector<CGameObject*>& vecTile = GetGroupObject(OBJ_TYPE::TILE);
 		((CTile*)vecTile[iIdx])->SetImgIdx(m_iIdx);
+		if (m_bIsTileCol)
+		{
+			((CTile*)vecTile[iIdx])->CreateCollider();
+			((CTile*)vecTile[iIdx])->GetCollider()->SetOffsetPos(vecTile[iIdx]->GetScale()/2);
+			((CTile*)vecTile[iIdx])->GetCollider()->SetScale(vecTile[iIdx]->GetScale());
+			((CTile*)vecTile[iIdx])->SetColl(true);
+		}
+		else
+		{
+			delete vecTile[iIdx]->GetCollider();
+			vecTile[iIdx]->SetCollider(nullptr);
+			((CTile*)vecTile[iIdx])->SetColl(false);
+		}
 	}
 }
 void CToolScene::SaveTile(const wstring& _strPath)
@@ -239,7 +268,6 @@ INT_PTR CALLBACK TileWndProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			int m_iIdx = GetDlgItemInt(hDlg, IDC_EDIT_TILE, nullptr, false);
 
 			CScene* pCurScene = SINGLE(CSceneManager)->GetCurScene();
-
 			CToolScene* pToolScene = dynamic_cast<CToolScene*>(pCurScene);
 			assert(pToolScene);
 
@@ -277,6 +305,33 @@ INT_PTR CALLBACK TileWndProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			//	SRCCOPY);
 
 			pToolScene->SetIdx(m_iIdx);
+		}
+		else if (LOWORD(wParam) == IDC_CHECK_COL)
+		{
+			HWND user_check = GetDlgItem(hDlg, IDC_CHECK_COL);
+			if (SendMessage(user_check, BM_GETCHECK, 0, 0) == BST_UNCHECKED)
+			{
+				SetWindowText(hDlg, L"체크가 해제 되었습니다.");
+
+				CScene* pCurScene = SINGLE(CSceneManager)->GetCurScene();
+
+				CToolScene* pToolScene = dynamic_cast<CToolScene*>(pCurScene);
+				assert(pToolScene);
+
+				pToolScene->SetTileColl(false);
+
+			}
+			else
+			{
+				SetWindowText(hDlg, L"체크가 설정 되었습니다.");
+
+				CScene* pCurScene = SINGLE(CSceneManager)->GetCurScene();
+
+				CToolScene* pToolScene = dynamic_cast<CToolScene*>(pCurScene);
+				assert(pToolScene);
+
+				pToolScene->SetTileColl(true);
+			}
 		}
 		break;
 	}

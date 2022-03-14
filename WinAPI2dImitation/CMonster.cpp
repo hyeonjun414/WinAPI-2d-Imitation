@@ -82,7 +82,7 @@ void CMonster::Init()
 void CMonster::Update()
 {
     if (m_bIsGravity && !m_bIsFloor) m_vVelocity.y -= 500 * DT;
-    m_vec2Pos.y += -m_vVelocity.y * DT;
+    m_vPos.y += -m_vVelocity.y * DT;
 
     if (m_bIsRight)
     {
@@ -117,10 +117,10 @@ void CMonster::OnCollision(CCollider* _pOther)
 {
     if (_pOther->GetObj()->GetName() == L"Wall")
     {
-        if (m_vec2Pos.x < _pOther->GetFinalPos().x)
-            m_vec2Pos.x = _pOther->GetFinalPos().x - _pOther->GetScale().x / 2 - m_pCollider->GetScale().x / 2;
+        if (m_vPos.x < _pOther->GetFinalPos().x)
+            m_vPos.x = _pOther->GetFinalPos().x - _pOther->GetScale().x / 2 - m_pCollider->GetScale().x / 2;
         else
-            m_vec2Pos.x = _pOther->GetFinalPos().x + _pOther->GetScale().x / 2 + m_pCollider->GetScale().x / 2;
+            m_vPos.x = _pOther->GetFinalPos().x + _pOther->GetScale().x / 2 + m_pCollider->GetScale().x / 2;
     }
 }
 void CMonster::OnCollisionEnter(CCollider* _pOther)
@@ -140,7 +140,7 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
     if (pOtherObj->GetName() == L"Floor")
     {
         m_vVelocity.y = 0;
-        m_vec2Pos.y = _pOther->GetOffsetPos().y - _pOther->GetScale().y / 2 +1;
+        m_vPos.y = _pOther->GetOffsetPos().y - _pOther->GetScale().y / 2 +1;
         m_bIsFloor = true;
     }
 }

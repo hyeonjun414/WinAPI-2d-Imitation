@@ -42,6 +42,7 @@ public:
 	void			SetGravity(bool _active)			{ m_bIsGravity = _active; }
 	void			SetPos(Vec2 _pos)					{ m_vPos = _pos; }
 	void			SetScale(Vec2 _scale)				{ m_vScale = _scale; }
+	void			SetCollider(CCollider* _pColl)		{ m_pCollider = _pColl; }
 
 	const wstring&	GetName()		{ return m_strName; }
 	OBJ_TYPE		GetObjGroup()	{ return m_eType; }
